@@ -1,0 +1,6 @@
+*.xml
+*.md
+*.config
+LICENSE
+.gitignore
+.idea/
