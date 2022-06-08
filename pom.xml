@@ -4,14 +4,17 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>io.github.akjo03.templates.simplemaven</groupId>
-    <artifactId>maven-simple-project</artifactId>
-    <version>0.1.0</version>
-    <packaging>jar</packaging>
+    <groupId>io.github.akjo03.akjonav</groupId>
+    <artifactId>AkjoNav</artifactId>
+    <version>2022.1-dev1</version>
+    <modules>
+        <module>AkjoNav-Model</module>
+    </modules>
+    <packaging>pom</packaging>
 
-    <name>Project Name</name>
-    <description>Project Description</description>
-    <url>https://akjo03.github.io</url>
+    <name>AkjoNav</name>
+    <description>An upcoming extensible and intelligent gps navigation system built for the future.</description>
+    <url>https://akjo03.github.io/akjonav</url>
     <inceptionYear>2022</inceptionYear>
 
     <licenses>
@@ -53,6 +56,8 @@
         <maven.compiler.target>17</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+
+        <spring.boot.version>2.7.0</spring.boot.version>
     </properties>
 
     <dependencies>
@@ -74,9 +79,21 @@
         </dependency>
 
         <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter</artifactId>
+            <version>${spring.boot.version}</version>
+        </dependency>
+
+        <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-api</artifactId>
             <version>5.8.2</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <version>${spring.boot.version}</version>
             <scope>test</scope>
         </dependency>
     </dependencies>
@@ -112,6 +129,12 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>2.22.2</version>
+            </plugin>
+
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <version>${spring.boot.version}</version>
             </plugin>
         </plugins>
     </build>

@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>AkjoNav</artifactId>
+        <groupId>io.github.akjo03.akjonav</groupId>
+        <version>2022.1-dev1</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>AkjoNav-Model</artifactId>
+    <version>2022.1-dev1</version>
+    <packaging>jar</packaging>
+
+    <name>AkjoNav Model</name>
+    <description>This is the data model for all AkjoNav modules.</description>
+    <url>https://akjo03.github.io/akjonav</url>
+    <inceptionYear>2022</inceptionYear>
+
+    <repositories>
+        <repository>
+            <id>akjo-repo</id>
+            <url>https://maven.pkg.github.com/akjo03/*</url>
+        </repository>
+    </repositories>
+
+    <developers>
+        <developer>
+            <id>akjo03</id>
+            <name>Lukas Küffer</name>
+            <email>lukas.kueffer@outlook.com</email>
+            <organization>Akjo Studios</organization>
+            <organizationUrl>https://akjo03.github.io/</organizationUrl>
+            <timezone>Europe/Zurich</timezone>
+            <properties>
+                <github>Akjo03</github>
+                <discord>Akjo#3012</discord>
+            </properties>
+        </developer>
+    </developers>
+
+    <properties>
+        <maven.compiler.source>17</maven.compiler.source>
+        <maven.compiler.target>17</maven.compiler.target>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>io.validly</groupId>
+            <artifactId>Validly</artifactId>
+            <version>0.1.0</version>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <defaultGoal>install</defaultGoal>
+        <directory>${maven.multiModuleProjectDirectory}/out</directory>
+
+        <finalName>${project.name}_${project.version}</finalName>
+
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <version>${spring.boot.version}</version>
+            </plugin>
+        </plugins>
+    </build>
+</project>
