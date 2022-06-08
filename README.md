@@ -10,7 +10,7 @@ An upcoming extensible and intelligent gps navigation system built for the futur
 ## Used Technologies
 
 - Java 17
-- Spring Boot 2
+- Spring Boot 2.7.0
 - Maven 3.8.1
 
 -----
