@@ -11,4 +11,5 @@ public class AkjonavModelConstants {
 
 	public final boolean DEBUG_MODE = true;
 	public final LoggingLevel LOGGING_LEVEL = DEBUG_MODE ? LoggingLevel.DEBUG : LoggingLevel.INFO;
+	public final String LOGGING_FORMAT = "[%t] %s[" + MODULE_NAME + "/" + APP_NAME + "] [%l]: %m";
 }
