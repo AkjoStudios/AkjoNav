@@ -5,7 +5,7 @@
 
 # AkjoNav
 
-Descriptions is coming soon...
+An upcoming extensible and intelligent gps navigation system built for the future. More info will follow soon.
 
 ## Used Technologies
 
