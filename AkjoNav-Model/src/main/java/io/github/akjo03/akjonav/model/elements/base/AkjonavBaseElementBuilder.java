@@ -11,7 +11,11 @@ public abstract class AkjonavBaseElementBuilder<T extends AkjonavBaseElement> ex
 	protected AkjonavBaseElementBuilder() { super(); }
 	protected AkjonavBaseElementBuilder(BigInteger elementID) { super(elementID); }
 
-	public static AkjonavBaseElement deserializeElement(@NotNull ObjectNode jsonObject) {
-		return (AkjonavBaseElement) AkjonavBaseElementType.fromType(jsonObject.get("type").asText()).getBuilder().deserialize(jsonObject);
+	public static <T extends AkjonavBaseElement> T deserializeElement(@NotNull ObjectNode jsonObject, @NotNull Class<T> elementClass) {
+		try {
+			return elementClass.cast(AkjonavBaseElementType.fromType(jsonObject.get("type").asText()).getBuilder().deserialize(jsonObject));
+		} catch (ClassCastException e) {
+			throw new IllegalArgumentException("Cannot deserialize element of type " + jsonObject.get("type").asText() + " to type " + elementClass.getSimpleName() + "!");
+		}
 	}
 }

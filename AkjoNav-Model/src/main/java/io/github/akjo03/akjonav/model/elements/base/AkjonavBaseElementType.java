@@ -2,6 +2,7 @@ package io.github.akjo03.akjonav.model.elements.base;
 
 import io.github.akjo03.akjonav.model.elements.AkjonavElementType;
 import io.github.akjo03.akjonav.model.elements.base.node.AkjonavNodeBuilder;
+import io.github.akjo03.akjonav.model.elements.base.way.AkjonavWayBuilder;
 import io.github.akjo03.akjonav.model.util.builder.AkjonavBuilder;
 import lombok.RequiredArgsConstructor;
 
@@ -9,10 +10,11 @@ import java.util.Arrays;
 
 @RequiredArgsConstructor
 public enum AkjonavBaseElementType implements AkjonavElementType {
-	NODE("BaseElement:NODE", new AkjonavNodeBuilder());
+	NODE("BaseElement:NODE", new AkjonavNodeBuilder()),
+	WAY("BaseElement:WAY", new AkjonavWayBuilder());
 
 	private final String typeID;
-	private final AkjonavBuilder<?> builder;
+	private final AkjonavBaseElementBuilder<?> builder;
 
 	@Override
 	public String getTypeID() {
