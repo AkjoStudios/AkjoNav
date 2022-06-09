@@ -30,6 +30,13 @@ public class AkjonavModelApp implements CommandLineRunner {
 	private final ApplicationContext applicationContext;
 	private final ObjectMapper objectMapper;
 
+	// ------------------------ BOARD OF THINGS THAT SHOULD BE DONE ------------------------
+	// TODO: 1. Add the AkjonavMap class
+	// TODO: 2. Add a reference system so that every AkjonavElement can be referenced by a unique ID from a AkjonavMap
+	// TODO: 3. Instead of using a list of AkjonavNodes to represent a way, use the reference to a way from an AkjonavMap
+	// TODO: 4. Add an AkjonavArea which is basically an AkjonavWay that has the additional validation that it is closed and has a minimum of 3 nodes
+	// TODO: 5. Add different AkjonavMapElements which wrap around certain types of AkjonavBaseElements (as references) to add to the AkjonavMap
+
 	public static void main(String[] args) {
 		LOGGER.setLoggingFormat(AkjonavModelConstants.LOGGING_FORMAT);
 		SpringApplication.run(AkjonavModelApp.class, args);
