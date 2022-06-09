@@ -30,7 +30,7 @@ public abstract class AkjonavElementBuilder<T extends AkjonavElement> extends Ak
 
 		valid(elementID, "AkjonavElement.elementID", notification)
 				.mustNotBeNull("ID of an AkjonavElement cannot be null!")
-				.must(elementID -> elementID.compareTo(BigInteger.ZERO) > 0, "ID of an AkjonavElement must be greater than 0!");
+				.must(elementIDP -> elementIDP.compareTo(BigInteger.ZERO) > 0, "ID of an AkjonavElement must be greater than 0!");
 
 		return notification;
 	}

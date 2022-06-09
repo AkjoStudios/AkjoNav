@@ -52,11 +52,11 @@ public class AkjonavPositionBuilder extends AkjonavBuilder<AkjonavPosition> {
 
 		valid(latitude, "AkjonavPosition.latiude", notification)
 				.mustNotBeNull("Latitude of a position cannot be null!")
-				.must(latitude -> new Range<>(-90D, 90D).contains(latitude), "Latitude of a position must be between -90 and 90!");
+				.must(latitudeP -> new Range<>(-90D, 90D).contains(latitudeP), "Latitude of a position must be between -90 and 90!");
 
 		valid(longitude, "AkjonavPosition.longitude", notification)
 				.mustNotBeNull("Longitude of a position cannot be null!")
-				.must(longitude -> new Range<>(-180D, 180D).contains(longitude), "Longitude of a position must be between -180 and 180!");
+				.must(longitudeP -> new Range<>(-180D, 180D).contains(longitudeP), "Longitude of a position must be between -180 and 180!");
 
 		return notification;
 	}

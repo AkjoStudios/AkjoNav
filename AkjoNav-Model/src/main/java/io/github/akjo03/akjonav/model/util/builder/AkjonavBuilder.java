@@ -25,11 +25,11 @@ public abstract class AkjonavBuilder<T extends AkjonavBuildable> {
 
 		valid(type, "AkjonavBuildable.type", validationReport)
 				.mustNotBeNull("Buildable cannot have a null type!")
-				.must(type -> type.getTypeID() != null, "Buildable type must have a type ID!")
-				.must(type -> type.getBuilder() != null, "Buildable type must have a builder!");
+				.must(typeP -> typeP.getTypeID() != null, "Buildable type must have a type ID!")
+				.must(typeP -> typeP.getBuilder() != null, "Buildable type must have a builder!");
 
 		ValidationUtil.printValidationReport(AkjonavBuilder.class, validationReport);
-		ValidationUtil.onError(validationReport, (notification) -> {
+		ValidationUtil.onError(validationReport, notification -> {
 			throw new IllegalArgumentException("Buildable is invalid because of " + notification.getMessages().size() + " " + (notification.getMessages().size() == 1 ? "reason" : "reasons") + " (First reason: " + notification.getMessages().values().toArray()[0].toString() + ") | See log for more details.");
 		});
 

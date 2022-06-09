@@ -34,6 +34,6 @@ public class AkjonavNodeBuilder extends AkjonavBaseElementBuilder<AkjonavNode> {
 
 	@Override
 	protected void fromSerializedElement(@NotNull ObjectNode objectNode) {
-
+		// Not implemented yet
 	}
 }

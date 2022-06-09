@@ -9,6 +9,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Locale;
+import java.util.Objects;
 
 @Getter
 public class AkjonavPosition extends AkjonavBuildable {
@@ -39,5 +40,22 @@ public class AkjonavPosition extends AkjonavBuildable {
 	@Override
 	protected @NotNull String toObjectString() {
 		return "{\"latitude\":" + latitude + ",\"longitude\":" + longitude + ",\"altitude\":" + (altitude != null ? altitude.toStringLocalizedWithAbbreviation(Locale.US) : "null").replace(" ", "") + "}";
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o)
+			return true;
+		if (o == null || getClass() != o.getClass())
+			return false;
+		if (!super.equals(o))
+			return false;
+		AkjonavPosition position = (AkjonavPosition) o;
+		return Double.compare(position.latitude, latitude) == 0 && Double.compare(position.longitude, longitude) == 0 && Objects.equals(altitude, position.altitude);
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(super.hashCode(), latitude, longitude, altitude);
 	}
 }

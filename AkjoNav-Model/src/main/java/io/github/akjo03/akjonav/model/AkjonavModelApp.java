@@ -1,11 +1,7 @@
 package io.github.akjo03.akjonav.model;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.node.ObjectNode;
 import io.github.akjo03.akjonav.model.constants.AkjonavModelConstants;
-import io.github.akjo03.akjonav.model.elements.base.AkjonavBaseElementBuilder;
-import io.github.akjo03.akjonav.model.elements.base.node.AkjonavNode;
-import io.github.akjo03.akjonav.model.elements.base.node.AkjonavNodeBuilder;
 import io.github.akjo03.util.logging.v2.Logger;
 import io.github.akjo03.util.logging.v2.LoggerManager;
 import lombok.RequiredArgsConstructor;
@@ -13,8 +9,6 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
-
-import java.math.BigInteger;
 
 @SpringBootApplication
 @RequiredArgsConstructor
@@ -32,13 +26,6 @@ public class AkjonavModelApp implements CommandLineRunner {
 	@Override
 	public void run(String[] args) {
 		LOGGER.info("Running " + AkjonavModelConstants.APP_NAME + " V" + AkjonavModelConstants.APP_VERSION + "...");
-
-		AkjonavNode akjonavNode = new AkjonavNodeBuilder().setID(new BigInteger("1")).build();
-		System.out.println(akjonavNode);
-		ObjectNode serializedNode = akjonavNode.serialize(objectMapper);
-		System.out.println(serializedNode);
-		AkjonavNode deserializedNode = (AkjonavNode) AkjonavBaseElementBuilder.deserializeElement(serializedNode);
-		System.out.println(deserializedNode);
 
 		exit(0);
 	}
