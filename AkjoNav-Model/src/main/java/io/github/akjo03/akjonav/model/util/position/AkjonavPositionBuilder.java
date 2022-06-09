@@ -1,5 +1,6 @@
 package io.github.akjo03.akjonav.model.util.position;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import io.github.akjo03.akjonav.model.util.builder.AkjonavBuildableType;
 import io.github.akjo03.akjonav.model.util.builder.AkjonavBuilder;
@@ -21,7 +22,7 @@ public class AkjonavPositionBuilder extends AkjonavBuilder<AkjonavPosition> {
 	private Double longitude;
 	@Nullable private Length altitude = null;
 
-	protected AkjonavPositionBuilder() { super(); }
+	public AkjonavPositionBuilder() { super(); }
 
 	public AkjonavPositionBuilder withLatitude(Double latitude) {
 		this.latitude = latitude;
@@ -50,7 +51,7 @@ public class AkjonavPositionBuilder extends AkjonavBuilder<AkjonavPosition> {
 	protected @NotNull Notification validateIt() {
 		Notification notification = new Notification();
 
-		valid(latitude, "AkjonavPosition.latiude", notification)
+		valid(latitude, "AkjonavPosition.latitude", notification)
 				.mustNotBeNull("Latitude of a position cannot be null!")
 				.must(latitudeP -> new Range<>(-90D, 90D).contains(latitudeP), "Latitude of a position must be between -90 and 90!");
 
@@ -62,7 +63,7 @@ public class AkjonavPositionBuilder extends AkjonavBuilder<AkjonavPosition> {
 	}
 
 	@Override
-	protected void fromSerialized(@NotNull ObjectNode objectNode) {
+	protected void fromSerialized(@NotNull ObjectNode objectNode, @NotNull ObjectMapper objectMapper) {
 		this.latitude = objectNode.get("lat").asDouble();
 		this.longitude = objectNode.get("lon").asDouble();
 		if (objectNode.has("alt")) {

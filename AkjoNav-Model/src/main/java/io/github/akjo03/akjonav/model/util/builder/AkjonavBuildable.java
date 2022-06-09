@@ -35,7 +35,7 @@ public abstract class AkjonavBuildable {
 
 	@Override
 	public String toString() {
-		return getClass().getSimpleName() + "{" + getRootPropertiesString() + ", type=" + type.getTypeID() + ", data=" + toObjectString() + "}";
+		return getClass().getSimpleName() + "{" + getRootPropertiesString() + ( !getRootPropertiesString().isBlank() ? ", " : "") + "type=" + type.getTypeID() + ", data=" + toObjectString() + "}";
 	}
 
 	@Override

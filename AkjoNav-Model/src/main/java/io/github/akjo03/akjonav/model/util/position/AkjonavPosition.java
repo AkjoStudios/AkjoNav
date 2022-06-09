@@ -11,6 +11,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.Locale;
 import java.util.Objects;
 
+@SuppressWarnings("unused")
 @Getter
 public class AkjonavPosition extends AkjonavBuildable {
 	private final double latitude;

@@ -1,6 +1,8 @@
 package io.github.akjo03.akjonav.model.util.builder;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
+import io.github.akjo03.akjonav.model.services.JsonService;
 import io.github.akjo03.akjonav.model.util.validation.ValidationUtil;
 import io.validly.Notification;
 import lombok.Getter;
@@ -16,8 +18,16 @@ import static io.validly.NoteFirstValidator.valid;
 public abstract class AkjonavBuilder<T extends AkjonavBuildable> {
 	@Nullable protected AkjonavBuildableType type;
 
+	private final JsonService jsonService;
+
 	protected AkjonavBuilder() {
 		this.type = getType();
+		this.jsonService = new JsonService();
+	}
+
+	private AkjonavBuilder(JsonService jsonService) {
+		this.type = getType();
+		this.jsonService = jsonService;
 	}
 
 	public T build() {
@@ -28,7 +38,7 @@ public abstract class AkjonavBuilder<T extends AkjonavBuildable> {
 				.must(typeP -> typeP.getTypeID() != null, "Buildable type must have a type ID!")
 				.must(typeP -> typeP.getBuilder() != null, "Buildable type must have a builder!");
 
-		ValidationUtil.printValidationReport(AkjonavBuilder.class, validationReport);
+		ValidationUtil.printValidationReport(getClass(), validationReport);
 		ValidationUtil.onError(validationReport, notification -> {
 			throw new IllegalArgumentException("Buildable is invalid because of " + notification.getMessages().size() + " " + (notification.getMessages().size() == 1 ? "reason" : "reasons") + " (First reason: " + notification.getMessages().values().toArray()[0].toString() + ") | See log for more details.");
 		});
@@ -39,7 +49,7 @@ public abstract class AkjonavBuilder<T extends AkjonavBuildable> {
 	public T deserialize(@NotNull ObjectNode objectNode) {
 		deserializeRootProperties(objectNode);
 		this.type = getType();
-		fromSerialized((ObjectNode) objectNode.get("data"));
+		fromSerialized((ObjectNode) objectNode.get("data"), jsonService.getObjectMapper());
 		return build();
 	}
 
@@ -48,5 +58,5 @@ public abstract class AkjonavBuilder<T extends AkjonavBuildable> {
 	protected abstract AkjonavBuildableType getType();
 	protected abstract T buildIt();
 	protected abstract @NotNull Notification validateIt();
-	protected abstract void fromSerialized(@NotNull ObjectNode objectNode);
+	protected abstract void fromSerialized(@NotNull ObjectNode objectNode, @NotNull ObjectMapper objectMapper);
 }

@@ -10,6 +10,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.function.Consumer;
 
 @UtilityClass
+@SuppressWarnings("unused")
 public class ValidationUtil {
 	public void printValidationReport(@NotNull String reportName, @NotNull Notification notification, @NotNull Logger logger) {
 		logger.info("---------------------------------------------------------------------------------------");

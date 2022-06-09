@@ -4,6 +4,7 @@ import io.github.akjo03.util.logging.v2.LoggingLevel;
 import lombok.experimental.UtilityClass;
 
 @UtilityClass
+@SuppressWarnings("unused")
 public class AkjonavModelConstants {
 	public final String MODULE_NAME = "AkjoNav-Model";
 	public final String APP_NAME = "AkjonavModelApp";
