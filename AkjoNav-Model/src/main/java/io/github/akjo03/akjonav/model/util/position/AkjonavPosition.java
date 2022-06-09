@@ -17,7 +17,7 @@ public class AkjonavPosition extends AkjonavBuildable {
 	private final double longitude;
 	@Nullable private final Length altitude;
 
-	public AkjonavPosition(BigInteger id, double latitude, double longitude, @Nullable Length altitude) {
+	AkjonavPosition(BigInteger id, double latitude, double longitude, @Nullable Length altitude) {
 		super(id, AkjonavPositionType.type);
 		this.latitude = latitude;
 		this.longitude = longitude;
