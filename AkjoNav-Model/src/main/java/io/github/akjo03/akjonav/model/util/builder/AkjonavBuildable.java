@@ -19,6 +19,7 @@ public abstract class AkjonavBuildable {
 	public ObjectNode serialize(@NotNull ObjectMapper objectMapper) {
 		ObjectNode objectNode = objectMapper.createObjectNode();
 
+		objectNode = addRootProperties(objectNode, objectMapper);
 		objectNode.put("type", type.getTypeID());
 
 		ObjectNode dataNode = objectMapper.createObjectNode();
@@ -27,12 +28,14 @@ public abstract class AkjonavBuildable {
 		return objectNode;
 	}
 
-	protected abstract ObjectNode serializeIt(ObjectNode objectNode, ObjectMapper objectMapper);
-	protected abstract String toObjectString();
+	protected ObjectNode addRootProperties(@NotNull ObjectNode objectNode, @NotNull ObjectMapper objectMapper) { return objectNode; }
+	protected String getRootPropertiesString() { return ""; }
+	protected abstract @NotNull ObjectNode serializeIt(@NotNull ObjectNode objectNode, @NotNull ObjectMapper objectMapper);
+	protected abstract @NotNull String toObjectString();
 
 	@Override
 	public String toString() {
-		return getClass().getSimpleName() + "{" + "type=" + type.getTypeID() + ", data=" + toObjectString() + "}";
+		return getClass().getSimpleName() + "{" + getRootPropertiesString() + ", type=" + type.getTypeID() + ", data=" + toObjectString() + "}";
 	}
 
 	@Override

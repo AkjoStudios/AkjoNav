@@ -1,7 +1,10 @@
 package io.github.akjo03.akjonav.model.elements;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import io.github.akjo03.akjonav.model.util.builder.AkjonavBuildable;
 import lombok.Getter;
+import org.jetbrains.annotations.NotNull;
 
 import java.math.BigInteger;
 import java.util.Objects;
@@ -10,10 +13,27 @@ import java.util.Objects;
 public abstract class AkjonavElement extends AkjonavBuildable {
 	private final BigInteger elementID;
 
-	AkjonavElement(BigInteger elementID, AkjonavElementType elementType) {
+	protected AkjonavElement(BigInteger elementID, AkjonavElementType elementType) {
 		super(elementType);
 		this.elementID = elementID;
 	}
+
+	@Override
+	protected @NotNull ObjectNode serializeIt(@NotNull ObjectNode objectNode, @NotNull ObjectMapper objectMapper) {
+		return serializeElement(objectNode, objectMapper);
+	}
+
+	@Override
+	protected ObjectNode addRootProperties(@NotNull ObjectNode objectNode, @NotNull ObjectMapper objectMapper) {
+		return objectNode.put("id", elementID);
+	}
+
+	@Override
+	protected String getRootPropertiesString() {
+		return "elementID=" + elementID;
+	}
+
+	protected abstract @NotNull ObjectNode serializeElement(@NotNull ObjectNode objectNode, @NotNull ObjectMapper objectMapper);
 
 	@Override
 	public boolean equals(Object o) {

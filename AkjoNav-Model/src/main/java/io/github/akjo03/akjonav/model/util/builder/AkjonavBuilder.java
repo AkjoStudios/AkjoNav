@@ -30,19 +30,22 @@ public abstract class AkjonavBuilder<T extends AkjonavBuildable> {
 
 		ValidationUtil.printValidationReport(AkjonavBuilder.class, validationReport);
 		ValidationUtil.onError(validationReport, (notification) -> {
-			throw new IllegalArgumentException("Buildable is invalid because of " + notification.getMessages().size() + " reasons (First reason: " + notification.getMessages().values().toArray()[0].toString() + ") | See log for more details.");
+			throw new IllegalArgumentException("Buildable is invalid because of " + notification.getMessages().size() + " " + (notification.getMessages().size() == 1 ? "reason" : "reasons") + " (First reason: " + notification.getMessages().values().toArray()[0].toString() + ") | See log for more details.");
 		});
 
 		return buildIt();
 	}
 
 	public T deserialize(@NotNull ObjectNode objectNode) {
+		deserializeRootProperties(objectNode);
 		this.type = getType();
 		fromSerialized((ObjectNode) objectNode.get("data"));
 		return build();
 	}
 
-	protected abstract @NotNull AkjonavBuildableType getType();
+	protected void deserializeRootProperties(@NotNull ObjectNode objectNode) {}
+
+	protected abstract AkjonavBuildableType getType();
 	protected abstract T buildIt();
 	protected abstract @NotNull Notification validateIt();
 	protected abstract void fromSerialized(@NotNull ObjectNode objectNode);

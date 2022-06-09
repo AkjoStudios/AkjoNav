@@ -24,7 +24,7 @@ public class AkjonavPosition extends AkjonavBuildable {
 	}
 
 	@Override
-	protected ObjectNode serializeIt(@NotNull ObjectNode objectNode, @NotNull ObjectMapper objectMapper) {
+	protected @NotNull ObjectNode serializeIt(@NotNull ObjectNode objectNode, @NotNull ObjectMapper objectMapper) {
 		objectNode.put("lat", latitude);
 		objectNode.put("lon", longitude);
 		if (altitude != null) {
@@ -37,7 +37,7 @@ public class AkjonavPosition extends AkjonavBuildable {
 	}
 
 	@Override
-	protected String toObjectString() {
+	protected @NotNull String toObjectString() {
 		return "{\"latitude\":" + latitude + ",\"longitude\":" + longitude + ",\"altitude\":" + (altitude != null ? altitude.toStringLocalizedWithAbbreviation(Locale.US) : "null").replace(" ", "") + "}";
 	}
 }

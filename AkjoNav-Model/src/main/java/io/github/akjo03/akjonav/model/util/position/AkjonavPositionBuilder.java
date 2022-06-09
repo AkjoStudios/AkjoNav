@@ -37,7 +37,7 @@ public class AkjonavPositionBuilder extends AkjonavBuilder<AkjonavPosition> {
 	}
 
 	@Override
-	protected @NotNull AkjonavBuildableType getType() {
+	protected AkjonavBuildableType getType() {
 		return AkjonavPositionType.type;
 	}
 

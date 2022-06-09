@@ -11,7 +11,7 @@ import static io.validly.NoteFirstValidator.valid;
 
 @SuppressWarnings("unused")
 public abstract class AkjonavElementBuilder<T extends AkjonavElement> extends AkjonavBuilder<T> {
-	private BigInteger elementID;
+	protected BigInteger elementID;
 
 	protected AkjonavElementBuilder() { super(); }
 
@@ -37,9 +37,15 @@ public abstract class AkjonavElementBuilder<T extends AkjonavElement> extends Ak
 
 	@Override
 	protected void fromSerialized(@NotNull ObjectNode objectNode) {
-		this.elementID = new BigInteger(objectNode.get("id").asText());
 		fromSerializedElement(objectNode);
 	}
+
+	@Override
+	protected void deserializeRootProperties(@NotNull ObjectNode objectNode) {
+		this.elementID = new BigInteger(objectNode.get("id").asText());
+	}
+
+
 
 	protected abstract @NotNull Notification validateElement();
 	protected abstract void fromSerializedElement(@NotNull ObjectNode objectNode);
