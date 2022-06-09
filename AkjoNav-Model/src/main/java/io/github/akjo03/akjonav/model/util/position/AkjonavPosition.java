@@ -8,7 +8,6 @@ import lombok.Getter;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.math.BigInteger;
 import java.util.Locale;
 
 @Getter
@@ -17,8 +16,8 @@ public class AkjonavPosition extends AkjonavBuildable {
 	private final double longitude;
 	@Nullable private final Length altitude;
 
-	AkjonavPosition(BigInteger id, double latitude, double longitude, @Nullable Length altitude) {
-		super(id, AkjonavPositionType.type);
+	AkjonavPosition(double latitude, double longitude, @Nullable Length altitude) {
+		super(AkjonavPositionType.type);
 		this.latitude = latitude;
 		this.longitude = longitude;
 		this.altitude = altitude;

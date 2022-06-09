@@ -7,20 +7,18 @@ import lombok.RequiredArgsConstructor;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.stereotype.Component;
 
-import java.math.BigInteger;
 import java.util.Objects;
 
 @Getter
 @RequiredArgsConstructor
 @Component
+@SuppressWarnings("unused")
 public abstract class AkjonavBuildable {
-	protected final BigInteger id;
-	protected final AkjonavBuildableType type;
+	@NotNull protected final AkjonavBuildableType type;
 
 	public ObjectNode serialize(@NotNull ObjectMapper objectMapper) {
 		ObjectNode objectNode = objectMapper.createObjectNode();
 
-		objectNode.put("id", id.toString());
 		objectNode.put("type", type.getTypeID());
 
 		ObjectNode dataNode = objectMapper.createObjectNode();
@@ -34,7 +32,7 @@ public abstract class AkjonavBuildable {
 
 	@Override
 	public String toString() {
-		return getClass().getSimpleName() + "{" + "id=" + id + ", type=" + type.getTypeID() + ", data=" + toObjectString() + "}";
+		return getClass().getSimpleName() + "{" + "type=" + type.getTypeID() + ", data=" + toObjectString() + "}";
 	}
 
 	@Override
@@ -44,11 +42,11 @@ public abstract class AkjonavBuildable {
 		if (o == null || getClass() != o.getClass())
 			return false;
 		AkjonavBuildable that = (AkjonavBuildable) o;
-		return Objects.equals(id, that.id) && Objects.equals(type, that.type);
+		return Objects.equals(type, that.type);
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(id, type);
+		return Objects.hash(type);
 	}
 }

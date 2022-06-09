@@ -27,6 +27,8 @@ public class AkjonavModelApp implements CommandLineRunner {
 	public void run(String[] args) {
 		LOGGER.info("Running " + AkjonavModelConstants.APP_NAME + " V" + AkjonavModelConstants.APP_VERSION + "...");
 
+
+
 		exit(0);
 	}
 

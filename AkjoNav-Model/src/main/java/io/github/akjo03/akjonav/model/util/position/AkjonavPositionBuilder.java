@@ -11,21 +11,17 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.math.BigDecimal;
-import java.math.BigInteger;
 import java.util.Objects;
 
 import static io.validly.NoteFirstValidator.valid;
 
+@SuppressWarnings("unused")
 public class AkjonavPositionBuilder extends AkjonavBuilder<AkjonavPosition> {
 	private Double latitude;
 	private Double longitude;
 	@Nullable private Length altitude = null;
 
 	protected AkjonavPositionBuilder() { super(); }
-
-	public AkjonavPositionBuilder(BigInteger id) {
-		super(id);
-	}
 
 	public AkjonavPositionBuilder withLatitude(Double latitude) {
 		this.latitude = latitude;
@@ -41,17 +37,17 @@ public class AkjonavPositionBuilder extends AkjonavBuilder<AkjonavPosition> {
 	}
 
 	@Override
-	protected AkjonavBuildableType getType() {
+	protected @NotNull AkjonavBuildableType getType() {
 		return AkjonavPositionType.type;
 	}
 
 	@Override
 	protected AkjonavPosition buildIt() {
-		return new AkjonavPosition(id, latitude, longitude, altitude);
+		return new AkjonavPosition(latitude, longitude, altitude);
 	}
 
 	@Override
-	protected Notification validateIt() {
+	protected @NotNull Notification validateIt() {
 		Notification notification = new Notification();
 
 		valid(latitude, "AkjonavPosition.latiude", notification)
