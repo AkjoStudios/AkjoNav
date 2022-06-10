@@ -1,7 +1,7 @@
 ![GitHub release (latest by date including pre-releases)](https://img.shields.io/github/downloads-pre/AkjoStudios/AkjoNav/latest/total?label=Downloads&style=flat-square)
 ![GitHub](https://img.shields.io/github/license/AkjoStudios/AkjoNav?label=License&style=flat-square)
 ![CodeFactor Grade](https://img.shields.io/codefactor/grade/github/AkjoStudios/AkjoNav?label=Code%20Quality&style=flat-square)
-![GitHub Workflow Status](https://img.shields.io/github/workflow/status/AkjoStudios/AkjoNav/CodeQL?label=CodeQL%20Status&style=flat-square)
+![GitHub branch checks state](https://img.shields.io/github/checks-status/AkjoStudios/AkjoNav/master?label=Checks%20%28master%29&style=flat-square)
 ![Lines of code](https://img.shields.io/tokei/lines/github/AkjoStudios/AkjoNav?label=Lines%20Of%20Code&style=flat-square)
 
 # AkjoNav
