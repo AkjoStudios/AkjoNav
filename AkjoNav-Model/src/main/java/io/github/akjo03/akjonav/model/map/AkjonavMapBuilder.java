@@ -11,13 +11,14 @@ import io.github.akjo03.akjonav.model.util.builder.AkjonavBuilder;
 import io.validly.Notification;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static io.validly.NoteFirstValidator.valid;
 
 @SuppressWarnings("unused")
 public class AkjonavMapBuilder extends AkjonavBuilder<AkjonavMap> {
-	private List<AkjonavBaseElement> baseElements;
+	private List<AkjonavBaseElement> baseElements = new ArrayList<>();
 
 	public AkjonavMapBuilder() { super(); }
 
