@@ -10,10 +10,10 @@ import java.math.BigInteger;
 import java.util.Objects;
 
 @Getter
-public abstract class AkjonavElement extends AkjonavBuildable {
+public abstract class AkjonavElement<T extends AkjonavElementType> extends AkjonavBuildable<T> {
 	private final BigInteger elementID;
 
-	protected AkjonavElement(BigInteger elementID, AkjonavElementType elementType) {
+	protected AkjonavElement(BigInteger elementID, T elementType) {
 		super(elementType);
 		this.elementID = elementID;
 	}
@@ -43,7 +43,7 @@ public abstract class AkjonavElement extends AkjonavBuildable {
 			return false;
 		if (!super.equals(o))
 			return false;
-		AkjonavElement that = (AkjonavElement) o;
+		AkjonavElement<?> that = (AkjonavElement<?>) o;
 		return Objects.equals(elementID, that.elementID);
 	}
 

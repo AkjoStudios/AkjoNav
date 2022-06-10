@@ -17,7 +17,7 @@ public class AkjonavMapType implements AkjonavBuildableType {
 	}
 
 	@Override
-	public AkjonavBuilder<?> getBuilder() {
+	public AkjonavBuilder<?, ?> getBuilder() {
 		return BUILDER;
 	}
 }

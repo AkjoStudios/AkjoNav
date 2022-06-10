@@ -13,8 +13,8 @@ import java.util.Objects;
 @RequiredArgsConstructor
 @Component
 @SuppressWarnings("unused")
-public abstract class AkjonavBuildable {
-	@NotNull protected final AkjonavBuildableType type;
+public abstract class AkjonavBuildable<T extends AkjonavBuildableType> {
+	@NotNull protected final T type;
 
 	public ObjectNode serialize(@NotNull ObjectMapper objectMapper) {
 		ObjectNode objectNode = objectMapper.createObjectNode();
@@ -28,6 +28,7 @@ public abstract class AkjonavBuildable {
 		return objectNode;
 	}
 
+	@SuppressWarnings("unused")
 	protected ObjectNode addRootProperties(@NotNull ObjectNode objectNode, @NotNull ObjectMapper objectMapper) { return objectNode; }
 	protected String getRootPropertiesString() { return ""; }
 	protected abstract @NotNull ObjectNode serializeIt(@NotNull ObjectNode objectNode, @NotNull ObjectMapper objectMapper);
@@ -44,7 +45,7 @@ public abstract class AkjonavBuildable {
 			return true;
 		if (o == null || getClass() != o.getClass())
 			return false;
-		AkjonavBuildable that = (AkjonavBuildable) o;
+		AkjonavBuildable<?> that = (AkjonavBuildable<?>) o;
 		return Objects.equals(type, that.type);
 	}
 

@@ -7,7 +7,7 @@ import org.jetbrains.annotations.NotNull;
 import java.math.BigInteger;
 
 @SuppressWarnings("unused")
-public abstract class AkjonavBaseElementBuilder<T extends AkjonavBaseElement> extends AkjonavElementBuilder<T> {
+public abstract class AkjonavBaseElementBuilder<T extends AkjonavBaseElement> extends AkjonavElementBuilder<AkjonavBaseElementType, T> {
 	protected AkjonavBaseElementBuilder() { super(); }
 	protected AkjonavBaseElementBuilder(BigInteger elementID) { super(elementID); }
 

@@ -22,7 +22,7 @@ public enum AkjonavBaseElementType implements AkjonavElementType {
 	}
 
 	@Override
-	public AkjonavBuilder<?> getBuilder() {
+	public AkjonavBuilder<?, ?> getBuilder() {
 		return builder;
 	}
 

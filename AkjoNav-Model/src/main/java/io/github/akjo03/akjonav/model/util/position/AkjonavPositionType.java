@@ -16,5 +16,5 @@ public class AkjonavPositionType implements AkjonavBuildableType {
 	public String getTypeID() { return TYPE_ID; }
 
 	@Override
-	public AkjonavBuilder<?> getBuilder() { return BUILDER; }
+	public AkjonavBuilder<?, ?> getBuilder() { return BUILDER; }
 }

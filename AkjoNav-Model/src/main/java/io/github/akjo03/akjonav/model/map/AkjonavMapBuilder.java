@@ -17,7 +17,7 @@ import java.util.List;
 import static io.validly.NoteFirstValidator.valid;
 
 @SuppressWarnings("unused")
-public class AkjonavMapBuilder extends AkjonavBuilder<AkjonavMap> {
+public class AkjonavMapBuilder extends AkjonavBuilder<AkjonavMapType, AkjonavMap> {
 	private List<AkjonavBaseElement> baseElements = new ArrayList<>();
 
 	public AkjonavMapBuilder() { super(); }

@@ -15,7 +15,7 @@ import static io.validly.NoteFirstValidator.valid;
 @Getter
 @Component
 @SuppressWarnings("unused")
-public abstract class AkjonavBuilder<T extends AkjonavBuildable> {
+public abstract class AkjonavBuilder<E extends AkjonavBuildableType, T extends AkjonavBuildable<E>> {
 	@Nullable protected AkjonavBuildableType type;
 
 	private final JsonService jsonService;

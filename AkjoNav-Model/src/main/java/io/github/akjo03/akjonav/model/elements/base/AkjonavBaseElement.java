@@ -6,7 +6,7 @@ import lombok.Getter;
 import java.math.BigInteger;
 
 @Getter
-public abstract class AkjonavBaseElement extends AkjonavElement {
+public abstract class AkjonavBaseElement extends AkjonavElement<AkjonavBaseElementType> {
 	protected AkjonavBaseElement(BigInteger elementID, AkjonavBaseElementType elementType) {
 		super(elementID, elementType);
 	}
