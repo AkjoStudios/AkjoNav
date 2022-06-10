@@ -25,13 +25,18 @@ public abstract class AkjonavElement<T extends AkjonavElementType> extends Akjon
 
 	@Override
 	protected ObjectNode addRootProperties(@NotNull ObjectNode objectNode, @NotNull ObjectMapper objectMapper) {
-		return objectNode.put("id", elementID);
+		objectNode.put("id", elementID);
+		objectNode = addAdditionalRootProperties(objectNode, objectMapper);
+		return objectNode;
 	}
 
 	@Override
 	protected String getRootPropertiesString() {
-		return "elementID=" + elementID;
+		return "elementID=" + elementID; // TODO Add additional properties here
 	}
+
+	protected @NotNull ObjectNode addAdditionalRootProperties(@NotNull ObjectNode objectNode, @NotNull ObjectMapper objectMapper) { return objectNode; }
+	protected @NotNull String getAdditionalRootPropertiesString() { return ""; }
 
 	protected abstract @NotNull ObjectNode serializeElement(@NotNull ObjectNode objectNode, @NotNull ObjectMapper objectMapper);
 
