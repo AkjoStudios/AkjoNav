@@ -20,4 +20,9 @@ public class AkjonavMapType implements AkjonavBuildableType {
 	public AkjonavBuilder<?, ?> getBuilder() {
 		return BUILDER;
 	}
+
+	@Override
+	public String toString() {
+		return TYPE_ID;
+	}
 }

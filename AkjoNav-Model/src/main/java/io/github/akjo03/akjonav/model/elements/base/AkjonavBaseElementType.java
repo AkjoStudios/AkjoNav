@@ -32,4 +32,9 @@ public enum AkjonavBaseElementType implements AkjonavElementType {
 				.findFirst()
 				.orElseThrow(() -> new IllegalArgumentException("No base element type found for id \"" + typeID + "\"!"));
 	}
+
+	@Override
+	public String toString() {
+		return typeID;
+	}
 }

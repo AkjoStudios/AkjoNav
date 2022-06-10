@@ -19,9 +19,17 @@ public class AkjonavElementReference {
 	@Contract("_ -> new")
 	public static @NotNull AkjonavElementReference of(@NotNull AkjonavElement<?> element) throws IllegalStateException {
 		Class<?> callerClass = StackWalker.getInstance(StackWalker.Option.RETAIN_CLASS_REFERENCE).getCallerClass();
-		if (callerClass == null || !callerClass.isAssignableFrom(AkjonavMap.class) || !callerClass.isAssignableFrom(AkjonavMapBuilder.class)) {
+		if (callerClass == null) {
+			throw new IllegalStateException("AkjonavElementReference.of() called from outside of a class.");
+		}
+		if (!AkjonavMap.class.isAssignableFrom(callerClass) && !AkjonavMapBuilder.class.isAssignableFrom(callerClass)) {
 			throw new IllegalStateException("AkjonavElementReference.of() can only be called from within an AkjonavMap or an AkjonavMapBuilder!");
 		}
 		return new AkjonavElementReference(element.getType(), element.getElementID());
+	}
+
+	@Override
+	public String toString() {
+		return "{type=" + elementType + ", id=" + elementID + "}";
 	}
 }
