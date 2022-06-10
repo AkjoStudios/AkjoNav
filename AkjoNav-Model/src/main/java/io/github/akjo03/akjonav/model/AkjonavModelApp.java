@@ -3,10 +3,11 @@ package io.github.akjo03.akjonav.model;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import io.github.akjo03.akjonav.model.constants.AkjonavModelConstants;
-import io.github.akjo03.akjonav.model.elements.base.AkjonavBaseElementBuilder;
 import io.github.akjo03.akjonav.model.elements.base.node.AkjonavNodeBuilder;
 import io.github.akjo03.akjonav.model.elements.base.way.AkjonavWay;
 import io.github.akjo03.akjonav.model.elements.base.way.AkjonavWayBuilder;
+import io.github.akjo03.akjonav.model.map.AkjonavMap;
+import io.github.akjo03.akjonav.model.map.AkjonavMapBuilder;
 import io.github.akjo03.akjonav.model.util.position.AkjonavPositionBuilder;
 import io.github.akjo03.util.logging.v2.Logger;
 import io.github.akjo03.util.logging.v2.LoggerManager;
@@ -50,11 +51,17 @@ public class AkjonavModelApp implements CommandLineRunner {
 				)).build();
 		LOGGER.info("AkjonavWay: " + akjonavWay);
 
-		ObjectNode serializedWay = akjonavWay.serialize(objectMapper);
-		LOGGER.info("Serialized AkjonavWay: " + serializedWay);
+		AkjonavMap akjonavMap = new AkjonavMapBuilder()
+				.addBaseElement(akjonavWay)
+				.build();
 
-		AkjonavWay deserializedWay = AkjonavBaseElementBuilder.deserializeElement(serializedWay, AkjonavWay.class);
-		LOGGER.info("Deserialized AkjonavWay: " + deserializedWay);
+		LOGGER.info("AkjonavMap: " + akjonavMap);
+
+		ObjectNode serializedMap = akjonavMap.serialize(objectMapper);
+		LOGGER.info("Serialized AkjonavMap: " + serializedMap);
+
+		AkjonavMap deserializedMap = new AkjonavMapBuilder().deserialize(serializedMap);
+		LOGGER.info("Deserialized AkjonavMap: " + deserializedMap);
 
 		exit(0);
 	}
