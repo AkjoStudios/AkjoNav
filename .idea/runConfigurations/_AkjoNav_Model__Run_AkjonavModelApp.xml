@@ -1,5 +1,5 @@
 <component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="Run AkjonavModelApp" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+  <configuration default="false" name="[AkjoNav-Model] Run AkjonavModelApp" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
     <option name="ACTIVE_PROFILES" />
     <module name="AkjoNav-Model" />
     <option name="SPRING_BOOT_MAIN_CLASS" value="io.github.akjo03.akjonav.model.AkjonavModelApp" />
