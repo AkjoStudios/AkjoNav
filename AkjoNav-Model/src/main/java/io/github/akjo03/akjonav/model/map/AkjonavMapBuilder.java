@@ -8,6 +8,7 @@ import io.github.akjo03.akjonav.model.elements.AkjonavElementReference;
 import io.github.akjo03.akjonav.model.elements.base.AkjonavBaseElement;
 import io.github.akjo03.akjonav.model.elements.base.AkjonavBaseElementBuilder;
 import io.github.akjo03.akjonav.model.elements.map.AkjonavMapElement;
+import io.github.akjo03.akjonav.model.elements.map.AkjonavMapElementBuilder;
 import io.github.akjo03.akjonav.model.util.builder.AkjonavBuildableType;
 import io.github.akjo03.akjonav.model.util.builder.AkjonavBuilder;
 import io.validly.Notification;
@@ -125,11 +126,11 @@ public class AkjonavMapBuilder extends AkjonavBuilder<AkjonavMapType, AkjonavMap
 			}
 		}
 
-		/*ArrayNode mapElementsArray = (ArrayNode) objectNode.get("mapElements");
+		ArrayNode mapElementsArray = (ArrayNode) objectNode.get("mapElements");
 		if (mapElementsArray != null) {
 			for (JsonNode mapElementNode : mapElementsArray) {
 				this.mapElements.add(AkjonavMapElementBuilder.deserializeElement((ObjectNode) mapElementNode));
 			}
-		}*/ // TODO: Implement map elements deserialization first
+		}
 	}
 }
