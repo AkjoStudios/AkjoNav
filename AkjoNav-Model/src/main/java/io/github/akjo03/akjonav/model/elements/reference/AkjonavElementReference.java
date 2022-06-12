@@ -35,6 +35,6 @@ public class AkjonavElementReference extends AkjonavBuildable<AkjonavElementRefe
 
 	@Override
 	public String toString() {
-		return "{type=" + elementType + ", id=" + elementID + "}";
+		return "AkjonavElementReference" + "{" + "type=" + elementType + ", id=" + elementID + "}";
 	}
 }

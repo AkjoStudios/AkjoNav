@@ -58,6 +58,10 @@ public class AkjonavMapBuilder extends AkjonavBuilder<AkjonavMapType, AkjonavMap
 		return reference;
 	}
 
+	public static AkjonavElementReference deserializeElementReference(@NotNull ObjectNode objectNode) {
+		return new AkjonavElementReferenceBuilder().deserialize(objectNode);
+	}
+
 	@Override
 	protected AkjonavBuildableType getType() {
 		return AkjonavMapType.type;

@@ -4,7 +4,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import io.github.akjo03.akjonav.model.elements.AkjonavElementType;
 import io.github.akjo03.akjonav.model.elements.base.AkjonavBaseElementType;
-import io.github.akjo03.akjonav.model.map.AkjonavMapBuilder;
 import io.github.akjo03.akjonav.model.util.builder.AkjonavBuildableType;
 import io.github.akjo03.akjonav.model.util.builder.AkjonavBuilder;
 import io.validly.Notification;
@@ -45,10 +44,10 @@ public class AkjonavElementReferenceBuilder extends AkjonavBuilder<AkjonavElemen
 	@Override
 	protected AkjonavElementReference buildIt() {
 		StackWalker.getInstance(StackWalker.Option.RETAIN_CLASS_REFERENCE).walk(stackFrames -> {
-			stackFrames.filter(stackFrame -> stackFrame.getClassName()
-					.endsWith(AkjonavMapBuilder.class.getSimpleName()))
-					.findFirst()
-					.orElseThrow(() -> new IllegalStateException("An AkjonavElementReference can only be created from within an AkjonavMap or an AkjonavMapBuilder!"));
+			stackFrames.filter(stackFrame -> {
+				String className = stackFrame.getClassName().split("\\.")[stackFrame.getClassName().split("\\.").length - 1];
+				return (className.equals("AkjonavMapBuilder"));
+			}).findFirst().orElseThrow(() -> new IllegalStateException("An AkjonavElementReference can only be created from within an AkjonavMap or an AkjonavMapBuilder!"));
 			return null;
 		});
 		return new AkjonavElementReference(elementType, elementID);
@@ -70,14 +69,15 @@ public class AkjonavElementReferenceBuilder extends AkjonavBuilder<AkjonavElemen
 
 	@Override
 	protected void fromSerialized(@NotNull ObjectNode objectNode, @NotNull ObjectMapper objectMapper) {
-		String serializedElementType = objectNode.get("type").asText().split(":")[0];
+		String serializedElementType = objectNode.get("elementType").asText().split(":")[0];
 		switch (serializedElementType) {
 			case "BaseElement":
-				this.elementType = AkjonavBaseElementType.fromType(objectNode.get("type").asText());
+				this.elementType = AkjonavBaseElementType.fromType(objectNode.get("elementType").asText());
 				break;
 
 			default:
 				throw new IllegalArgumentException("Cannot generate element reference from unknown element type: " + serializedElementType + "!");
 		}
+		this.elementID = new BigInteger(objectNode.get("elementID").asText());
 	}
 }
