@@ -31,22 +31,28 @@ public class AkjonavMapBuilder extends AkjonavBuilder<AkjonavMapType, AkjonavMap
 	public AkjonavMapBuilder() { super(); }
 
 	public AkjonavMapBuilder addBaseElement(@NotNull AkjonavBaseElement baseElement) {
+		if (baseElements.stream().anyMatch(element -> element.getElementID().equals(baseElement.getElementID()))) {
+			throw new IllegalArgumentException("Base element with ID " + baseElement.getElementID() + " already exists!");
+		}
 		this.baseElements.add(baseElement);
 		return this;
 	}
 
-	public AkjonavMapBuilder addBaseElements(@NotNull List<AkjonavBaseElement> baseElements) {
-		this.baseElements.addAll(baseElements);
+	public AkjonavMapBuilder addBaseElements(@NotNull List<AkjonavBaseElement> newBaseElements) {
+		newBaseElements.forEach(this::addBaseElement);
 		return this;
 	}
 
 	public AkjonavMapBuilder addMapElement(@NotNull AkjonavMapElement mapElement) {
+		if (mapElements.stream().anyMatch(element -> element.getElementID().equals(mapElement.getElementID()))) {
+			throw new IllegalArgumentException("Map element with ID " + mapElement.getElementID() + " already exists!");
+		}
 		this.mapElements.add(mapElement);
 		return this;
 	}
 
 	public AkjonavMapBuilder addMapElements(@NotNull List<AkjonavMapElement> mapElements) {
-		this.mapElements.addAll(mapElements);
+		mapElements.forEach(this::addMapElement);
 		return this;
 	}
 
@@ -110,9 +116,11 @@ public class AkjonavMapBuilder extends AkjonavBuilder<AkjonavMapType, AkjonavMap
 	protected @NotNull Notification validateIt() {
 		Notification notification = new Notification();
 		valid(baseElements, "AkjonavMap.baseElements", notification)
-				.mustNotBeNull("BaseElements of an AkjonavMap cannot be null!");
+				.mustNotBeNull("BaseElements of an AkjonavMap cannot be null!")
+				.must(baseElementsP -> baseElementsP.stream().map(AkjonavBaseElement::getElementID).distinct().count() == baseElementsP.size(), "BaseElements of an AkjonavMap must each have unique IDs!");
 		valid(mapElements, "AkjonavMap.mapElements", notification)
-				.mustNotBeNull("MapElements of an AkjonavMap cannot be null!");
+				.mustNotBeNull("MapElements of an AkjonavMap cannot be null!")
+				.must(mapElementsP -> mapElementsP.stream().map(AkjonavMapElement::getElementID).distinct().count() == mapElementsP.size(), "MapElements of an AkjonavMap must each have unique IDs!");
 		return notification;
 	}
 
