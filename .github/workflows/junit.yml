@@ -27,4 +27,4 @@ jobs:
         java-version: 17
 
     - name: Perform JUnit Tests
-      uses: mvn mvn -B package test
+      run: mvn mvn -B package test
