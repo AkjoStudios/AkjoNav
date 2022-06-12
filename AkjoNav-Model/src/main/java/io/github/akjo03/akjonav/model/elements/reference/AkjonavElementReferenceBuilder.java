@@ -71,12 +71,8 @@ public class AkjonavElementReferenceBuilder extends AkjonavBuilder<AkjonavElemen
 	protected void fromSerialized(@NotNull ObjectNode objectNode, @NotNull ObjectMapper objectMapper) {
 		String serializedElementType = objectNode.get("elementType").asText().split(":")[0];
 		switch (serializedElementType) {
-			case "BaseElement":
-				this.elementType = AkjonavBaseElementType.fromType(objectNode.get("elementType").asText());
-				break;
-
-			default:
-				throw new IllegalArgumentException("Cannot generate element reference from unknown element type: " + serializedElementType + "!");
+			case "BaseElement" -> this.elementType = AkjonavBaseElementType.fromType(objectNode.get("elementType").asText());
+			default -> throw new IllegalArgumentException("Cannot generate element reference from unknown element type: " + serializedElementType + "!");
 		}
 		this.elementID = new BigInteger(objectNode.get("elementID").asText());
 	}
