@@ -1,12 +1,13 @@
 package io.github.akjo03.akjonav.model;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.node.ObjectNode;
 import io.github.akjo03.akjonav.model.constants.AkjonavModelConstants;
 import io.github.akjo03.akjonav.model.elements.base.node.AkjonavNodeBuilder;
 import io.github.akjo03.akjonav.model.elements.base.way.AkjonavWayBuilder;
 import io.github.akjo03.akjonav.model.map.AkjonavMap;
 import io.github.akjo03.akjonav.model.map.AkjonavMapBuilder;
+import io.github.akjo03.akjonav.model.map.file.AkjonavMapReader;
+import io.github.akjo03.akjonav.model.map.file.AkjonavMapWriter;
 import io.github.akjo03.akjonav.model.util.position.AkjonavPositionBuilder;
 import io.github.akjo03.util.logging.v2.Logger;
 import io.github.akjo03.util.logging.v2.LoggerManager;
@@ -16,6 +17,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
 
+import java.io.IOException;
 import java.math.BigInteger;
 import java.util.List;
 
@@ -55,15 +57,20 @@ public class AkjonavModelApp implements CommandLineRunner {
 
 		AkjonavMap map = mapBuilder.build();
 
-		LOGGER.info("Original Map: " + map);
+		AkjonavMapWriter mapWriter = new AkjonavMapWriter(AkjonavModelConstants.MAPS_FOLDER.resolve("testMap.anm"));
+		try {
+			mapWriter.writeMap(map, objectMapper);
+		} catch (IOException e) {
+			LOGGER.error("Error writing map to file!", e);
+		}
 
-		ObjectNode objectNode = map.serialize(objectMapper);
-
-		LOGGER.info("Serialized Map: " + objectNode);
-
-		AkjonavMap deserializedMap = new AkjonavMapBuilder().deserialize(objectNode);
-
-		LOGGER.info("Deserialized Map: " + deserializedMap);
+		AkjonavMapReader mapReader = new AkjonavMapReader(AkjonavModelConstants.MAPS_FOLDER.resolve("testMap.anm"));
+		try {
+			AkjonavMap readMap = mapReader.readMap(objectMapper);
+			LOGGER.info("Read map: " + readMap);
+		} catch (IOException e) {
+			LOGGER.error("Error reading map from file!", e);
+		}
 
 		exit(0);
 	}
