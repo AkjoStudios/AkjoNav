@@ -2,6 +2,7 @@ package io.github.akjo03.akjonav.model;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.github.akjo03.akjonav.model.constants.AkjonavModelConstants;
+import io.github.akjo03.akjonav.model.elements.base.area.AkjonavAreaBuilder;
 import io.github.akjo03.akjonav.model.elements.base.node.AkjonavNodeBuilder;
 import io.github.akjo03.akjonav.model.elements.base.way.AkjonavWayBuilder;
 import io.github.akjo03.akjonav.model.map.AkjonavMap;
@@ -44,14 +45,25 @@ public class AkjonavModelApp implements CommandLineRunner {
 				new AkjonavNodeBuilder(BigInteger.valueOf(1))
 						.setPosition(new AkjonavPositionBuilder(0.0, 0.0).build())
 						.build(),
-				new AkjonavNodeBuilder(BigInteger.valueOf(2))
+				new AkjonavNodeBuilder(BigInteger.valueOf(1))
 						.setPosition(new AkjonavPositionBuilder(1.0, 1.0).build())
+						.build(),
+				new AkjonavNodeBuilder(BigInteger.valueOf(3))
+						.setPosition(new AkjonavPositionBuilder(2.0, 2.0).build())
 						.build()
 		)).addBaseElement(
-				new AkjonavWayBuilder(BigInteger.valueOf(3))
+				new AkjonavWayBuilder(BigInteger.valueOf(4))
 						.addNodes(List.of(
 								mapBuilder.getBaseElementReference(BigInteger.valueOf(1)),
-								mapBuilder.getBaseElementReference(BigInteger.valueOf(2))
+								mapBuilder.getBaseElementReference(BigInteger.valueOf(2)),
+								mapBuilder.getBaseElementReference(BigInteger.valueOf(3))
+						)).build()
+		).addBaseElement(
+				new AkjonavAreaBuilder(BigInteger.valueOf(5))
+						.addNodes(List.of(
+								mapBuilder.getBaseElementReference(BigInteger.valueOf(1)),
+								mapBuilder.getBaseElementReference(BigInteger.valueOf(2)),
+								mapBuilder.getBaseElementReference(BigInteger.valueOf(1))
 						)).build()
 		);
 

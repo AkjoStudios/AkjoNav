@@ -1,6 +1,7 @@
 package io.github.akjo03.akjonav.model.elements.base;
 
 import io.github.akjo03.akjonav.model.elements.AkjonavElementType;
+import io.github.akjo03.akjonav.model.elements.base.area.AkjonavAreaBuilder;
 import io.github.akjo03.akjonav.model.elements.base.node.AkjonavNodeBuilder;
 import io.github.akjo03.akjonav.model.elements.base.way.AkjonavWayBuilder;
 import io.github.akjo03.akjonav.model.util.builder.AkjonavBuilder;
@@ -11,7 +12,8 @@ import java.util.Arrays;
 @RequiredArgsConstructor
 public enum AkjonavBaseElementType implements AkjonavElementType {
 	NODE("BaseElement:NODE", new AkjonavNodeBuilder()),
-	WAY("BaseElement:WAY", new AkjonavWayBuilder());
+	WAY("BaseElement:WAY", new AkjonavWayBuilder()),
+	AREA("BaseElement:AREA", new AkjonavAreaBuilder());
 
 	private final String typeID;
 	private final AkjonavBaseElementBuilder<?> builder;

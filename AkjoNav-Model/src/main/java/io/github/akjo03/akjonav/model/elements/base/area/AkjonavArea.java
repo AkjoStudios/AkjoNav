@@ -1,4 +1,4 @@
-package io.github.akjo03.akjonav.model.elements.base.way;
+package io.github.akjo03.akjonav.model.elements.base.area;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ArrayNode;
@@ -12,12 +12,12 @@ import java.math.BigInteger;
 import java.util.List;
 import java.util.Objects;
 
-@SuppressWarnings("unused")
-public class AkjonavWay extends AkjonavBaseElement {
-	@NotNull private final List<AkjonavElementReference> nodeRefs;
+public class AkjonavArea extends AkjonavBaseElement {
+	@NotNull
+	private final List<AkjonavElementReference> nodeRefs;
 
-	protected AkjonavWay(BigInteger elementID, @NotNull List<AkjonavElementReference> nodeRefs) {
-		super(elementID, AkjonavBaseElementType.WAY);
+	protected AkjonavArea(BigInteger elementID, @NotNull List<AkjonavElementReference> nodeRefs) {
+		super(elementID, AkjonavBaseElementType.AREA);
 		this.nodeRefs = nodeRefs;
 	}
 
@@ -44,7 +44,7 @@ public class AkjonavWay extends AkjonavBaseElement {
 			return false;
 		if (!super.equals(o))
 			return false;
-		AkjonavWay that = (AkjonavWay) o;
+		AkjonavArea that = (AkjonavArea) o;
 		return nodeRefs.equals(that.nodeRefs);
 	}
 
