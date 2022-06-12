@@ -40,7 +40,7 @@ public class AkjonavPosition extends AkjonavBuildable<AkjonavPositionType> {
 
 	@Override
 	protected @NotNull String toObjectString() {
-		return "{\"latitude\":" + latitude + ",\"longitude\":" + longitude + ",\"altitude\":" + (altitude != null ? altitude.toStringLocalizedWithAbbreviation(Locale.US) : "null").replace(" ", "") + "}";
+		return "{latitude=" + latitude + ", longitude=" + longitude + ", altitude=" + (altitude != null ? altitude.toStringLocalizedWithAbbreviation(Locale.US) : "null").replace(" ", "") + "}";
 	}
 
 	@Override
