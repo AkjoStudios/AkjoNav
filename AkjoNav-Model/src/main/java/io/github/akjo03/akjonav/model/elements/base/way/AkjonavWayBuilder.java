@@ -68,7 +68,7 @@ public class AkjonavWayBuilder extends AkjonavBaseElementBuilder<AkjonavWay> {
 	}
 
 	@Override
-	protected void fromSerializedElement(@NotNull ObjectNode objectNode, @NotNull ObjectMapper objectMapper) {
+	protected void fromSerialized(@NotNull ObjectNode objectNode, @NotNull ObjectMapper objectMapper) {
 		ArrayNode nodesArray = (ArrayNode) objectNode.get("nodes");
 		if (nodesArray != null) {
 			for (JsonNode node : nodesArray) {

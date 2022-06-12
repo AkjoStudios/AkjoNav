@@ -1,7 +1,10 @@
 package io.github.akjo03.akjonav.model;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import io.github.akjo03.akjonav.model.constants.AkjonavModelConstants;
 import io.github.akjo03.akjonav.model.elements.base.node.AkjonavNodeBuilder;
+import io.github.akjo03.akjonav.model.elements.reference.AkjonavElementReference;
 import io.github.akjo03.akjonav.model.map.AkjonavMapBuilder;
 import io.github.akjo03.akjonav.model.util.position.AkjonavPositionBuilder;
 import io.github.akjo03.util.logging.v2.Logger;
@@ -20,6 +23,7 @@ public class AkjonavModelApp implements CommandLineRunner {
 	private static final Logger LOGGER = LoggerManager.getLogger(AkjonavModelApp.class, AkjonavModelConstants.LOGGING_LEVEL);
 
 	private final ApplicationContext applicationContext;
+	private final ObjectMapper objectMapper;
 
 	public static void main(String[] args) {
 		LOGGER.setLoggingFormat(AkjonavModelConstants.LOGGING_FORMAT);
@@ -38,7 +42,13 @@ public class AkjonavModelApp implements CommandLineRunner {
 						.build()
 		);
 
-		mapBuilder.getBaseElementReference(BigInteger.valueOf(1));
+		AkjonavElementReference nodeRef = mapBuilder.getBaseElementReference(BigInteger.valueOf(1));
+
+		ObjectNode serializedNodeRef = nodeRef.serialize(objectMapper);
+		LOGGER.info("Serialized node reference: " + serializedNodeRef.toString());
+
+		AkjonavElementReference deserializedNodeRef = AkjonavMapBuilder.deserializeElementReference(serializedNodeRef);
+		LOGGER.info("Deserialized node reference: " + deserializedNodeRef.toString());
 
 		exit(0);
 	}

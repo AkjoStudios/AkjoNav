@@ -53,7 +53,7 @@ public class AkjonavNodeBuilder extends AkjonavBaseElementBuilder<AkjonavNode> {
 	}
 
 	@Override
-	protected void fromSerializedElement(@NotNull ObjectNode objectNode, @NotNull ObjectMapper objectMapper) {
+	protected void fromSerialized(@NotNull ObjectNode objectNode, @NotNull ObjectMapper objectMapper) {
 		this.position = new AkjonavPositionBuilder().deserialize((ObjectNode) objectNode.get("position"));
 	}
 }

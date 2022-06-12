@@ -1,6 +1,5 @@
 package io.github.akjo03.akjonav.model.elements;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import io.github.akjo03.akjonav.model.util.builder.AkjonavBuilder;
 import io.validly.Notification;
@@ -37,17 +36,9 @@ public abstract class AkjonavElementBuilder<E extends AkjonavElementType, T exte
 	}
 
 	@Override
-	protected void fromSerialized(@NotNull ObjectNode objectNode, @NotNull ObjectMapper objectMapper) {
-		fromSerializedElement(objectNode, objectMapper);
-	}
-
-	@Override
 	protected void deserializeRootProperties(@NotNull ObjectNode objectNode) {
 		this.elementID = new BigInteger(objectNode.get("id").asText());
 	}
 
-
-
 	protected abstract @NotNull Notification validateElement();
-	protected abstract void fromSerializedElement(@NotNull ObjectNode objectNode, @NotNull ObjectMapper objectMapper);
 }

@@ -8,6 +8,7 @@ import lombok.Getter;
 import org.jetbrains.annotations.NotNull;
 
 import java.math.BigInteger;
+import java.util.Objects;
 
 @Getter
 @SuppressWarnings("unused")
@@ -35,6 +36,23 @@ public class AkjonavElementReference extends AkjonavBuildable<AkjonavElementRefe
 
 	@Override
 	public String toString() {
-		return "{type=" + elementType + ", id=" + elementID + "}";
+		return "AkjonavElementReference" + "{" + "type=" + elementType + ", id=" + elementID + "}";
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o)
+			return true;
+		if (o == null || getClass() != o.getClass())
+			return false;
+		if (!super.equals(o))
+			return false;
+		AkjonavElementReference that = (AkjonavElementReference) o;
+		return elementType.equals(that.elementType) && elementID.equals(that.elementID);
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(super.hashCode(), elementType, elementID);
 	}
 }
