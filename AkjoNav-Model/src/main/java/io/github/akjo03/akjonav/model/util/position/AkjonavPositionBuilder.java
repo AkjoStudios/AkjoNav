@@ -25,11 +25,13 @@ public class AkjonavPositionBuilder extends AkjonavBuilder<AkjonavPositionType, 
 	public AkjonavPositionBuilder() { super(); }
 
 	public AkjonavPositionBuilder(@NotNull Double latitude, @NotNull Double longitude) {
+		super();
 		this.latitude = latitude;
 		this.longitude = longitude;
 	}
 
 	public AkjonavPositionBuilder(@NotNull Double latitude, @NotNull Double longitude, @NotNull Length altitude) {
+		super();
 		this.latitude = latitude;
 		this.longitude = longitude;
 		this.altitude = altitude;
