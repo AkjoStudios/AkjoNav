@@ -63,13 +63,13 @@ public class AkjonavMap extends AkjonavBuildable<AkjonavMapType> {
 				.toList();
 	}
 
-	public @NotNull List<AkjonavBaseElement> getBaseElementsByType(@NotNull List<AkjonavBaseElementType> types) {
+	public @NotNull List<AkjonavBaseElement> getBaseElementsByTypes(@NotNull List<AkjonavBaseElementType> types) {
 		return baseElements.stream()
 				.filter(baseElementP -> types.contains(baseElementP.getType()))
 				.toList();
 	}
 
-	public @NotNull List<AkjonavMapElement> getMapElementsByType(@NotNull List<AkjonavMapElementType> types) {
+	public @NotNull List<AkjonavMapElement> getMapElementsByTypes(@NotNull List<AkjonavMapElementType> types) {
 		return mapElements.stream()
 				.filter(mapElementP -> types.contains(mapElementP.getType()))
 				.toList();
