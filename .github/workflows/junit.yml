@@ -10,7 +10,7 @@ on:
 
 jobs:
   analyze:
-    name: Analyze
+    name: Test (junit)
     runs-on: ubuntu-latest
     permissions:
       actions: read
@@ -27,4 +27,4 @@ jobs:
         java-version: 17
 
     - name: Perform JUnit Tests
-      run: mvn mvn -B package test
+      run: mvn -B package test
