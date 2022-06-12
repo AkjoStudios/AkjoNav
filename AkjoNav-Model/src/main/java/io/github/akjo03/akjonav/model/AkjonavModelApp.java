@@ -4,7 +4,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import io.github.akjo03.akjonav.model.constants.AkjonavModelConstants;
 import io.github.akjo03.akjonav.model.elements.base.node.AkjonavNodeBuilder;
-import io.github.akjo03.akjonav.model.elements.reference.AkjonavElementReference;
+import io.github.akjo03.akjonav.model.elements.base.way.AkjonavWayBuilder;
+import io.github.akjo03.akjonav.model.map.AkjonavMap;
 import io.github.akjo03.akjonav.model.map.AkjonavMapBuilder;
 import io.github.akjo03.akjonav.model.util.position.AkjonavPositionBuilder;
 import io.github.akjo03.util.logging.v2.Logger;
@@ -16,6 +17,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
 
 import java.math.BigInteger;
+import java.util.List;
 
 @SpringBootApplication
 @RequiredArgsConstructor
@@ -36,19 +38,32 @@ public class AkjonavModelApp implements CommandLineRunner {
 
 		AkjonavMapBuilder mapBuilder = new AkjonavMapBuilder();
 
-		mapBuilder.addBaseElement(
+		mapBuilder.addBaseElements(List.of(
 				new AkjonavNodeBuilder(BigInteger.valueOf(1))
 						.setPosition(new AkjonavPositionBuilder(0.0, 0.0).build())
+						.build(),
+				new AkjonavNodeBuilder(BigInteger.valueOf(2))
+						.setPosition(new AkjonavPositionBuilder(1.0, 1.0).build())
 						.build()
+		)).addBaseElement(
+				new AkjonavWayBuilder(BigInteger.valueOf(3))
+						.addNodes(List.of(
+								mapBuilder.getBaseElementReference(BigInteger.valueOf(1)),
+								mapBuilder.getBaseElementReference(BigInteger.valueOf(2))
+						)).build()
 		);
 
-		AkjonavElementReference nodeRef = mapBuilder.getBaseElementReference(BigInteger.valueOf(1));
+		AkjonavMap map = mapBuilder.build();
 
-		ObjectNode serializedNodeRef = nodeRef.serialize(objectMapper);
-		LOGGER.info("Serialized node reference: " + serializedNodeRef.toString());
+		LOGGER.info("Original Map: " + map);
 
-		AkjonavElementReference deserializedNodeRef = AkjonavMapBuilder.deserializeElementReference(serializedNodeRef);
-		LOGGER.info("Deserialized node reference: " + deserializedNodeRef.toString());
+		ObjectNode objectNode = map.serialize(objectMapper);
+
+		LOGGER.info("Serialized Map: " + objectNode);
+
+		AkjonavMap deserializedMap = new AkjonavMapBuilder().deserialize(objectNode);
+
+		LOGGER.info("Deserialized Map: " + deserializedMap);
 
 		exit(0);
 	}

@@ -37,6 +37,18 @@ public abstract class AkjonavMapElementBuilder<T extends AkjonavMapElement> exte
 		return notification;
 	}
 
+	public static AkjonavMapElement deserializeElement(@NotNull ObjectNode jsonObject) {
+		return (AkjonavMapElement) AkjonavMapElementType.fromType(jsonObject.get("type").asText()).getBuilder().deserialize(jsonObject);
+	}
+
+	public static <T extends AkjonavMapElement> T deserializeElement(@NotNull ObjectNode jsonObject, @NotNull Class<T> elementClass) {
+		try {
+			return elementClass.cast(AkjonavMapElementType.fromType(jsonObject.get("type").asText()).getBuilder().deserialize(jsonObject));
+		} catch (ClassCastException e) {
+			throw new IllegalArgumentException("Cannot deserialize element of type " + jsonObject.get("type").asText() + " to type " + elementClass.getSimpleName() + "!");
+		}
+	}
+
 	@Override
 	protected void deserializeRootProperties(@NotNull ObjectNode objectNode) {
 		this.baseElementRef = AkjonavMapBuilder.deserializeElementReference(objectNode);

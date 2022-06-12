@@ -5,7 +5,7 @@ import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import io.github.akjo03.akjonav.model.elements.base.AkjonavBaseElement;
 import io.github.akjo03.akjonav.model.elements.base.AkjonavBaseElementType;
-import io.github.akjo03.akjonav.model.elements.base.node.AkjonavNode;
+import io.github.akjo03.akjonav.model.elements.reference.AkjonavElementReference;
 import org.jetbrains.annotations.NotNull;
 
 import java.math.BigInteger;
@@ -14,26 +14,26 @@ import java.util.Objects;
 
 @SuppressWarnings("unused")
 public class AkjonavWay extends AkjonavBaseElement {
-	@NotNull private final List<AkjonavNode> nodes;
+	@NotNull private final List<AkjonavElementReference> nodeRefs;
 
-	AkjonavWay(BigInteger elementID, @NotNull List<AkjonavNode> nodes) {
+	AkjonavWay(BigInteger elementID, @NotNull List<AkjonavElementReference> nodeRefs) {
 		super(elementID, AkjonavBaseElementType.WAY);
-		this.nodes = nodes;
+		this.nodeRefs = nodeRefs;
 	}
 
 	@Override
 	protected @NotNull ObjectNode serializeElement(@NotNull ObjectNode objectNode, @NotNull ObjectMapper objectMapper) {
 		ArrayNode nodesArray = objectMapper.createArrayNode();
-		for (AkjonavNode node : nodes) {
+		for (AkjonavElementReference node : nodeRefs) {
 			nodesArray.add(node.serialize(objectMapper));
 		}
-		objectNode.set("nodes", nodesArray);
+		objectNode.set("nodeRefs", nodesArray);
 		return objectNode;
 	}
 
 	@Override
 	protected @NotNull String toObjectString() {
-		return "{nodes=" + nodes + "}";
+		return "{nodeRefs=" + nodeRefs + "}";
 	}
 
 	@Override
@@ -45,11 +45,11 @@ public class AkjonavWay extends AkjonavBaseElement {
 		if (!super.equals(o))
 			return false;
 		AkjonavWay that = (AkjonavWay) o;
-		return nodes.equals(that.nodes);
+		return nodeRefs.equals(that.nodeRefs);
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(super.hashCode(), nodes);
+		return Objects.hash(super.hashCode(), nodeRefs);
 	}
 }
