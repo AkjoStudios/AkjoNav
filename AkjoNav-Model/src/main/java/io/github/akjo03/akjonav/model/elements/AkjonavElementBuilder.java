@@ -11,7 +11,7 @@ import java.math.BigInteger;
 import static io.validly.NoteFirstValidator.valid;
 
 @SuppressWarnings("unused")
-public abstract class AkjonavElementBuilder<T extends AkjonavElement> extends AkjonavBuilder<T> {
+public abstract class AkjonavElementBuilder<E extends AkjonavElementType, T extends AkjonavElement<E>> extends AkjonavBuilder<E, T> {
 	protected BigInteger elementID;
 
 	protected AkjonavElementBuilder() { super(); }
@@ -20,7 +20,7 @@ public abstract class AkjonavElementBuilder<T extends AkjonavElement> extends Ak
 		this.elementID = elementID;
 	}
 
-	public AkjonavElementBuilder<T> setID(BigInteger elementID) {
+	public AkjonavElementBuilder<E, T> setID(BigInteger elementID) {
 		this.elementID = elementID;
 		return this;
 	}

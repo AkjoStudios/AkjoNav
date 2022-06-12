@@ -17,7 +17,7 @@ import java.util.Objects;
 import static io.validly.NoteFirstValidator.valid;
 
 @SuppressWarnings("unused")
-public class AkjonavPositionBuilder extends AkjonavBuilder<AkjonavPosition> {
+public class AkjonavPositionBuilder extends AkjonavBuilder<AkjonavPositionType, AkjonavPosition> {
 	private Double latitude;
 	private Double longitude;
 	@Nullable private Length altitude = null;
@@ -25,11 +25,13 @@ public class AkjonavPositionBuilder extends AkjonavBuilder<AkjonavPosition> {
 	public AkjonavPositionBuilder() { super(); }
 
 	public AkjonavPositionBuilder(@NotNull Double latitude, @NotNull Double longitude) {
+		super();
 		this.latitude = latitude;
 		this.longitude = longitude;
 	}
 
 	public AkjonavPositionBuilder(@NotNull Double latitude, @NotNull Double longitude, @NotNull Length altitude) {
+		super();
 		this.latitude = latitude;
 		this.longitude = longitude;
 		this.altitude = altitude;

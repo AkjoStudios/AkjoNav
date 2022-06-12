@@ -10,7 +10,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.List;
 import java.util.Objects;
 
-public class AkjonavMap extends AkjonavBuildable {
+public class AkjonavMap extends AkjonavBuildable<AkjonavMapType> {
 	@NotNull private final List<AkjonavBaseElement> baseElements;
 
 	public AkjonavMap(@NotNull List<AkjonavBaseElement> baseElements) {
@@ -25,6 +25,7 @@ public class AkjonavMap extends AkjonavBuildable {
 			baseElementsNode.add(baseElement.serialize(objectMapper));
 		}
 		objectNode.set("baseElements", baseElementsNode);
+
 		return objectNode;
 	}
 
@@ -42,7 +43,7 @@ public class AkjonavMap extends AkjonavBuildable {
 		if (!super.equals(o))
 			return false;
 		AkjonavMap that = (AkjonavMap) o;
-		return baseElements.equals(that.baseElements);
+		return Objects.equals(baseElements, that.baseElements);
 	}
 
 	@Override

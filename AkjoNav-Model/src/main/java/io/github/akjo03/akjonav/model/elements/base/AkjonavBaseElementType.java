@@ -22,7 +22,7 @@ public enum AkjonavBaseElementType implements AkjonavElementType {
 	}
 
 	@Override
-	public AkjonavBuilder<?> getBuilder() {
+	public AkjonavBuilder<?, ?> getBuilder() {
 		return builder;
 	}
 
@@ -31,5 +31,10 @@ public enum AkjonavBaseElementType implements AkjonavElementType {
 				.filter(type -> type.getTypeID().equals(typeID))
 				.findFirst()
 				.orElseThrow(() -> new IllegalArgumentException("No base element type found for id \"" + typeID + "\"!"));
+	}
+
+	@Override
+	public String toString() {
+		return typeID;
 	}
 }

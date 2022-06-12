@@ -13,7 +13,7 @@ import java.util.Objects;
 
 @SuppressWarnings("unused")
 @Getter
-public class AkjonavPosition extends AkjonavBuildable {
+public class AkjonavPosition extends AkjonavBuildable<AkjonavPositionType> {
 	private final double latitude;
 	private final double longitude;
 	@Nullable private final Length altitude;

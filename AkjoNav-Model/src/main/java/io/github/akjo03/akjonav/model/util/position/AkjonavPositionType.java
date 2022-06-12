@@ -9,12 +9,16 @@ public class AkjonavPositionType implements AkjonavBuildableType {
 	private static final String TYPE_ID = "AkjonavPosition";
 	private static final AkjonavPositionBuilder BUILDER = new AkjonavPositionBuilder();
 
-
 	private AkjonavPositionType() {}
 
 	@Override
 	public String getTypeID() { return TYPE_ID; }
 
 	@Override
-	public AkjonavBuilder<?> getBuilder() { return BUILDER; }
+	public AkjonavBuilder<?, ?> getBuilder() { return BUILDER; }
+
+	@Override
+	public String toString() {
+		return TYPE_ID;
+	}
 }

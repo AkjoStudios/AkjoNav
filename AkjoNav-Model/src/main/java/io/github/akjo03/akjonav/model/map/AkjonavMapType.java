@@ -17,7 +17,12 @@ public class AkjonavMapType implements AkjonavBuildableType {
 	}
 
 	@Override
-	public AkjonavBuilder<?> getBuilder() {
+	public AkjonavBuilder<?, ?> getBuilder() {
 		return BUILDER;
+	}
+
+	@Override
+	public String toString() {
+		return TYPE_ID;
 	}
 }
