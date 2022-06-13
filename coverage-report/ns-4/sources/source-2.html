@@ -1,0 +1,130 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <title>Coverage Report > AkjonavBaseElementBuilder</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/highlight-idea.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.pack.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">io.github.akjo03.akjonav.model.elements.base</a>
+</div>
+
+<h1>Coverage Summary for Class: AkjonavBaseElementBuilder (io.github.akjo03.akjonav.model.elements.base)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">AkjonavBaseElementBuilder</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/4)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/6)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<div class="sourceCode" id="sourceCode"><i class="no-highlight">1</i>&nbsp;package io.github.akjo03.akjonav.model.elements.base;
+<i class="no-highlight">2</i>&nbsp;
+<i class="no-highlight">3</i>&nbsp;import com.fasterxml.jackson.databind.node.ObjectNode;
+<i class="no-highlight">4</i>&nbsp;import io.github.akjo03.akjonav.model.elements.AkjonavElementBuilder;
+<i class="no-highlight">5</i>&nbsp;import org.jetbrains.annotations.NotNull;
+<i class="no-highlight">6</i>&nbsp;
+<i class="no-highlight">7</i>&nbsp;import java.math.BigInteger;
+<i class="no-highlight">8</i>&nbsp;
+<i class="no-highlight">9</i>&nbsp;@SuppressWarnings(&quot;unused&quot;)
+<i class="no-highlight">10</i>&nbsp;public abstract class AkjonavBaseElementBuilder&lt;T extends AkjonavBaseElement&gt; extends AkjonavElementBuilder&lt;AkjonavBaseElementType, T&gt; {
+<b class="nc"><i class="no-highlight">11</i>&nbsp;	protected AkjonavBaseElementBuilder() { super(); }</b>
+<b class="nc"><i class="no-highlight">12</i>&nbsp;	protected AkjonavBaseElementBuilder(BigInteger elementID) { super(elementID); }</b>
+<i class="no-highlight">13</i>&nbsp;
+<i class="no-highlight">14</i>&nbsp;	public static AkjonavBaseElement deserializeElement(@NotNull ObjectNode jsonObject) {
+<b class="nc"><i class="no-highlight">15</i>&nbsp;		return (AkjonavBaseElement) AkjonavBaseElementType.fromType(jsonObject.get(&quot;type&quot;).asText()).getBuilder().deserialize(jsonObject);</b>
+<i class="no-highlight">16</i>&nbsp;	}
+<i class="no-highlight">17</i>&nbsp;
+<i class="no-highlight">18</i>&nbsp;	public static &lt;T extends AkjonavBaseElement&gt; T deserializeElement(@NotNull ObjectNode jsonObject, @NotNull Class&lt;T&gt; elementClass) {
+<i class="no-highlight">19</i>&nbsp;		try {
+<b class="nc"><i class="no-highlight">20</i>&nbsp;			return elementClass.cast(AkjonavBaseElementType.fromType(jsonObject.get(&quot;type&quot;).asText()).getBuilder().deserialize(jsonObject));</b>
+<b class="nc"><i class="no-highlight">21</i>&nbsp;		} catch (ClassCastException e) {</b>
+<b class="nc"><i class="no-highlight">22</i>&nbsp;			throw new IllegalArgumentException(&quot;Cannot deserialize element of type &quot; + jsonObject.get(&quot;type&quot;).asText() + &quot; to type &quot; + elementClass.getSimpleName() + &quot;!&quot;);</b>
+<i class="no-highlight">23</i>&nbsp;		}
+<i class="no-highlight">24</i>&nbsp;	}
+<i class="no-highlight">25</i>&nbsp;}
+</div>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+        var codeBlock = document.getElementById('sourceCode');
+
+        if (codeBlock) {
+            hljs.highlightBlock(codeBlock);
+        }
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2022-06-13 16:51</div>
+</div>
+</body>
+</html>
