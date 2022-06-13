@@ -49,7 +49,14 @@ public abstract class AkjonavBuilder<E extends AkjonavBuildableType, T extends A
 	public T deserialize(@NotNull ObjectNode objectNode) {
 		deserializeRootProperties(objectNode);
 		this.type = getType();
-		fromSerialized((ObjectNode) objectNode.get("data"), jsonService.getObjectMapper());
+		if (objectNode.get("type") == null || this.type == null || !this.type.getTypeID().equals(objectNode.get("type").asText())) {
+			throw new IllegalArgumentException("Type ID of deserialized object is invalid or does not match type ID of builder!");
+		}
+		ObjectNode dataNode = (ObjectNode) objectNode.get("data");
+		if (dataNode == null) {
+			throw new IllegalArgumentException("Data of a buildable cannot be null!");
+		}
+		fromSerialized(dataNode, jsonService.getObjectMapper());
 		return build();
 	}
 

@@ -45,11 +45,13 @@ public class AkjonavPositionBuilder extends AkjonavBuilder<AkjonavPositionType, 
 		this.latitude = latitude;
 		return this;
 	}
+
 	public AkjonavPositionBuilder withLongitude(@NotNull Double longitude) {
 		ArgumentChecks.requireArgumentNotNull(longitude, "Longitude of a position cannot be null!");
 		this.longitude = longitude;
 		return this;
 	}
+
 	public AkjonavPositionBuilder withAltitude(@NotNull Length altitude) {
 		this.altitude = altitude;
 		return this;
