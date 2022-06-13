@@ -4,4 +4,4 @@
 LICENSE
 .gitignore
 .idea/
-coverage-reports/
+coverage-report/
