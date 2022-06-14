@@ -13,6 +13,7 @@ import io.github.akjo03.akjonav.model.elements.reference.AkjonavElementReference
 import io.github.akjo03.akjonav.model.util.builder.AkjonavBuildableType;
 import io.github.akjo03.akjonav.model.util.builder.AkjonavBuilder;
 import io.validly.Notification;
+import lombok.Getter;
 import org.jetbrains.annotations.NotNull;
 
 import java.math.BigInteger;
@@ -22,6 +23,7 @@ import java.util.List;
 import static io.validly.NoteFirstValidator.valid;
 
 @SuppressWarnings({"unused", "UnusedReturnValue"})
+@Getter
 public class AkjonavMapBuilder extends AkjonavBuilder<AkjonavMapType, AkjonavMap> {
 	private final List<AkjonavBaseElement> baseElements = new ArrayList<>();
 	private final List<AkjonavMapElement> mapElements = new ArrayList<>();
