@@ -58,10 +58,10 @@ Current scope:     <a href="../../index.html">all classes</a>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    66.7%
+    75%
   </span>
   <span class="absValue">
-    (2/3)
+    (3/4)
   </span>
 </td>
 </tr>
@@ -79,20 +79,22 @@ Current scope:     <a href="../../index.html">all classes</a>
 <i class="no-highlight">4</i>&nbsp;import lombok.experimental.UtilityClass;
 <i class="no-highlight">5</i>&nbsp;
 <i class="no-highlight">6</i>&nbsp;import java.nio.file.Path;
-<i class="no-highlight">7</i>&nbsp;
-<i class="no-highlight">8</i>&nbsp;@UtilityClass
-<i class="no-highlight">9</i>&nbsp;@SuppressWarnings(&quot;unused&quot;)
-<b class="nc"><i class="no-highlight">10</i>&nbsp;public class AkjonavModelConstants {</b>
-<i class="no-highlight">11</i>&nbsp;	public final String MODULE_NAME = &quot;AkjoNav-Model&quot;;
-<i class="no-highlight">12</i>&nbsp;	public final String APP_NAME = &quot;AkjonavModelApp&quot;;
-<i class="no-highlight">13</i>&nbsp;	public final String APP_VERSION = &quot;2022.1-dev1&quot;;
-<i class="no-highlight">14</i>&nbsp;
-<i class="no-highlight">15</i>&nbsp;	public final boolean DEBUG_MODE = true;
-<b class="fc"><i class="no-highlight">16</i>&nbsp;	public final LoggingLevel LOGGING_LEVEL = DEBUG_MODE ? LoggingLevel.DEBUG : LoggingLevel.INFO;</b>
-<i class="no-highlight">17</i>&nbsp;	public final String LOGGING_FORMAT = &quot;[%t] %s[&quot; + MODULE_NAME + &quot;/&quot; + APP_NAME + &quot; @ %i] [%l]: %m&quot;;
-<i class="no-highlight">18</i>&nbsp;
-<b class="fc"><i class="no-highlight">19</i>&nbsp;	public final Path MAPS_FOLDER = Path.of(&quot;maps&quot;);</b>
-<i class="no-highlight">20</i>&nbsp;}
+<i class="no-highlight">7</i>&nbsp;import java.util.regex.Pattern;
+<i class="no-highlight">8</i>&nbsp;
+<i class="no-highlight">9</i>&nbsp;@UtilityClass
+<i class="no-highlight">10</i>&nbsp;@SuppressWarnings(&quot;unused&quot;)
+<b class="nc"><i class="no-highlight">11</i>&nbsp;public class AkjonavModelConstants {</b>
+<i class="no-highlight">12</i>&nbsp;	public final String MODULE_NAME = &quot;AkjoNav-Model&quot;;
+<i class="no-highlight">13</i>&nbsp;	public final String APP_NAME = &quot;AkjonavModelApp&quot;;
+<i class="no-highlight">14</i>&nbsp;	public final String APP_VERSION = &quot;2022.1-dev1&quot;;
+<i class="no-highlight">15</i>&nbsp;
+<i class="no-highlight">16</i>&nbsp;	public final boolean DEBUG_MODE = true;
+<b class="fc"><i class="no-highlight">17</i>&nbsp;	public final LoggingLevel LOGGING_LEVEL = DEBUG_MODE ? LoggingLevel.DEBUG : LoggingLevel.INFO;</b>
+<i class="no-highlight">18</i>&nbsp;	public final String LOGGING_FORMAT = &quot;[%t] %s[&quot; + MODULE_NAME + &quot;/&quot; + APP_NAME + &quot; @ %i] [%l]: %m&quot;;
+<b class="fc"><i class="no-highlight">19</i>&nbsp;	public final Pattern LOGGING_PREFIX_PATTERN = Pattern.compile(&quot;\\[\\d{4}(-\\d{2}){2} \\d{2}(:\\d{2}){2}\\.\\d{3,4}] \\[[A-Za-z\\d-_]+/[A-Za-z\\d-_]+ @ [A-Za-z\\d-_]+] \\[[A-Z]+]: &quot;);</b>
+<i class="no-highlight">20</i>&nbsp;
+<b class="fc"><i class="no-highlight">21</i>&nbsp;	public final Path MAPS_FOLDER = Path.of(&quot;maps&quot;);</b>
+<i class="no-highlight">22</i>&nbsp;}
 </div>
 </pre>
 </div>
@@ -119,7 +121,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2022-06-13 16:51</div>
+    <div style="float:right;">generated on 2022-06-14 22:01</div>
 </div>
 </body>
 </html>
