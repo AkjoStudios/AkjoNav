@@ -53,7 +53,7 @@ Current scope:     <a href="../../index.html">all classes</a>
     100%
   </span>
   <span class="absValue">
-    (12/12)
+    (10/10)
   </span>
 </td>
 <td class="coverageStat">
@@ -61,7 +61,7 @@ Current scope:     <a href="../../index.html">all classes</a>
     100%
   </span>
   <span class="absValue">
-    (34/34)
+    (32/32)
   </span>
 </td>
 </tr>
@@ -84,89 +84,87 @@ Current scope:     <a href="../../index.html">all classes</a>
 <i class="no-highlight">9</i>&nbsp;import io.github.akjo03.util.math.unit.units.length.Length;
 <i class="no-highlight">10</i>&nbsp;import io.github.akjo03.util.math.unit.units.length.LengthUnit;
 <i class="no-highlight">11</i>&nbsp;import io.validly.Notification;
-<i class="no-highlight">12</i>&nbsp;import lombok.Getter;
-<i class="no-highlight">13</i>&nbsp;import org.jetbrains.annotations.NotNull;
-<i class="no-highlight">14</i>&nbsp;import org.jetbrains.annotations.Nullable;
-<i class="no-highlight">15</i>&nbsp;
-<i class="no-highlight">16</i>&nbsp;import java.math.BigDecimal;
-<i class="no-highlight">17</i>&nbsp;import java.util.Objects;
-<i class="no-highlight">18</i>&nbsp;
-<i class="no-highlight">19</i>&nbsp;import static io.validly.NoteFirstValidator.valid;
-<i class="no-highlight">20</i>&nbsp;
-<i class="no-highlight">21</i>&nbsp;@SuppressWarnings(&quot;unused&quot;)
-<i class="no-highlight">22</i>&nbsp;@Getter
-<i class="no-highlight">23</i>&nbsp;public class AkjonavPositionBuilder extends AkjonavBuilder&lt;AkjonavPositionType, AkjonavPosition&gt; {
-<b class="fc"><i class="no-highlight">24</i>&nbsp;	private Double latitude;</b>
-<b class="fc"><i class="no-highlight">25</i>&nbsp;	private Double longitude;</b>
-<b class="fc"><i class="no-highlight">26</i>&nbsp;	@Nullable private Length altitude = null;</b>
+<i class="no-highlight">12</i>&nbsp;import org.jetbrains.annotations.NotNull;
+<i class="no-highlight">13</i>&nbsp;import org.jetbrains.annotations.Nullable;
+<i class="no-highlight">14</i>&nbsp;
+<i class="no-highlight">15</i>&nbsp;import java.math.BigDecimal;
+<i class="no-highlight">16</i>&nbsp;import java.util.Objects;
+<i class="no-highlight">17</i>&nbsp;
+<i class="no-highlight">18</i>&nbsp;import static io.validly.NoteFirstValidator.valid;
+<i class="no-highlight">19</i>&nbsp;
+<i class="no-highlight">20</i>&nbsp;@SuppressWarnings(&quot;unused&quot;)
+<i class="no-highlight">21</i>&nbsp;public class AkjonavPositionBuilder extends AkjonavBuilder&lt;AkjonavPositionType, AkjonavPosition&gt; {
+<i class="no-highlight">22</i>&nbsp;	protected Double latitude;
+<i class="no-highlight">23</i>&nbsp;	protected Double longitude;
+<b class="fc"><i class="no-highlight">24</i>&nbsp;	@Nullable protected Length altitude = null;</b>
+<i class="no-highlight">25</i>&nbsp;
+<b class="fc"><i class="no-highlight">26</i>&nbsp;	public AkjonavPositionBuilder() { super(); }</b>
 <i class="no-highlight">27</i>&nbsp;
-<b class="fc"><i class="no-highlight">28</i>&nbsp;	public AkjonavPositionBuilder() { super(); }</b>
-<i class="no-highlight">29</i>&nbsp;
-<i class="no-highlight">30</i>&nbsp;	public AkjonavPositionBuilder(@NotNull Double latitude, @NotNull Double longitude) {
-<b class="fc"><i class="no-highlight">31</i>&nbsp;		super();</b>
-<b class="fc"><i class="no-highlight">32</i>&nbsp;		this.latitude = latitude;</b>
-<b class="fc"><i class="no-highlight">33</i>&nbsp;		this.longitude = longitude;</b>
-<i class="no-highlight">34</i>&nbsp;	}
-<i class="no-highlight">35</i>&nbsp;
-<i class="no-highlight">36</i>&nbsp;	public AkjonavPositionBuilder(@NotNull Double latitude, @NotNull Double longitude, @NotNull Length altitude) {
-<b class="fc"><i class="no-highlight">37</i>&nbsp;		super();</b>
-<b class="fc"><i class="no-highlight">38</i>&nbsp;		this.latitude = latitude;</b>
-<b class="fc"><i class="no-highlight">39</i>&nbsp;		this.longitude = longitude;</b>
-<b class="fc"><i class="no-highlight">40</i>&nbsp;		this.altitude = altitude;</b>
-<i class="no-highlight">41</i>&nbsp;	}
-<i class="no-highlight">42</i>&nbsp;
-<i class="no-highlight">43</i>&nbsp;	public AkjonavPositionBuilder withLatitude(@NotNull Double latitude) {
-<b class="fc"><i class="no-highlight">44</i>&nbsp;		ArgumentChecks.requireArgumentNotNull(latitude, &quot;Latitude of a position cannot be null!&quot;);</b>
-<b class="fc"><i class="no-highlight">45</i>&nbsp;		this.latitude = latitude;</b>
-<b class="fc"><i class="no-highlight">46</i>&nbsp;		return this;</b>
-<i class="no-highlight">47</i>&nbsp;	}
-<i class="no-highlight">48</i>&nbsp;
-<i class="no-highlight">49</i>&nbsp;	public AkjonavPositionBuilder withLongitude(@NotNull Double longitude) {
-<b class="fc"><i class="no-highlight">50</i>&nbsp;		ArgumentChecks.requireArgumentNotNull(longitude, &quot;Longitude of a position cannot be null!&quot;);</b>
-<b class="fc"><i class="no-highlight">51</i>&nbsp;		this.longitude = longitude;</b>
-<b class="fc"><i class="no-highlight">52</i>&nbsp;		return this;</b>
-<i class="no-highlight">53</i>&nbsp;	}
-<i class="no-highlight">54</i>&nbsp;
-<i class="no-highlight">55</i>&nbsp;	public AkjonavPositionBuilder withAltitude(@NotNull Length altitude) {
-<b class="fc"><i class="no-highlight">56</i>&nbsp;		this.altitude = altitude;</b>
-<b class="fc"><i class="no-highlight">57</i>&nbsp;		return this;</b>
-<i class="no-highlight">58</i>&nbsp;	}
-<i class="no-highlight">59</i>&nbsp;
-<i class="no-highlight">60</i>&nbsp;	@Override
-<i class="no-highlight">61</i>&nbsp;	protected AkjonavBuildableType getType() {
-<b class="fc"><i class="no-highlight">62</i>&nbsp;		return AkjonavPositionType.type;</b>
-<i class="no-highlight">63</i>&nbsp;	}
-<i class="no-highlight">64</i>&nbsp;
-<i class="no-highlight">65</i>&nbsp;	@Override
-<i class="no-highlight">66</i>&nbsp;	protected AkjonavPosition buildIt() {
-<b class="fc"><i class="no-highlight">67</i>&nbsp;		return new AkjonavPosition(latitude, longitude, altitude);</b>
-<i class="no-highlight">68</i>&nbsp;	}
-<i class="no-highlight">69</i>&nbsp;
-<i class="no-highlight">70</i>&nbsp;	@Override
-<i class="no-highlight">71</i>&nbsp;	protected @NotNull Notification validateIt() {
-<b class="fc"><i class="no-highlight">72</i>&nbsp;		Notification notification = new Notification();</b>
-<i class="no-highlight">73</i>&nbsp;
-<b class="fc"><i class="no-highlight">74</i>&nbsp;		valid(latitude, &quot;AkjonavPosition.latitude&quot;, notification)</b>
-<b class="fc"><i class="no-highlight">75</i>&nbsp;				.mustNotBeNull(&quot;Latitude of a position cannot be null!&quot;)</b>
-<b class="fc"><i class="no-highlight">76</i>&nbsp;				.must(latitudeP -&gt; new Range&lt;&gt;(-90D, 90D).contains(latitudeP), &quot;Latitude of a position must be between -90 and 90!&quot;);</b>
-<i class="no-highlight">77</i>&nbsp;
-<b class="fc"><i class="no-highlight">78</i>&nbsp;		valid(longitude, &quot;AkjonavPosition.longitude&quot;, notification)</b>
-<b class="fc"><i class="no-highlight">79</i>&nbsp;				.mustNotBeNull(&quot;Longitude of a position cannot be null!&quot;)</b>
-<b class="fc"><i class="no-highlight">80</i>&nbsp;				.must(longitudeP -&gt; new Range&lt;&gt;(-180D, 180D).contains(longitudeP), &quot;Longitude of a position must be between -180 and 180!&quot;);</b>
-<i class="no-highlight">81</i>&nbsp;
-<b class="fc"><i class="no-highlight">82</i>&nbsp;		return notification;</b>
-<i class="no-highlight">83</i>&nbsp;	}
-<i class="no-highlight">84</i>&nbsp;
-<i class="no-highlight">85</i>&nbsp;	@Override
-<i class="no-highlight">86</i>&nbsp;	protected void fromSerialized(@NotNull ObjectNode objectNode, @NotNull ObjectMapper objectMapper) {
-<b class="fc"><i class="no-highlight">87</i>&nbsp;		this.latitude = objectNode.get(&quot;lat&quot;).asDouble();</b>
-<b class="fc"><i class="no-highlight">88</i>&nbsp;		this.longitude = objectNode.get(&quot;lon&quot;).asDouble();</b>
-<b class="fc"><i class="no-highlight">89</i>&nbsp;		if (objectNode.has(&quot;alt&quot;)) {</b>
-<b class="fc"><i class="no-highlight">90</i>&nbsp;			ObjectNode altitudeNode = (ObjectNode) objectNode.get(&quot;alt&quot;);</b>
-<b class="fc"><i class="no-highlight">91</i>&nbsp;			altitude = new Length(new BigDecimal(altitudeNode.get(&quot;value&quot;).asText()), Objects.requireNonNull(LengthUnit.getUnit(altitudeNode.get(&quot;unit&quot;).asText())));</b>
-<i class="no-highlight">92</i>&nbsp;		}
-<i class="no-highlight">93</i>&nbsp;	}
-<i class="no-highlight">94</i>&nbsp;}
+<i class="no-highlight">28</i>&nbsp;	public AkjonavPositionBuilder(@NotNull Double latitude, @NotNull Double longitude) {
+<b class="fc"><i class="no-highlight">29</i>&nbsp;		super();</b>
+<b class="fc"><i class="no-highlight">30</i>&nbsp;		this.latitude = latitude;</b>
+<b class="fc"><i class="no-highlight">31</i>&nbsp;		this.longitude = longitude;</b>
+<i class="no-highlight">32</i>&nbsp;	}
+<i class="no-highlight">33</i>&nbsp;
+<i class="no-highlight">34</i>&nbsp;	public AkjonavPositionBuilder(@NotNull Double latitude, @NotNull Double longitude, @NotNull Length altitude) {
+<b class="fc"><i class="no-highlight">35</i>&nbsp;		super();</b>
+<b class="fc"><i class="no-highlight">36</i>&nbsp;		this.latitude = latitude;</b>
+<b class="fc"><i class="no-highlight">37</i>&nbsp;		this.longitude = longitude;</b>
+<b class="fc"><i class="no-highlight">38</i>&nbsp;		this.altitude = altitude;</b>
+<i class="no-highlight">39</i>&nbsp;	}
+<i class="no-highlight">40</i>&nbsp;
+<i class="no-highlight">41</i>&nbsp;	public AkjonavPositionBuilder withLatitude(@NotNull Double latitude) {
+<b class="fc"><i class="no-highlight">42</i>&nbsp;		ArgumentChecks.requireArgumentNotNull(latitude, &quot;Latitude of a position cannot be null!&quot;);</b>
+<b class="fc"><i class="no-highlight">43</i>&nbsp;		this.latitude = latitude;</b>
+<b class="fc"><i class="no-highlight">44</i>&nbsp;		return this;</b>
+<i class="no-highlight">45</i>&nbsp;	}
+<i class="no-highlight">46</i>&nbsp;
+<i class="no-highlight">47</i>&nbsp;	public AkjonavPositionBuilder withLongitude(@NotNull Double longitude) {
+<b class="fc"><i class="no-highlight">48</i>&nbsp;		ArgumentChecks.requireArgumentNotNull(longitude, &quot;Longitude of a position cannot be null!&quot;);</b>
+<b class="fc"><i class="no-highlight">49</i>&nbsp;		this.longitude = longitude;</b>
+<b class="fc"><i class="no-highlight">50</i>&nbsp;		return this;</b>
+<i class="no-highlight">51</i>&nbsp;	}
+<i class="no-highlight">52</i>&nbsp;
+<i class="no-highlight">53</i>&nbsp;	public AkjonavPositionBuilder withAltitude(@NotNull Length altitude) {
+<b class="fc"><i class="no-highlight">54</i>&nbsp;		this.altitude = altitude;</b>
+<b class="fc"><i class="no-highlight">55</i>&nbsp;		return this;</b>
+<i class="no-highlight">56</i>&nbsp;	}
+<i class="no-highlight">57</i>&nbsp;
+<i class="no-highlight">58</i>&nbsp;	@Override
+<i class="no-highlight">59</i>&nbsp;	protected AkjonavBuildableType getType() {
+<b class="fc"><i class="no-highlight">60</i>&nbsp;		return AkjonavPositionType.type;</b>
+<i class="no-highlight">61</i>&nbsp;	}
+<i class="no-highlight">62</i>&nbsp;
+<i class="no-highlight">63</i>&nbsp;	@Override
+<i class="no-highlight">64</i>&nbsp;	protected AkjonavPosition buildIt() {
+<b class="fc"><i class="no-highlight">65</i>&nbsp;		return new AkjonavPosition(latitude, longitude, altitude);</b>
+<i class="no-highlight">66</i>&nbsp;	}
+<i class="no-highlight">67</i>&nbsp;
+<i class="no-highlight">68</i>&nbsp;	@Override
+<i class="no-highlight">69</i>&nbsp;	protected @NotNull Notification validateIt() {
+<b class="fc"><i class="no-highlight">70</i>&nbsp;		Notification notification = new Notification();</b>
+<i class="no-highlight">71</i>&nbsp;
+<b class="fc"><i class="no-highlight">72</i>&nbsp;		valid(latitude, &quot;AkjonavPosition.latitude&quot;, notification)</b>
+<b class="fc"><i class="no-highlight">73</i>&nbsp;				.mustNotBeNull(&quot;Latitude of a position cannot be null!&quot;)</b>
+<b class="fc"><i class="no-highlight">74</i>&nbsp;				.must(latitudeP -&gt; new Range&lt;&gt;(-90D, 90D).contains(latitudeP), &quot;Latitude of a position must be between -90 and 90!&quot;);</b>
+<i class="no-highlight">75</i>&nbsp;
+<b class="fc"><i class="no-highlight">76</i>&nbsp;		valid(longitude, &quot;AkjonavPosition.longitude&quot;, notification)</b>
+<b class="fc"><i class="no-highlight">77</i>&nbsp;				.mustNotBeNull(&quot;Longitude of a position cannot be null!&quot;)</b>
+<b class="fc"><i class="no-highlight">78</i>&nbsp;				.must(longitudeP -&gt; new Range&lt;&gt;(-180D, 180D).contains(longitudeP), &quot;Longitude of a position must be between -180 and 180!&quot;);</b>
+<i class="no-highlight">79</i>&nbsp;
+<b class="fc"><i class="no-highlight">80</i>&nbsp;		return notification;</b>
+<i class="no-highlight">81</i>&nbsp;	}
+<i class="no-highlight">82</i>&nbsp;
+<i class="no-highlight">83</i>&nbsp;	@Override
+<i class="no-highlight">84</i>&nbsp;	protected void fromSerialized(@NotNull ObjectNode objectNode, @NotNull ObjectMapper objectMapper) {
+<b class="fc"><i class="no-highlight">85</i>&nbsp;		this.latitude = objectNode.get(&quot;lat&quot;).asDouble();</b>
+<b class="fc"><i class="no-highlight">86</i>&nbsp;		this.longitude = objectNode.get(&quot;lon&quot;).asDouble();</b>
+<b class="fc"><i class="no-highlight">87</i>&nbsp;		if (objectNode.has(&quot;alt&quot;)) {</b>
+<b class="fc"><i class="no-highlight">88</i>&nbsp;			ObjectNode altitudeNode = (ObjectNode) objectNode.get(&quot;alt&quot;);</b>
+<b class="fc"><i class="no-highlight">89</i>&nbsp;			altitude = new Length(new BigDecimal(altitudeNode.get(&quot;value&quot;).asText()), Objects.requireNonNull(LengthUnit.getUnit(altitudeNode.get(&quot;unit&quot;).asText())));</b>
+<i class="no-highlight">90</i>&nbsp;		}
+<i class="no-highlight">91</i>&nbsp;	}
+<i class="no-highlight">92</i>&nbsp;}
 </div>
 </pre>
 </div>
@@ -193,7 +191,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2022-06-14 22:21</div>
+    <div style="float:right;">generated on 2022-06-17 14:40</div>
 </div>
 </body>
 </html>

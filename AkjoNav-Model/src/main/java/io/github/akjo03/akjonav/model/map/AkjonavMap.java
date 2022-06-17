@@ -14,7 +14,9 @@ import org.jetbrains.annotations.Nullable;
 import java.math.BigInteger;
 import java.util.List;
 import java.util.Objects;
+import java.util.function.Consumer;
 
+@SuppressWarnings("unused")
 public class AkjonavMap extends AkjonavBuildable<AkjonavMapType> {
 	@NotNull private final List<AkjonavBaseElement> baseElements;
 	@NotNull private final List<AkjonavMapElement> mapElements;
@@ -73,6 +75,22 @@ public class AkjonavMap extends AkjonavBuildable<AkjonavMapType> {
 		return mapElements.stream()
 				.filter(mapElementP -> types.contains(mapElementP.getType()))
 				.toList();
+	}
+
+	public void forEachBaseElement(@NotNull Consumer<AkjonavBaseElement> consumer) {
+		baseElements.forEach(consumer);
+	}
+
+	public void forEachMapElement(@NotNull Consumer<AkjonavMapElement> consumer) {
+		mapElements.forEach(consumer);
+	}
+
+	public int getBaseElementCount() {
+		return baseElements.size();
+	}
+
+	public int getMapElementCount() {
+		return mapElements.size();
 	}
 
 	@Override

@@ -27,34 +27,34 @@ class AkjonavPositionBuilderTest {
 	@Test
 	void testEmptyConstructor() {
 		AkjonavPositionBuilder builder = new AkjonavPositionBuilder();
-		assertNull(builder.getLatitude());
-		assertNull(builder.getLongitude());
-		assertNull(builder.getAltitude());
+		assertNull(builder.latitude);
+		assertNull(builder.longitude);
+		assertNull(builder.altitude);
 	}
 
 	@Test
 	void testConstructorWithPosition() {
 		AkjonavPositionBuilder builder = new AkjonavPositionBuilder(1.0, 2.0);
-		assertEquals(1.0, builder.getLatitude());
-		assertEquals(2.0, builder.getLongitude());
-		assertNull(builder.getAltitude());
+		assertEquals(1.0, builder.latitude);
+		assertEquals(2.0, builder.longitude);
+		assertNull(builder.altitude);
 	}
 
 	@Test
 	void testConstructorWithPositionAndAltitude() {
 		AkjonavPositionBuilder builder = new AkjonavPositionBuilder(1.0, 2.0, new Length(new BigDecimal("3.0"), LengthUnit.METRE));
-		assertEquals(1.0, builder.getLatitude());
-		assertEquals(2.0, builder.getLongitude());
-		assertNotNull(builder.getAltitude());
-		assertEquals(new BigDecimal("3.0"), builder.getAltitude().getValue());
-		assertEquals(LengthUnit.METRE, builder.getAltitude().getUnit());
+		assertEquals(1.0, builder.latitude);
+		assertEquals(2.0, builder.longitude);
+		assertNotNull(builder.altitude);
+		assertEquals(new BigDecimal("3.0"), builder.altitude.getValue());
+		assertEquals(LengthUnit.METRE, builder.altitude.getUnit());
 	}
 
 	@Test
 	void testValidWithLatitude() {
 		AkjonavPositionBuilder builder = new AkjonavPositionBuilder();
 		builder.withLatitude(1.0);
-		assertEquals(1.0, builder.getLatitude());
+		assertEquals(1.0, builder.latitude);
 	}
 
 	@Test
@@ -68,7 +68,7 @@ class AkjonavPositionBuilderTest {
 	void testValidWithLongitude() {
 		AkjonavPositionBuilder builder = new AkjonavPositionBuilder();
 		builder.withLongitude(1.0);
-		assertEquals(1.0, builder.getLongitude());
+		assertEquals(1.0, builder.longitude);
 	}
 
 	@Test
@@ -82,19 +82,19 @@ class AkjonavPositionBuilderTest {
 	void testValidWithAltitude() {
 		AkjonavPositionBuilder builder = new AkjonavPositionBuilder();
 		builder.withAltitude(new Length(new BigDecimal("1.0"), LengthUnit.METRE));
-		assertNotNull(builder.getAltitude());
-		assertEquals(new BigDecimal("1.0"), builder.getAltitude().getValue());
-		assertEquals(LengthUnit.METRE, builder.getAltitude().getUnit());
+		assertNotNull(builder.altitude);
+		assertEquals(new BigDecimal("1.0"), builder.altitude.getValue());
+		assertEquals(LengthUnit.METRE, builder.altitude.getUnit());
 	}
 
 	@Test
 	void testChainability() {
 		AkjonavPositionBuilder positionBuilder = new AkjonavPositionBuilder().withLatitude(1.0).withLongitude(2.0).withAltitude(new Length(new BigDecimal("3.0"), LengthUnit.METRE));
-		assertEquals(1.0, positionBuilder.getLatitude());
-		assertEquals(2.0, positionBuilder.getLongitude());
-		assertNotNull(positionBuilder.getAltitude());
-		assertEquals(new BigDecimal("3.0"), positionBuilder.getAltitude().getValue());
-		assertEquals(LengthUnit.METRE, positionBuilder.getAltitude().getUnit());
+		assertEquals(1.0, positionBuilder.latitude);
+		assertEquals(2.0, positionBuilder.longitude);
+		assertNotNull(positionBuilder.altitude);
+		assertEquals(new BigDecimal("3.0"), positionBuilder.altitude.getValue());
+		assertEquals(LengthUnit.METRE, positionBuilder.altitude.getUnit());
 	}
 
 	@Test
@@ -173,7 +173,7 @@ class AkjonavPositionBuilderTest {
 		jsonPosition.put("type", "AkjonavPosition");
 		ObjectNode jsonData = objectMapper.createObjectNode();
 		jsonData.put("lat", 1.0);
-		jsonData.put("lon", 2.0);
+		jsonData.put("lon",     2.0);
 		ObjectNode jsonAltitude = objectMapper.createObjectNode();
 		jsonAltitude.put("value", 3.0);
 		jsonAltitude.put("unit", "LengthUnit.METRE");

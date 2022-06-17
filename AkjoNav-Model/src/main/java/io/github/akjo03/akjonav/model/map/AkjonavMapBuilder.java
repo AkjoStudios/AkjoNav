@@ -13,22 +13,21 @@ import io.github.akjo03.akjonav.model.elements.reference.AkjonavElementReference
 import io.github.akjo03.akjonav.model.util.builder.AkjonavBuildableType;
 import io.github.akjo03.akjonav.model.util.builder.AkjonavBuilder;
 import io.validly.Notification;
-import lombok.Getter;
 import org.jetbrains.annotations.NotNull;
 
 import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import static io.validly.NoteFirstValidator.valid;
 
 @SuppressWarnings({"unused", "UnusedReturnValue"})
-@Getter
-public class AkjonavMapBuilder extends AkjonavBuilder<AkjonavMapType, AkjonavMap> {
-	private final List<AkjonavBaseElement> baseElements = new ArrayList<>();
-	private final List<AkjonavMapElement> mapElements = new ArrayList<>();
 
-	private final List<AkjonavElementReference> elementReferences = new ArrayList<>();
+public class AkjonavMapBuilder extends AkjonavBuilder<AkjonavMapType, AkjonavMap> {
+	protected final List<AkjonavBaseElement> baseElements = new ArrayList<>();
+	protected final List<AkjonavMapElement> mapElements = new ArrayList<>();
+	protected final List<AkjonavElementReference> elementReferences = new ArrayList<>();
 
 	public AkjonavMapBuilder() { super(); }
 
@@ -119,26 +118,40 @@ public class AkjonavMapBuilder extends AkjonavBuilder<AkjonavMapType, AkjonavMap
 		Notification notification = new Notification();
 		valid(baseElements, "AkjonavMap.baseElements", notification)
 				.mustNotBeNull("BaseElements of an AkjonavMap cannot be null!")
+				.must(baseElementsP -> baseElementsP.stream().noneMatch(Objects::isNull), "No BaseElements in an AkjonavMap should be null!")
 				.must(baseElementsP -> baseElementsP.stream().map(AkjonavBaseElement::getElementID).distinct().count() == baseElementsP.size(), "BaseElements of an AkjonavMap must each have unique IDs!");
 		valid(mapElements, "AkjonavMap.mapElements", notification)
 				.mustNotBeNull("MapElements of an AkjonavMap cannot be null!")
+				.must(mapElementsP -> mapElementsP.stream().noneMatch(Objects::isNull), "No MapElements in an AkjonavMap should be null!")
 				.must(mapElementsP -> mapElementsP.stream().map(AkjonavMapElement::getElementID).distinct().count() == mapElementsP.size(), "MapElements of an AkjonavMap must each have unique IDs!");
 		return notification;
 	}
 
 	@Override
 	protected void fromSerialized(@NotNull ObjectNode objectNode, @NotNull ObjectMapper objectMapper) {
-		ArrayNode baseElementsArray = (ArrayNode) objectNode.get("baseElements");
-		if (baseElementsArray != null) {
-			for (JsonNode baseElementNode : baseElementsArray) {
+		JsonNode baseElementsNode = objectNode.get("baseElements");
+		if (baseElementsNode == null || !baseElementsNode.isArray()) {
+			throw new IllegalArgumentException("BaseElements of and AkjonavMap must be not null and an array!");
+		}
+		ArrayNode baseElementsArray = (ArrayNode) baseElementsNode;
+		for (JsonNode baseElementNode : baseElementsArray) {
+			if (!baseElementNode.isNull()) {
 				this.baseElements.add(AkjonavBaseElementBuilder.deserializeElement((ObjectNode) baseElementNode));
+			} else {
+				this.baseElements.add(null);
 			}
 		}
 
-		ArrayNode mapElementsArray = (ArrayNode) objectNode.get("mapElements");
-		if (mapElementsArray != null) {
-			for (JsonNode mapElementNode : mapElementsArray) {
+		JsonNode mapElementsNode = objectNode.get("mapElements");
+		if (mapElementsNode == null || !mapElementsNode.isArray()) {
+			throw new IllegalArgumentException("MapElements of and AkjonavMap must be not null and an array!");
+		}
+		ArrayNode mapElementsArray = (ArrayNode) mapElementsNode;
+		for (JsonNode mapElementNode : mapElementsArray) {
+			if (!mapElementNode.isNull()) {
 				this.mapElements.add(AkjonavMapElementBuilder.deserializeElement((ObjectNode) mapElementNode));
+			} else {
+				this.mapElements.add(null);
 			}
 		}
 	}

@@ -9,7 +9,6 @@ import io.github.akjo03.util.math.Range;
 import io.github.akjo03.util.math.unit.units.length.Length;
 import io.github.akjo03.util.math.unit.units.length.LengthUnit;
 import io.validly.Notification;
-import lombok.Getter;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -19,11 +18,10 @@ import java.util.Objects;
 import static io.validly.NoteFirstValidator.valid;
 
 @SuppressWarnings("unused")
-@Getter
 public class AkjonavPositionBuilder extends AkjonavBuilder<AkjonavPositionType, AkjonavPosition> {
-	private Double latitude;
-	private Double longitude;
-	@Nullable private Length altitude = null;
+	protected Double latitude;
+	protected Double longitude;
+	@Nullable protected Length altitude = null;
 
 	public AkjonavPositionBuilder() { super(); }
 
