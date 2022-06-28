@@ -53,7 +53,7 @@ Current scope:     <a href="../../index.html">all classes</a>
     0%
   </span>
   <span class="absValue">
-    (0/5)
+    (0/6)
   </span>
 </td>
 <td class="coverageStat">
@@ -61,7 +61,7 @@ Current scope:     <a href="../../index.html">all classes</a>
     0%
   </span>
   <span class="absValue">
-    (0/18)
+    (0/19)
   </span>
 </td>
 </tr>
@@ -81,53 +81,56 @@ Current scope:     <a href="../../index.html">all classes</a>
 <i class="no-highlight">6</i>&nbsp;import io.github.akjo03.akjonav.model.elements.base.AkjonavBaseElement;
 <i class="no-highlight">7</i>&nbsp;import io.github.akjo03.akjonav.model.elements.base.AkjonavBaseElementType;
 <i class="no-highlight">8</i>&nbsp;import io.github.akjo03.akjonav.model.elements.reference.AkjonavElementReference;
-<i class="no-highlight">9</i>&nbsp;import org.jetbrains.annotations.NotNull;
-<i class="no-highlight">10</i>&nbsp;
-<i class="no-highlight">11</i>&nbsp;import java.math.BigInteger;
-<i class="no-highlight">12</i>&nbsp;import java.util.List;
-<i class="no-highlight">13</i>&nbsp;import java.util.Objects;
-<i class="no-highlight">14</i>&nbsp;
-<i class="no-highlight">15</i>&nbsp;public class AkjonavArea extends AkjonavBaseElement {
-<i class="no-highlight">16</i>&nbsp;	@NotNull
-<i class="no-highlight">17</i>&nbsp;	private final List&lt;AkjonavElementReference&gt; nodeRefs;
-<i class="no-highlight">18</i>&nbsp;
-<i class="no-highlight">19</i>&nbsp;	protected AkjonavArea(BigInteger elementID, @NotNull List&lt;AkjonavElementReference&gt; nodeRefs) {
-<b class="nc"><i class="no-highlight">20</i>&nbsp;		super(elementID, AkjonavBaseElementType.AREA);</b>
-<b class="nc"><i class="no-highlight">21</i>&nbsp;		this.nodeRefs = nodeRefs;</b>
-<i class="no-highlight">22</i>&nbsp;	}
-<i class="no-highlight">23</i>&nbsp;
-<i class="no-highlight">24</i>&nbsp;	@Override
-<i class="no-highlight">25</i>&nbsp;	protected @NotNull ObjectNode serializeElement(@NotNull ObjectNode objectNode, @NotNull ObjectMapper objectMapper) {
-<b class="nc"><i class="no-highlight">26</i>&nbsp;		ArrayNode nodesArray = objectMapper.createArrayNode();</b>
-<b class="nc"><i class="no-highlight">27</i>&nbsp;		for (AkjonavElementReference node : nodeRefs) {</b>
-<b class="nc"><i class="no-highlight">28</i>&nbsp;			nodesArray.add(node.serialize(objectMapper));</b>
-<b class="nc"><i class="no-highlight">29</i>&nbsp;		}</b>
-<b class="nc"><i class="no-highlight">30</i>&nbsp;		objectNode.set(&quot;nodeRefs&quot;, nodesArray);</b>
-<b class="nc"><i class="no-highlight">31</i>&nbsp;		return objectNode;</b>
-<i class="no-highlight">32</i>&nbsp;	}
-<i class="no-highlight">33</i>&nbsp;
-<i class="no-highlight">34</i>&nbsp;	@Override
-<i class="no-highlight">35</i>&nbsp;	protected @NotNull String toObjectString() {
-<b class="nc"><i class="no-highlight">36</i>&nbsp;		return &quot;{nodeRefs=&quot; + nodeRefs + &quot;}&quot;;</b>
-<i class="no-highlight">37</i>&nbsp;	}
-<i class="no-highlight">38</i>&nbsp;
-<i class="no-highlight">39</i>&nbsp;	@Override
-<i class="no-highlight">40</i>&nbsp;	public boolean equals(Object o) {
-<b class="nc"><i class="no-highlight">41</i>&nbsp;		if (this == o)</b>
-<b class="nc"><i class="no-highlight">42</i>&nbsp;			return true;</b>
-<b class="nc"><i class="no-highlight">43</i>&nbsp;		if (o == null || getClass() != o.getClass())</b>
-<b class="nc"><i class="no-highlight">44</i>&nbsp;			return false;</b>
-<b class="nc"><i class="no-highlight">45</i>&nbsp;		if (!super.equals(o))</b>
-<b class="nc"><i class="no-highlight">46</i>&nbsp;			return false;</b>
-<b class="nc"><i class="no-highlight">47</i>&nbsp;		AkjonavArea that = (AkjonavArea) o;</b>
-<b class="nc"><i class="no-highlight">48</i>&nbsp;		return nodeRefs.equals(that.nodeRefs);</b>
-<i class="no-highlight">49</i>&nbsp;	}
-<i class="no-highlight">50</i>&nbsp;
-<i class="no-highlight">51</i>&nbsp;	@Override
-<i class="no-highlight">52</i>&nbsp;	public int hashCode() {
-<b class="nc"><i class="no-highlight">53</i>&nbsp;		return Objects.hash(super.hashCode(), nodeRefs);</b>
-<i class="no-highlight">54</i>&nbsp;	}
-<i class="no-highlight">55</i>&nbsp;}
+<i class="no-highlight">9</i>&nbsp;import lombok.Getter;
+<i class="no-highlight">10</i>&nbsp;import org.jetbrains.annotations.NotNull;
+<i class="no-highlight">11</i>&nbsp;
+<i class="no-highlight">12</i>&nbsp;import java.math.BigInteger;
+<i class="no-highlight">13</i>&nbsp;import java.util.List;
+<i class="no-highlight">14</i>&nbsp;import java.util.Objects;
+<i class="no-highlight">15</i>&nbsp;
+<i class="no-highlight">16</i>&nbsp;@SuppressWarnings(&quot;unused&quot;)
+<i class="no-highlight">17</i>&nbsp;@Getter
+<i class="no-highlight">18</i>&nbsp;public class AkjonavArea extends AkjonavBaseElement {
+<i class="no-highlight">19</i>&nbsp;	@NotNull
+<b class="nc"><i class="no-highlight">20</i>&nbsp;	private final List&lt;AkjonavElementReference&gt; nodeRefs;</b>
+<i class="no-highlight">21</i>&nbsp;
+<i class="no-highlight">22</i>&nbsp;	protected AkjonavArea(BigInteger elementID, @NotNull List&lt;AkjonavElementReference&gt; nodeRefs) {
+<b class="nc"><i class="no-highlight">23</i>&nbsp;		super(elementID, AkjonavBaseElementType.AREA);</b>
+<b class="nc"><i class="no-highlight">24</i>&nbsp;		this.nodeRefs = nodeRefs;</b>
+<i class="no-highlight">25</i>&nbsp;	}
+<i class="no-highlight">26</i>&nbsp;
+<i class="no-highlight">27</i>&nbsp;	@Override
+<i class="no-highlight">28</i>&nbsp;	protected @NotNull ObjectNode serializeElement(@NotNull ObjectNode objectNode, @NotNull ObjectMapper objectMapper) {
+<b class="nc"><i class="no-highlight">29</i>&nbsp;		ArrayNode nodesArray = objectMapper.createArrayNode();</b>
+<b class="nc"><i class="no-highlight">30</i>&nbsp;		for (AkjonavElementReference node : nodeRefs) {</b>
+<b class="nc"><i class="no-highlight">31</i>&nbsp;			nodesArray.add(node.serialize(objectMapper));</b>
+<b class="nc"><i class="no-highlight">32</i>&nbsp;		}</b>
+<b class="nc"><i class="no-highlight">33</i>&nbsp;		objectNode.set(&quot;nodeRefs&quot;, nodesArray);</b>
+<b class="nc"><i class="no-highlight">34</i>&nbsp;		return objectNode;</b>
+<i class="no-highlight">35</i>&nbsp;	}
+<i class="no-highlight">36</i>&nbsp;
+<i class="no-highlight">37</i>&nbsp;	@Override
+<i class="no-highlight">38</i>&nbsp;	protected @NotNull String toObjectString() {
+<b class="nc"><i class="no-highlight">39</i>&nbsp;		return &quot;{nodeRefs=&quot; + nodeRefs + &quot;}&quot;;</b>
+<i class="no-highlight">40</i>&nbsp;	}
+<i class="no-highlight">41</i>&nbsp;
+<i class="no-highlight">42</i>&nbsp;	@Override
+<i class="no-highlight">43</i>&nbsp;	public boolean equals(Object o) {
+<b class="nc"><i class="no-highlight">44</i>&nbsp;		if (this == o)</b>
+<b class="nc"><i class="no-highlight">45</i>&nbsp;			return true;</b>
+<b class="nc"><i class="no-highlight">46</i>&nbsp;		if (o == null || getClass() != o.getClass())</b>
+<b class="nc"><i class="no-highlight">47</i>&nbsp;			return false;</b>
+<b class="nc"><i class="no-highlight">48</i>&nbsp;		if (!super.equals(o))</b>
+<b class="nc"><i class="no-highlight">49</i>&nbsp;			return false;</b>
+<b class="nc"><i class="no-highlight">50</i>&nbsp;		AkjonavArea that = (AkjonavArea) o;</b>
+<b class="nc"><i class="no-highlight">51</i>&nbsp;		return nodeRefs.equals(that.nodeRefs);</b>
+<i class="no-highlight">52</i>&nbsp;	}
+<i class="no-highlight">53</i>&nbsp;
+<i class="no-highlight">54</i>&nbsp;	@Override
+<i class="no-highlight">55</i>&nbsp;	public int hashCode() {
+<b class="nc"><i class="no-highlight">56</i>&nbsp;		return Objects.hash(super.hashCode(), nodeRefs);</b>
+<i class="no-highlight">57</i>&nbsp;	}
+<i class="no-highlight">58</i>&nbsp;}
 </div>
 </pre>
 </div>
@@ -154,7 +157,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2022-06-17 14:40</div>
+    <div style="float:right;">generated on 2022-06-28 21:07</div>
 </div>
 </body>
 </html>
