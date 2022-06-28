@@ -9,6 +9,7 @@
     <version>2022.1-dev1</version>
     <modules>
         <module>AkjoNav-Model</module>
+        <module>Akjonav-Base</module>
     </modules>
     <packaging>pom</packaging>
 
