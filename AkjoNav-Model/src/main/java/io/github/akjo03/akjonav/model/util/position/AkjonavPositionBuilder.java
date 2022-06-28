@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import io.github.akjo03.akjonav.model.util.builder.AkjonavBuildableType;
 import io.github.akjo03.akjonav.model.util.builder.AkjonavBuilder;
+import io.github.akjo03.util.ArgumentChecks;
 import io.github.akjo03.util.math.Range;
 import io.github.akjo03.util.math.unit.units.length.Length;
 import io.github.akjo03.util.math.unit.units.length.LengthUnit;
@@ -18,9 +19,9 @@ import static io.validly.NoteFirstValidator.valid;
 
 @SuppressWarnings("unused")
 public class AkjonavPositionBuilder extends AkjonavBuilder<AkjonavPositionType, AkjonavPosition> {
-	private Double latitude;
-	private Double longitude;
-	@Nullable private Length altitude = null;
+	protected Double latitude;
+	protected Double longitude;
+	@Nullable protected Length altitude = null;
 
 	public AkjonavPositionBuilder() { super(); }
 
@@ -38,14 +39,18 @@ public class AkjonavPositionBuilder extends AkjonavBuilder<AkjonavPositionType, 
 	}
 
 	public AkjonavPositionBuilder withLatitude(@NotNull Double latitude) {
+		ArgumentChecks.requireArgumentNotNull(latitude, "Latitude of a position cannot be null!");
 		this.latitude = latitude;
 		return this;
 	}
+
 	public AkjonavPositionBuilder withLongitude(@NotNull Double longitude) {
+		ArgumentChecks.requireArgumentNotNull(longitude, "Longitude of a position cannot be null!");
 		this.longitude = longitude;
 		return this;
 	}
-	public AkjonavPositionBuilder withAltitude(@Nullable Length altitude) {
+
+	public AkjonavPositionBuilder withAltitude(@NotNull Length altitude) {
 		this.altitude = altitude;
 		return this;
 	}
