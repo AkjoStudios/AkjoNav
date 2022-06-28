@@ -7,11 +7,12 @@ import lombok.RequiredArgsConstructor;
 import java.util.Arrays;
 
 @RequiredArgsConstructor
-public enum AkjonavMapElementType implements AkjonavElementType {
+public enum AkjonavMapElementType implements AkjonavElementType<AkjonavMapElement> {
 	;
 
 	private final String typeID;
 	private final AkjonavMapElementBuilder<?> builder;
+	private final Class<? extends AkjonavMapElement> typeClass;
 
 	@Override
 	public String getTypeID() {
@@ -21,6 +22,11 @@ public enum AkjonavMapElementType implements AkjonavElementType {
 	@Override
 	public AkjonavBuilder<?, ?> getBuilder() {
 		return builder;
+	}
+
+	@Override
+	public Class<? extends AkjonavMapElement> getTypeClass() {
+		return typeClass;
 	}
 
 	public static AkjonavMapElementType fromType(String typeID) {

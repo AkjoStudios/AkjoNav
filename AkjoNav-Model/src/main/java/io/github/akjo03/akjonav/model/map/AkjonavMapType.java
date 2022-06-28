@@ -3,7 +3,7 @@ package io.github.akjo03.akjonav.model.map;
 import io.github.akjo03.akjonav.model.util.builder.AkjonavBuildableType;
 import io.github.akjo03.akjonav.model.util.builder.AkjonavBuilder;
 
-public class AkjonavMapType implements AkjonavBuildableType {
+public class AkjonavMapType implements AkjonavBuildableType<AkjonavMap> {
 	public static final AkjonavMapType type = new AkjonavMapType();
 
 	private static final String TYPE_ID = "AkjonavMap";
@@ -19,6 +19,11 @@ public class AkjonavMapType implements AkjonavBuildableType {
 	@Override
 	public AkjonavBuilder<?, ?> getBuilder() {
 		return BUILDER;
+	}
+
+	@Override
+	public Class<AkjonavMap> getTypeClass() {
+		return AkjonavMap.class;
 	}
 
 	@Override

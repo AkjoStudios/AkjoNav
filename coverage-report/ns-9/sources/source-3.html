@@ -50,18 +50,18 @@ Current scope:     <a href="../../index.html">all classes</a>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    80%
+    66.7%
   </span>
   <span class="absValue">
-    (4/5)
+    (4/6)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    83.3%
+    71.4%
   </span>
   <span class="absValue">
-    (5/6)
+    (5/7)
   </span>
 </td>
 </tr>
@@ -78,7 +78,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 <i class="no-highlight">3</i>&nbsp;import io.github.akjo03.akjonav.model.util.builder.AkjonavBuildableType;
 <i class="no-highlight">4</i>&nbsp;import io.github.akjo03.akjonav.model.util.builder.AkjonavBuilder;
 <i class="no-highlight">5</i>&nbsp;
-<i class="no-highlight">6</i>&nbsp;public class AkjonavElementReferenceType implements AkjonavBuildableType {
+<i class="no-highlight">6</i>&nbsp;public class AkjonavElementReferenceType implements AkjonavBuildableType&lt;AkjonavElementReference&gt; {
 <b class="fc"><i class="no-highlight">7</i>&nbsp;	public static final AkjonavElementReferenceType type = new AkjonavElementReferenceType();</b>
 <i class="no-highlight">8</i>&nbsp;
 <i class="no-highlight">9</i>&nbsp;	private static final String TYPE_ID = &quot;AkjonavElementReference&quot;;
@@ -97,10 +97,15 @@ Current scope:     <a href="../../index.html">all classes</a>
 <i class="no-highlight">22</i>&nbsp;	}
 <i class="no-highlight">23</i>&nbsp;
 <i class="no-highlight">24</i>&nbsp;	@Override
-<i class="no-highlight">25</i>&nbsp;	public String toString() {
-<b class="nc"><i class="no-highlight">26</i>&nbsp;		return TYPE_ID;</b>
+<i class="no-highlight">25</i>&nbsp;	public Class&lt;AkjonavElementReference&gt; getTypeClass() {
+<b class="nc"><i class="no-highlight">26</i>&nbsp;		return AkjonavElementReference.class;</b>
 <i class="no-highlight">27</i>&nbsp;	}
-<i class="no-highlight">28</i>&nbsp;}
+<i class="no-highlight">28</i>&nbsp;
+<i class="no-highlight">29</i>&nbsp;	@Override
+<i class="no-highlight">30</i>&nbsp;	public String toString() {
+<b class="nc"><i class="no-highlight">31</i>&nbsp;		return TYPE_ID;</b>
+<i class="no-highlight">32</i>&nbsp;	}
+<i class="no-highlight">33</i>&nbsp;}
 </div>
 </pre>
 </div>
@@ -127,7 +132,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2022-06-17 14:40</div>
+    <div style="float:right;">generated on 2022-06-28 21:07</div>
 </div>
 </body>
 </html>

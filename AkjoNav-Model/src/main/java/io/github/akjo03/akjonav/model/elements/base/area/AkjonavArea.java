@@ -6,12 +6,15 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 import io.github.akjo03.akjonav.model.elements.base.AkjonavBaseElement;
 import io.github.akjo03.akjonav.model.elements.base.AkjonavBaseElementType;
 import io.github.akjo03.akjonav.model.elements.reference.AkjonavElementReference;
+import lombok.Getter;
 import org.jetbrains.annotations.NotNull;
 
 import java.math.BigInteger;
 import java.util.List;
 import java.util.Objects;
 
+@SuppressWarnings("unused")
+@Getter
 public class AkjonavArea extends AkjonavBaseElement {
 	@NotNull
 	private final List<AkjonavElementReference> nodeRefs;
