@@ -1,0 +1,10 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="[Akjonav-Base] Run AkjonavBaseApp" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+    <option name="ACTIVE_PROFILES" />
+    <module name="Akjonav-Base" />
+    <option name="SPRING_BOOT_MAIN_CLASS" value="io.github.akjo03.akjonav.base.AkjonavBaseApp" />
+    <method v="2">
+      <option name="Make" enabled="true" />
+    </method>
+  </configuration>
+</component>

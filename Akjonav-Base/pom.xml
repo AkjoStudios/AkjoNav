@@ -9,12 +9,12 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>AkjoNav-Model</artifactId>
+    <artifactId>Akjonav-Base</artifactId>
     <version>2022.1-dev1</version>
     <packaging>jar</packaging>
 
-    <name>AkjoNav Model</name>
-    <description>This is the data model for all AkjoNav modules.</description>
+    <name>AkjoNav Base</name>
+    <description>This is the API to interact with the model.</description>
     <url>https://akjo03.github.io/akjonav</url>
     <inceptionYear>2022</inceptionYear>
 
@@ -47,9 +47,21 @@
 
     <dependencies>
         <dependency>
-            <groupId>io.validly</groupId>
-            <artifactId>Validly</artifactId>
-            <version>0.1.0</version>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+            <version>${spring.boot.version}</version>
+        </dependency>
+
+
+        <dependency>
+            <groupId>org.springdoc</groupId>
+            <artifactId>springdoc-openapi-ui</artifactId>
+            <version>1.6.9</version>
+        </dependency>
+        <dependency>
+            <groupId>io.swagger.core.v3</groupId>
+            <artifactId>swagger-annotations</artifactId>
+            <version>2.2.1</version>
         </dependency>
     </dependencies>
 
@@ -72,7 +84,7 @@
                 <version>2.22.2</version>
                 <configuration>
                     <includes>
-                        <include>io.github.akjo03.akjonav.model.**.*Test</include>
+                        <include>io.github.akjo03.akjonav.base.**.*Test</include>
                     </includes>
                     <failIfNoTests>false</failIfNoTests>
                 </configuration>

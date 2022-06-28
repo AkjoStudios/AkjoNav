@@ -45,7 +45,7 @@ public class AkjonavModelApp implements CommandLineRunner {
 				new AkjonavNodeBuilder(BigInteger.valueOf(1))
 						.setPosition(new AkjonavPositionBuilder(0.0, 0.0).build())
 						.build(),
-				new AkjonavNodeBuilder(BigInteger.valueOf(1))
+				new AkjonavNodeBuilder(BigInteger.valueOf(2))
 						.setPosition(new AkjonavPositionBuilder(1.0, 1.0).build())
 						.build(),
 				new AkjonavNodeBuilder(BigInteger.valueOf(3))
