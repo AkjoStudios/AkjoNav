@@ -1,0 +1,9 @@
+spring:
+  application:
+    name: AkjonavBaseApp
+server:
+  servlet:
+    context-path: /akjonav/base
+springdoc:
+  api-docs:
+    path: /akjonav/base/api-docs
