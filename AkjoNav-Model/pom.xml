@@ -71,7 +71,10 @@
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>2.22.2</version>
                 <configuration>
-                    <test>io.github.akjo03.akjonav.model.*</test>
+                    <includes>
+                        <include>io.github.akjo03.akjonav.model.**.*Test</include>
+                    </includes>
+                    <failIfNoTests>false</failIfNoTests>
                 </configuration>
             </plugin>
         </plugins>
