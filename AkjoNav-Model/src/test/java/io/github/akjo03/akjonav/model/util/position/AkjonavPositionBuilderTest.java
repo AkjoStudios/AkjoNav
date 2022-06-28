@@ -20,7 +20,7 @@ class AkjonavPositionBuilderTest {
 	private final JsonService jsonService;
 
 	@Autowired
-	public AkjonavPositionBuilderTest(JsonService jsonService) {
+	protected AkjonavPositionBuilderTest(JsonService jsonService) {
 		this.jsonService = jsonService;
 	}
 

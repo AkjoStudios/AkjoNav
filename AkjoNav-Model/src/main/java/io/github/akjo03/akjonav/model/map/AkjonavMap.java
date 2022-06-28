@@ -41,39 +41,44 @@ public class AkjonavMap extends AkjonavBuildable<AkjonavMapType> {
 				.orElse(null);
 	}
 
-	public @NotNull List<AkjonavBaseElement> getBaseElementsByID(@NotNull List<BigInteger> ids) {
+	public @NotNull List<? extends AkjonavBaseElement> getBaseElementsByID(@NotNull List<BigInteger> ids) {
 		return baseElements.stream()
 				.filter(baseElementP -> ids.contains(baseElementP.getElementID()))
 				.toList();
 	}
 
-	public @NotNull List<AkjonavMapElement> getMapElementsByID(@NotNull List<BigInteger> ids) {
+	public @NotNull List< ? extends AkjonavMapElement> getMapElementsByID(@NotNull List<BigInteger> ids) {
 		return mapElements.stream()
 				.filter(mapElementP -> ids.contains(mapElementP.getElementID()))
 				.toList();
 	}
 
-	public @NotNull List<AkjonavBaseElement> getBaseElementsByType(@NotNull AkjonavBaseElementType type) {
+	public @NotNull List<? extends AkjonavBaseElement> getBaseElementsByType(@NotNull AkjonavBaseElementType type) {
 		return baseElements.stream()
 				.filter(baseElementP -> baseElementP.getType().equals(type))
+				.map(baseElementP -> type.getTypeClass().cast(baseElementP))
 				.toList();
 	}
 
-	public @NotNull List<AkjonavMapElement> getMapElementsByType(@NotNull AkjonavMapElementType type) {
+	public @NotNull List<? extends AkjonavMapElement> getMapElementsByType(@NotNull AkjonavMapElementType type) {
 		return mapElements.stream()
 				.filter(mapElementP -> mapElementP.getType().equals(type))
+				.map(mapElementP -> type.getTypeClass().cast(mapElementP))
 				.toList();
 	}
 
-	public @NotNull List<AkjonavBaseElement> getBaseElementsByTypes(@NotNull List<AkjonavBaseElementType> types) {
+	public @NotNull List<? extends AkjonavBaseElement> getBaseElementsByTypes(@NotNull List<AkjonavBaseElementType> types) {
 		return baseElements.stream()
 				.filter(baseElementP -> types.contains(baseElementP.getType()))
+				.map(baseElementP -> types.get(types.indexOf(baseElementP.getType())).getTypeClass().cast(baseElementP))
 				.toList();
+
 	}
 
-	public @NotNull List<AkjonavMapElement> getMapElementsByTypes(@NotNull List<AkjonavMapElementType> types) {
+	public @NotNull List<? extends AkjonavMapElement> getMapElementsByTypes(@NotNull List<AkjonavMapElementType> types) {
 		return mapElements.stream()
 				.filter(mapElementP -> types.contains(mapElementP.getType()))
+				.map(mapElementP -> types.get(types.indexOf(mapElementP.getType())).getTypeClass().cast(mapElementP))
 				.toList();
 	}
 
