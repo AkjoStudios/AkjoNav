@@ -50,18 +50,18 @@ Current scope:     <a href="../../index.html">all classes</a>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    83.3%
+    100%
   </span>
   <span class="absValue">
-    (5/6)
+    (7/7)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    90.9%
+    100%
   </span>
   <span class="absValue">
-    (10/11)
+    (12/12)
   </span>
 </td>
 </tr>
@@ -76,45 +76,54 @@ Current scope:     <a href="../../index.html">all classes</a>
 <div class="sourceCode" id="sourceCode"><i class="no-highlight">1</i>&nbsp;package io.github.akjo03.akjonav.model.elements.base;
 <i class="no-highlight">2</i>&nbsp;
 <i class="no-highlight">3</i>&nbsp;import io.github.akjo03.akjonav.model.elements.AkjonavElementType;
-<i class="no-highlight">4</i>&nbsp;import io.github.akjo03.akjonav.model.elements.base.area.AkjonavAreaBuilder;
-<i class="no-highlight">5</i>&nbsp;import io.github.akjo03.akjonav.model.elements.base.node.AkjonavNodeBuilder;
-<i class="no-highlight">6</i>&nbsp;import io.github.akjo03.akjonav.model.elements.base.way.AkjonavWayBuilder;
-<i class="no-highlight">7</i>&nbsp;import io.github.akjo03.akjonav.model.util.builder.AkjonavBuilder;
-<i class="no-highlight">8</i>&nbsp;import lombok.RequiredArgsConstructor;
-<i class="no-highlight">9</i>&nbsp;
-<i class="no-highlight">10</i>&nbsp;import java.util.Arrays;
-<i class="no-highlight">11</i>&nbsp;
-<b class="fc"><i class="no-highlight">12</i>&nbsp;@RequiredArgsConstructor</b>
-<i class="no-highlight">13</i>&nbsp;public enum AkjonavBaseElementType implements AkjonavElementType {
-<b class="fc"><i class="no-highlight">14</i>&nbsp;	NODE(&quot;BaseElement:NODE&quot;, new AkjonavNodeBuilder()),</b>
-<b class="fc"><i class="no-highlight">15</i>&nbsp;	WAY(&quot;BaseElement:WAY&quot;, new AkjonavWayBuilder()),</b>
-<b class="fc"><i class="no-highlight">16</i>&nbsp;	AREA(&quot;BaseElement:AREA&quot;, new AkjonavAreaBuilder());</b>
-<i class="no-highlight">17</i>&nbsp;
-<i class="no-highlight">18</i>&nbsp;	private final String typeID;
-<i class="no-highlight">19</i>&nbsp;	private final AkjonavBaseElementBuilder&lt;?&gt; builder;
+<i class="no-highlight">4</i>&nbsp;import io.github.akjo03.akjonav.model.elements.base.area.AkjonavArea;
+<i class="no-highlight">5</i>&nbsp;import io.github.akjo03.akjonav.model.elements.base.area.AkjonavAreaBuilder;
+<i class="no-highlight">6</i>&nbsp;import io.github.akjo03.akjonav.model.elements.base.node.AkjonavNode;
+<i class="no-highlight">7</i>&nbsp;import io.github.akjo03.akjonav.model.elements.base.node.AkjonavNodeBuilder;
+<i class="no-highlight">8</i>&nbsp;import io.github.akjo03.akjonav.model.elements.base.way.AkjonavWay;
+<i class="no-highlight">9</i>&nbsp;import io.github.akjo03.akjonav.model.elements.base.way.AkjonavWayBuilder;
+<i class="no-highlight">10</i>&nbsp;import io.github.akjo03.akjonav.model.util.builder.AkjonavBuilder;
+<i class="no-highlight">11</i>&nbsp;import lombok.RequiredArgsConstructor;
+<i class="no-highlight">12</i>&nbsp;
+<i class="no-highlight">13</i>&nbsp;import java.util.Arrays;
+<i class="no-highlight">14</i>&nbsp;
+<b class="fc"><i class="no-highlight">15</i>&nbsp;@RequiredArgsConstructor</b>
+<i class="no-highlight">16</i>&nbsp;public enum AkjonavBaseElementType implements AkjonavElementType&lt;AkjonavBaseElement&gt; {
+<b class="fc"><i class="no-highlight">17</i>&nbsp;	NODE(&quot;BaseElement:NODE&quot;, new AkjonavNodeBuilder(), AkjonavNode.class),</b>
+<b class="fc"><i class="no-highlight">18</i>&nbsp;	WAY(&quot;BaseElement:WAY&quot;, new AkjonavWayBuilder(), AkjonavWay.class),</b>
+<b class="fc"><i class="no-highlight">19</i>&nbsp;	AREA(&quot;BaseElement:AREA&quot;, new AkjonavAreaBuilder(), AkjonavArea.class);</b>
 <i class="no-highlight">20</i>&nbsp;
-<i class="no-highlight">21</i>&nbsp;	@Override
-<i class="no-highlight">22</i>&nbsp;	public String getTypeID() {
-<b class="fc"><i class="no-highlight">23</i>&nbsp;		return typeID;</b>
-<i class="no-highlight">24</i>&nbsp;	}
-<i class="no-highlight">25</i>&nbsp;
-<i class="no-highlight">26</i>&nbsp;	@Override
-<i class="no-highlight">27</i>&nbsp;	public AkjonavBuilder&lt;?, ?&gt; getBuilder() {
-<b class="fc"><i class="no-highlight">28</i>&nbsp;		return builder;</b>
-<i class="no-highlight">29</i>&nbsp;	}
-<i class="no-highlight">30</i>&nbsp;
-<i class="no-highlight">31</i>&nbsp;	public static AkjonavBaseElementType fromType(String typeID) {
-<b class="fc"><i class="no-highlight">32</i>&nbsp;		return Arrays.stream(values())</b>
-<b class="fc"><i class="no-highlight">33</i>&nbsp;				.filter(type -&gt; type.getTypeID().equals(typeID))</b>
-<b class="fc"><i class="no-highlight">34</i>&nbsp;				.findFirst()</b>
-<b class="fc"><i class="no-highlight">35</i>&nbsp;				.orElseThrow(() -&gt; new IllegalArgumentException(&quot;No base element type found for id \&quot;&quot; + typeID + &quot;\&quot;!&quot;));</b>
-<i class="no-highlight">36</i>&nbsp;	}
-<i class="no-highlight">37</i>&nbsp;
-<i class="no-highlight">38</i>&nbsp;	@Override
-<i class="no-highlight">39</i>&nbsp;	public String toString() {
-<b class="nc"><i class="no-highlight">40</i>&nbsp;		return typeID;</b>
-<i class="no-highlight">41</i>&nbsp;	}
-<i class="no-highlight">42</i>&nbsp;}
+<i class="no-highlight">21</i>&nbsp;	private final String typeID;
+<i class="no-highlight">22</i>&nbsp;	private final AkjonavBaseElementBuilder&lt;?&gt; builder;
+<i class="no-highlight">23</i>&nbsp;	private final Class&lt;? extends AkjonavBaseElement&gt; typeClass;
+<i class="no-highlight">24</i>&nbsp;
+<i class="no-highlight">25</i>&nbsp;	@Override
+<i class="no-highlight">26</i>&nbsp;	public String getTypeID() {
+<b class="fc"><i class="no-highlight">27</i>&nbsp;		return typeID;</b>
+<i class="no-highlight">28</i>&nbsp;	}
+<i class="no-highlight">29</i>&nbsp;
+<i class="no-highlight">30</i>&nbsp;	@Override
+<i class="no-highlight">31</i>&nbsp;	public AkjonavBuilder&lt;?, ?&gt; getBuilder() {
+<b class="fc"><i class="no-highlight">32</i>&nbsp;		return builder;</b>
+<i class="no-highlight">33</i>&nbsp;	}
+<i class="no-highlight">34</i>&nbsp;
+<i class="no-highlight">35</i>&nbsp;	@Override
+<i class="no-highlight">36</i>&nbsp;	public Class&lt;? extends AkjonavBaseElement&gt; getTypeClass() {
+<b class="fc"><i class="no-highlight">37</i>&nbsp;		return typeClass;</b>
+<i class="no-highlight">38</i>&nbsp;	}
+<i class="no-highlight">39</i>&nbsp;
+<i class="no-highlight">40</i>&nbsp;	public static AkjonavBaseElementType fromType(String typeID) {
+<b class="fc"><i class="no-highlight">41</i>&nbsp;		return Arrays.stream(values())</b>
+<b class="fc"><i class="no-highlight">42</i>&nbsp;				.filter(type -&gt; type.getTypeID().equals(typeID))</b>
+<b class="fc"><i class="no-highlight">43</i>&nbsp;				.findFirst()</b>
+<b class="fc"><i class="no-highlight">44</i>&nbsp;				.orElseThrow(() -&gt; new IllegalArgumentException(&quot;No base element type found for id \&quot;&quot; + typeID + &quot;\&quot;!&quot;));</b>
+<i class="no-highlight">45</i>&nbsp;	}
+<i class="no-highlight">46</i>&nbsp;
+<i class="no-highlight">47</i>&nbsp;	@Override
+<i class="no-highlight">48</i>&nbsp;	public String toString() {
+<b class="fc"><i class="no-highlight">49</i>&nbsp;		return typeID;</b>
+<i class="no-highlight">50</i>&nbsp;	}
+<i class="no-highlight">51</i>&nbsp;}
 </div>
 </pre>
 </div>
@@ -141,7 +150,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2022-06-17 14:40</div>
+    <div style="float:right;">generated on 2022-06-28 21:07</div>
 </div>
 </body>
 </html>

@@ -28,7 +28,7 @@ class AkjonavMapBuilderTest {
 	private final JsonService jsonService;
 
 	@Autowired
-	public AkjonavMapBuilderTest(JsonService jsonService) {
+	protected AkjonavMapBuilderTest(JsonService jsonService) {
 		this.jsonService = jsonService;
 	}
 

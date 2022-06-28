@@ -39,10 +39,11 @@ Current scope:     <a href="../../index.html">all classes</a>
 <pre>
 <div class="sourceCode" id="sourceCode"><i class="no-highlight">1</i>&nbsp;package io.github.akjo03.akjonav.model.util.builder;
 <i class="no-highlight">2</i>&nbsp;
-<i class="no-highlight">3</i>&nbsp;public interface AkjonavBuildableType {
+<i class="no-highlight">3</i>&nbsp;public interface AkjonavBuildableType&lt;T extends AkjonavBuildable&lt;?&gt;&gt; {
 <i class="no-highlight">4</i>&nbsp;	String getTypeID();
 <i class="no-highlight">5</i>&nbsp;	AkjonavBuilder&lt;?, ?&gt; getBuilder();
-<i class="no-highlight">6</i>&nbsp;}
+<i class="no-highlight">6</i>&nbsp;	Class&lt;? extends T&gt; getTypeClass();
+<i class="no-highlight">7</i>&nbsp;}
 </div>
 </pre>
 </div>
@@ -69,7 +70,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2022-06-17 14:40</div>
+    <div style="float:right;">generated on 2022-06-28 21:07</div>
 </div>
 </body>
 </html>
