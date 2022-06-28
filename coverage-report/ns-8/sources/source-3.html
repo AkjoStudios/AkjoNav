@@ -53,7 +53,7 @@ Current scope:     <a href="../../index.html">all classes</a>
     0%
   </span>
   <span class="absValue">
-    (0/5)
+    (0/6)
   </span>
 </td>
 <td class="coverageStat">
@@ -61,7 +61,7 @@ Current scope:     <a href="../../index.html">all classes</a>
     0%
   </span>
   <span class="absValue">
-    (0/8)
+    (0/9)
   </span>
 </td>
 </tr>
@@ -82,34 +82,40 @@ Current scope:     <a href="../../index.html">all classes</a>
 <i class="no-highlight">7</i>&nbsp;import java.util.Arrays;
 <i class="no-highlight">8</i>&nbsp;
 <b class="nc"><i class="no-highlight">9</i>&nbsp;@RequiredArgsConstructor</b>
-<i class="no-highlight">10</i>&nbsp;public enum AkjonavMapElementType implements AkjonavElementType {
+<i class="no-highlight">10</i>&nbsp;public enum AkjonavMapElementType implements AkjonavElementType&lt;AkjonavMapElement&gt; {
 <i class="no-highlight">11</i>&nbsp;	;
 <i class="no-highlight">12</i>&nbsp;
 <i class="no-highlight">13</i>&nbsp;	private final String typeID;
 <i class="no-highlight">14</i>&nbsp;	private final AkjonavMapElementBuilder&lt;?&gt; builder;
-<i class="no-highlight">15</i>&nbsp;
-<i class="no-highlight">16</i>&nbsp;	@Override
-<i class="no-highlight">17</i>&nbsp;	public String getTypeID() {
-<b class="nc"><i class="no-highlight">18</i>&nbsp;		return typeID;</b>
-<i class="no-highlight">19</i>&nbsp;	}
-<i class="no-highlight">20</i>&nbsp;
-<i class="no-highlight">21</i>&nbsp;	@Override
-<i class="no-highlight">22</i>&nbsp;	public AkjonavBuilder&lt;?, ?&gt; getBuilder() {
-<b class="nc"><i class="no-highlight">23</i>&nbsp;		return builder;</b>
-<i class="no-highlight">24</i>&nbsp;	}
-<i class="no-highlight">25</i>&nbsp;
-<i class="no-highlight">26</i>&nbsp;	public static AkjonavMapElementType fromType(String typeID) {
-<b class="nc"><i class="no-highlight">27</i>&nbsp;		return Arrays.stream(values())</b>
-<b class="nc"><i class="no-highlight">28</i>&nbsp;				.filter(type -&gt; type.getTypeID().equals(typeID))</b>
-<b class="nc"><i class="no-highlight">29</i>&nbsp;				.findFirst()</b>
-<b class="nc"><i class="no-highlight">30</i>&nbsp;				.orElseThrow(() -&gt; new IllegalArgumentException(&quot;No map element type found for id \&quot;&quot; + typeID + &quot;\&quot;!&quot;));</b>
-<i class="no-highlight">31</i>&nbsp;	}
-<i class="no-highlight">32</i>&nbsp;
-<i class="no-highlight">33</i>&nbsp;	@Override
-<i class="no-highlight">34</i>&nbsp;	public String toString() {
-<b class="nc"><i class="no-highlight">35</i>&nbsp;		return typeID;</b>
-<i class="no-highlight">36</i>&nbsp;	}
-<i class="no-highlight">37</i>&nbsp;}
+<i class="no-highlight">15</i>&nbsp;	private final Class&lt;? extends AkjonavMapElement&gt; typeClass;
+<i class="no-highlight">16</i>&nbsp;
+<i class="no-highlight">17</i>&nbsp;	@Override
+<i class="no-highlight">18</i>&nbsp;	public String getTypeID() {
+<b class="nc"><i class="no-highlight">19</i>&nbsp;		return typeID;</b>
+<i class="no-highlight">20</i>&nbsp;	}
+<i class="no-highlight">21</i>&nbsp;
+<i class="no-highlight">22</i>&nbsp;	@Override
+<i class="no-highlight">23</i>&nbsp;	public AkjonavBuilder&lt;?, ?&gt; getBuilder() {
+<b class="nc"><i class="no-highlight">24</i>&nbsp;		return builder;</b>
+<i class="no-highlight">25</i>&nbsp;	}
+<i class="no-highlight">26</i>&nbsp;
+<i class="no-highlight">27</i>&nbsp;	@Override
+<i class="no-highlight">28</i>&nbsp;	public Class&lt;? extends AkjonavMapElement&gt; getTypeClass() {
+<b class="nc"><i class="no-highlight">29</i>&nbsp;		return typeClass;</b>
+<i class="no-highlight">30</i>&nbsp;	}
+<i class="no-highlight">31</i>&nbsp;
+<i class="no-highlight">32</i>&nbsp;	public static AkjonavMapElementType fromType(String typeID) {
+<b class="nc"><i class="no-highlight">33</i>&nbsp;		return Arrays.stream(values())</b>
+<b class="nc"><i class="no-highlight">34</i>&nbsp;				.filter(type -&gt; type.getTypeID().equals(typeID))</b>
+<b class="nc"><i class="no-highlight">35</i>&nbsp;				.findFirst()</b>
+<b class="nc"><i class="no-highlight">36</i>&nbsp;				.orElseThrow(() -&gt; new IllegalArgumentException(&quot;No map element type found for id \&quot;&quot; + typeID + &quot;\&quot;!&quot;));</b>
+<i class="no-highlight">37</i>&nbsp;	}
+<i class="no-highlight">38</i>&nbsp;
+<i class="no-highlight">39</i>&nbsp;	@Override
+<i class="no-highlight">40</i>&nbsp;	public String toString() {
+<b class="nc"><i class="no-highlight">41</i>&nbsp;		return typeID;</b>
+<i class="no-highlight">42</i>&nbsp;	}
+<i class="no-highlight">43</i>&nbsp;}
 </div>
 </pre>
 </div>
@@ -136,7 +142,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2022-06-28 10:51</div>
+    <div style="float:right;">generated on 2022-06-28 21:07</div>
 </div>
 </body>
 </html>

@@ -50,18 +50,18 @@ Current scope:     <a href="../../index.html">all classes</a>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    100%
+    83.3%
   </span>
   <span class="absValue">
-    (5/5)
+    (5/6)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    100%
+    85.7%
   </span>
   <span class="absValue">
-    (6/6)
+    (6/7)
   </span>
 </td>
 </tr>
@@ -78,7 +78,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 <i class="no-highlight">3</i>&nbsp;import io.github.akjo03.akjonav.model.util.builder.AkjonavBuildableType;
 <i class="no-highlight">4</i>&nbsp;import io.github.akjo03.akjonav.model.util.builder.AkjonavBuilder;
 <i class="no-highlight">5</i>&nbsp;
-<i class="no-highlight">6</i>&nbsp;public class AkjonavPositionType implements AkjonavBuildableType {
+<i class="no-highlight">6</i>&nbsp;public class AkjonavPositionType implements AkjonavBuildableType&lt;AkjonavPosition&gt; {
 <b class="fc"><i class="no-highlight">7</i>&nbsp;	public static final AkjonavPositionType type = new AkjonavPositionType();</b>
 <i class="no-highlight">8</i>&nbsp;
 <i class="no-highlight">9</i>&nbsp;	private static final String TYPE_ID = &quot;AkjonavPosition&quot;;
@@ -93,10 +93,15 @@ Current scope:     <a href="../../index.html">all classes</a>
 <b class="fc"><i class="no-highlight">18</i>&nbsp;	public AkjonavBuilder&lt;?, ?&gt; getBuilder() { return BUILDER; }</b>
 <i class="no-highlight">19</i>&nbsp;
 <i class="no-highlight">20</i>&nbsp;	@Override
-<i class="no-highlight">21</i>&nbsp;	public String toString() {
-<b class="fc"><i class="no-highlight">22</i>&nbsp;		return TYPE_ID;</b>
+<i class="no-highlight">21</i>&nbsp;	public Class&lt;AkjonavPosition&gt; getTypeClass() {
+<b class="nc"><i class="no-highlight">22</i>&nbsp;		return AkjonavPosition.class;</b>
 <i class="no-highlight">23</i>&nbsp;	}
-<i class="no-highlight">24</i>&nbsp;}
+<i class="no-highlight">24</i>&nbsp;
+<i class="no-highlight">25</i>&nbsp;	@Override
+<i class="no-highlight">26</i>&nbsp;	public String toString() {
+<b class="fc"><i class="no-highlight">27</i>&nbsp;		return TYPE_ID;</b>
+<i class="no-highlight">28</i>&nbsp;	}
+<i class="no-highlight">29</i>&nbsp;}
 </div>
 </pre>
 </div>
@@ -123,7 +128,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2022-06-28 10:51</div>
+    <div style="float:right;">generated on 2022-06-28 21:07</div>
 </div>
 </body>
 </html>
