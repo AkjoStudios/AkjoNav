@@ -76,9 +76,23 @@ public abstract class AbstractFirestoreRepository<T> {
 		try {
 			List<QueryDocumentSnapshot> queryDocumentSnapshots = resultApiFuture.get().getDocuments();
 
-			return queryDocumentSnapshots.stream()
-					.map(queryDocumentSnapshot -> queryDocumentSnapshot.toObject(parameterizedType))
-					.toList();
+			List<T> queryResults = new ArrayList<>();
+			for (QueryDocumentSnapshot queryDocumentSnapshot : queryDocumentSnapshots) {
+				String documentID = queryDocumentSnapshot.getId();
+				T document = queryDocumentSnapshot.toObject(parameterizedType);
+				Arrays.stream(getParameterizedType().getDeclaredFields()).toList().forEach(field -> {
+					if (field.isAnnotationPresent(DocumentID.class)) {
+						field.setAccessible(true);
+						try {
+							field.set(document, documentID);
+						} catch (IllegalAccessException e) {
+							getLogger().error("Failed to set document ID for retrieved element with id " + documentID + "!", e);
+						}
+					}
+				});
+				queryResults.add(document);
+			}
+			return queryResults;
 		} catch (InterruptedException | ExecutionException e) {
 			getLogger().error("Failed to retrieve all documents for " + collectionName + "!", e);
 		}
