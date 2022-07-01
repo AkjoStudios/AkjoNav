@@ -27,7 +27,6 @@ public class SecurityConfig extends BasicAuthenticationEntryPoint implements Aut
 	@Bean
 	public SecurityFilterChain filterChain(@NotNull HttpSecurity http) throws Exception {
 		return http
-				.csrf().disable()
 				.authorizeRequests()
 				.antMatchers(
 						"/",
