@@ -6,10 +6,12 @@ import io.github.akjo03.util.logging.v2.LoggerManager;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.context.properties.ConfigurationPropertiesScan;
 import org.springframework.context.ApplicationContext;
 
 @SpringBootApplication
 @RequiredArgsConstructor
+@ConfigurationPropertiesScan
 public class AkjonavBaseApp {
     private static final Logger LOGGER = LoggerManager.getLogger(AkjonavBaseApp.class, AkjonavBaseConstants.LOGGING_LEVEL);
 
