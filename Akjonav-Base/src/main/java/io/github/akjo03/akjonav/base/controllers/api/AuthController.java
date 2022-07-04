@@ -25,9 +25,6 @@ public class AuthController {
 			.setMinimumLoggingLevel(AkjonavBaseConstants.LOGGING_LEVEL)
 			.setLoggingFormat(AkjonavBaseConstants.LOGGING_FORMAT);
 
-	@Value("${auth0.audience}")
-	private String audience;
-
 	@Value("${spring.security.oauth2.resourceserver.jwt.issuer-uri}")
 	private String issuer;
 
