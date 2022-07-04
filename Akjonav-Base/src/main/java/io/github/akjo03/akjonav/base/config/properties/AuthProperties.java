@@ -12,4 +12,6 @@ import org.springframework.context.annotation.Configuration;
 public class AuthProperties {
 	private String domain;
 	private String audience;
+	private String clientId;
+	private String clientSecret;
 }
