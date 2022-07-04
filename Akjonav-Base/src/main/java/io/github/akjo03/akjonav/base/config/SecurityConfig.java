@@ -1,15 +1,10 @@
 package io.github.akjo03.akjonav.base.config;
 
-import io.github.akjo03.akjonav.base.model.RestUser;
-import io.github.akjo03.akjonav.base.persistence.RestUserRepository;
-import io.github.akjo03.util.logging.v2.Logger;
-import io.github.akjo03.util.logging.v2.LoggerManager;
-import lombok.RequiredArgsConstructor;
+import io.github.akjo03.akjonav.base.constants.AkjonavConstants;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -17,7 +12,6 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.www.BasicAuthenticationEntryPoint;
 
@@ -30,11 +24,7 @@ import java.util.List;
 
 @Configuration
 @EnableWebSecurity
-@RequiredArgsConstructor
 public class SecurityConfig extends BasicAuthenticationEntryPoint implements AuthenticationManager {
-	private static final Logger LOGGER = LoggerManager.getLogger("SecurityManager");
-	private final RestUserRepository restUserRepository;
-
 	@Bean
 	public SecurityFilterChain filterChain(@NotNull HttpSecurity http) throws Exception {
 		return http
@@ -42,7 +32,6 @@ public class SecurityConfig extends BasicAuthenticationEntryPoint implements Aut
 				.antMatchers(
 						"/",
 						"/swagger-ui.html",
-						"/swagger-ui/**",
 						"/api-docs",
 						"/api-docs/**"
 				).permitAll()
@@ -57,22 +46,8 @@ public class SecurityConfig extends BasicAuthenticationEntryPoint implements Aut
 		String username = authentication.getPrincipal().toString();
 		String password = authentication.getCredentials().toString();
 
-		RestUser restUser = restUserRepository.getByUsername(username);
-		if (restUser == null) {
-			UsernameNotFoundException e = new UsernameNotFoundException("User not found");
-			LOGGER.error(e.getMessage(), e);
-			throw e;
-		}
-		if (!restUser.getPassword().equals(password)) {
-			BadCredentialsException e = new BadCredentialsException("Password is incorrect");
-			LOGGER.error(e.getMessage(), e);
-			throw e;
-		}
-
 		List<GrantedAuthority> grantedAuths = new ArrayList<>();
-		for (String role : restUser.getRoles()) {
-			grantedAuths.add(new SimpleGrantedAuthority(role));
-		}
+		grantedAuths.add(new SimpleGrantedAuthority("ROLE_USER"));
 		return new UsernamePasswordAuthenticationToken(username, password, grantedAuths);
 	}
 
@@ -86,7 +61,8 @@ public class SecurityConfig extends BasicAuthenticationEntryPoint implements Aut
 
 	@Override
 	public void afterPropertiesSet() {
-		setRealmName("AkjoNav");
+		setRealmName(AkjonavConstants.NAME);
 		super.afterPropertiesSet();
 	}
+
 }
