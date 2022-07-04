@@ -1,6 +1,8 @@
 package io.github.akjo03.akjonav.base.config;
 
 import io.github.akjo03.akjonav.base.constants.AkjonavBaseConstants;
+import io.swagger.v3.oas.annotations.enums.SecuritySchemeType;
+import io.swagger.v3.oas.annotations.security.SecurityScheme;
 import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.oas.models.info.Contact;
 import io.swagger.v3.oas.models.info.Info;
@@ -11,6 +13,12 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 @ConditionalOnProperty(name = "springdoc.swagger-ui.enabled", havingValue = "true", matchIfMissing = true)
+@SecurityScheme(
+		name = "Bearer Authentication",
+		type = SecuritySchemeType.HTTP,
+		bearerFormat = "JWT",
+		scheme = "Bearer"
+)
 public class OpenApiConfig {
 	@Bean
 	public OpenAPI getOpenAPI() {

@@ -1,6 +1,11 @@
 spring:
   application:
     name: AkjonavBaseApp
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: https://${auth0.domain}/
 
 server:
   servlet:
@@ -13,7 +18,17 @@ server:
 springdoc:
   api-docs:
     path: /api-docs
+  use-fqn: true
+  swagger-ui:
+    default-model-expand-depth: -1
 
-firebase:
-  credential:
-    path: Akjonav-Base/src/main/resources/private/akjonav-0e21ee11c4ba.json
+auth0:
+  domain: akjo03.eu.auth0.com
+  audience: api.akjonav.io
+
+  client-id: ${env.AUTH_CLIENT_ID}
+  client-secret: ${env.AUTH_CLIENT_SECRET}
+
+.env:
+  directory: ./.env
+  ignoreIfMissing: false
