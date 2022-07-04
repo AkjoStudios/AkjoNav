@@ -1,5 +1,6 @@
 package io.github.akjo03.akjonav.base.controllers.api;
 
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import io.swagger.v3.oas.annotations.tags.Tags;
 import org.springframework.http.ResponseEntity;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/position")
 public class PositionController {
 	@GetMapping("/distance")
+	@SecurityRequirement(name = "Bearer Authentication")
 	public ResponseEntity<Double> getDistance() {
 		return ResponseEntity.ok(0.0);
 	}
