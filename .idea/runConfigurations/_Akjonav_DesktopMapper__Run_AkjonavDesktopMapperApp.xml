@@ -1,0 +1,10 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="[Akjonav-DesktopMapper] Run AkjonavDesktopMapperApp" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+    <option name="ACTIVE_PROFILES" />
+    <module name="Akjonav-DesktopMapper" />
+    <option name="SPRING_BOOT_MAIN_CLASS" value="io.github.akjo03.akjonav.desktopmapper.AkjonavDesktopMapperApp" />
+    <method v="2">
+      <option name="Make" enabled="true" />
+    </method>
+  </configuration>
+</component>

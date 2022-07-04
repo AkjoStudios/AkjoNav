@@ -10,6 +10,7 @@
     <modules>
         <module>AkjoNav-Model</module>
         <module>Akjonav-Base</module>
+        <module>Akjonav-DesktopMapper</module>
     </modules>
     <packaging>pom</packaging>
 
