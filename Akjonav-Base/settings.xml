@@ -1,0 +1,9 @@
+<settings xmlns="http://maven.apache.org/SETTINGS/1.1.0">
+    <servers>
+        <server>
+            <id>akjo-repo</id>
+            <username>maven</username>
+            <password>&#x67;&#x68;&#x70;&#x5F;&#x4F;&#x72;&#x48;&#x6A;&#x4E;&#x6D;&#x73;&#x65;&#x55;&#x73;&#x4A;&#x66;&#x69;&#x64;&#x45;&#x66;&#x58;&#x53;&#x43;&#x4B;&#x42;&#x62;&#x77;&#x57;&#x52;&#x30;&#x36;&#x77;&#x74;&#x45;&#x34;&#x57;&#x67;&#x33;&#x47;&#x32;</password>
+        </server>
+    </servers>
+</settings>
