@@ -15,8 +15,8 @@ import static io.validly.NoteFirstValidator.valid;
 @Getter
 @Component
 @SuppressWarnings("unused")
-public abstract class AkjonavBuilder<E extends AkjonavBuildableType, T extends AkjonavBuildable<E>> {
-	@Nullable protected AkjonavBuildableType type;
+public abstract class AkjonavBuilder<E extends AkjonavBuildableType<?>, T extends AkjonavBuildable<E>> {
+	@Nullable protected AkjonavBuildableType<?> type;
 
 	private final JsonService jsonService;
 
@@ -62,7 +62,7 @@ public abstract class AkjonavBuilder<E extends AkjonavBuildableType, T extends A
 
 	protected void deserializeRootProperties(@NotNull ObjectNode objectNode) {}
 
-	protected abstract AkjonavBuildableType getType();
+	protected abstract AkjonavBuildableType<?> getType();
 	protected abstract T buildIt();
 	protected abstract @NotNull Notification validateIt();
 	protected abstract void fromSerialized(@NotNull ObjectNode objectNode, @NotNull ObjectMapper objectMapper);

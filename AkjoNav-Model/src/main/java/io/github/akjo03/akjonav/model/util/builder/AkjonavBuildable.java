@@ -13,7 +13,7 @@ import java.util.Objects;
 @RequiredArgsConstructor
 @Component
 @SuppressWarnings("unused")
-public abstract class AkjonavBuildable<T extends AkjonavBuildableType> {
+public abstract class AkjonavBuildable<T extends AkjonavBuildableType<?>> {
 	@NotNull protected final T type;
 
 	public ObjectNode serialize(@NotNull ObjectMapper objectMapper) {

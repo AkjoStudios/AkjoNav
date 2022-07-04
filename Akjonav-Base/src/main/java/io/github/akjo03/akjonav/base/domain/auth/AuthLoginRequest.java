@@ -2,14 +2,13 @@ package io.github.akjo03.akjonav.base.domain.auth;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.v3.oas.annotations.media.Schema;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
-@Schema(name = "AuthLoginRequest", description = "Request for logging into an Akjonav API", hidden = true)
+@Schema(name = "AuthLoginRequest", description = "Request for logging into an Akjonav API")
 @Getter
 @Setter
+@NoArgsConstructor
+@AllArgsConstructor
 @ToString
 @EqualsAndHashCode
 public class AuthLoginRequest {

@@ -4,7 +4,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import io.github.akjo03.akjonav.model.elements.base.AkjonavBaseElementBuilder;
 import io.github.akjo03.akjonav.model.elements.base.AkjonavBaseElementType;
-import io.github.akjo03.akjonav.model.util.builder.AkjonavBuildableType;
 import io.github.akjo03.akjonav.model.util.position.AkjonavPosition;
 import io.github.akjo03.akjonav.model.util.position.AkjonavPositionBuilder;
 import io.validly.Notification;
@@ -35,7 +34,7 @@ public class AkjonavNodeBuilder extends AkjonavBaseElementBuilder<AkjonavNode> {
 	}
 
 	@Override
-	protected AkjonavBuildableType getType() {
+	protected AkjonavBaseElementType getType() {
 		return AkjonavBaseElementType.NODE;
 	}
 

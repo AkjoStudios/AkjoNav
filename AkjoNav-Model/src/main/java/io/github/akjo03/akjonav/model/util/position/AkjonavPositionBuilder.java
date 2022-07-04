@@ -2,7 +2,6 @@ package io.github.akjo03.akjonav.model.util.position;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
-import io.github.akjo03.akjonav.model.util.builder.AkjonavBuildableType;
 import io.github.akjo03.akjonav.model.util.builder.AkjonavBuilder;
 import io.github.akjo03.util.ArgumentChecks;
 import io.github.akjo03.util.math.Range;
@@ -56,7 +55,7 @@ public class AkjonavPositionBuilder extends AkjonavBuilder<AkjonavPositionType, 
 	}
 
 	@Override
-	protected AkjonavBuildableType getType() {
+	protected AkjonavPositionType getType() {
 		return AkjonavPositionType.type;
 	}
 
