@@ -13,7 +13,3 @@ server:
 springdoc:
   api-docs:
     path: /api-docs
-
-firebase:
-  credential:
-    path: Akjonav-Base/src/main/resources/private/akjonav-0e21ee11c4ba.json
