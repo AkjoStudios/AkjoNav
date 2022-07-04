@@ -5,22 +5,16 @@ import io.github.akjo03.akjonav.model.services.JsonService;
 import io.github.akjo03.util.math.unit.units.length.Length;
 import io.github.akjo03.util.math.unit.units.length.LengthUnit;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.ContextConfiguration;
 
 import java.math.BigDecimal;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-@SpringBootTest
-@ContextConfiguration(classes = { JsonService.class })
 class AkjonavPositionTest {
 	private final JsonService jsonService;
 
-	@Autowired
-	protected AkjonavPositionTest(JsonService jsonService) {
-		this.jsonService = jsonService;
+	protected AkjonavPositionTest() {
+		this.jsonService = new JsonService();
 	}
 
 	@Test

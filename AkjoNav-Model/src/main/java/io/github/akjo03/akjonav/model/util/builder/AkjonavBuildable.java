@@ -5,13 +5,11 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.jetbrains.annotations.NotNull;
-import org.springframework.stereotype.Component;
 
 import java.util.Objects;
 
 @Getter
 @RequiredArgsConstructor
-@Component
 @SuppressWarnings("unused")
 public abstract class AkjonavBuildable<T extends AkjonavBuildableType<?>> {
 	@NotNull protected final T type;

@@ -50,6 +50,11 @@
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter</artifactId>
+            <version>${spring.boot.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
             <version>${spring.boot.version}</version>
         </dependency>
@@ -113,11 +118,18 @@
             <artifactId>swagger-annotations</artifactId>
             <version>2.2.1</version>
         </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <version>${spring.boot.version}</version>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
 
     <build>
         <defaultGoal>install</defaultGoal>
-        <directory>${maven.multiModuleProjectDirectory}/out</directory>
+        <directory>${maven.multiModuleProjectDirectory}/Akjonav-Base/out</directory>
 
         <finalName>${project.name}_${project.version}</finalName>
 

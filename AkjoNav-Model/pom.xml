@@ -61,17 +61,11 @@
 
     <build>
         <defaultGoal>install</defaultGoal>
-        <directory>${maven.multiModuleProjectDirectory}/out</directory>
+        <directory>${maven.multiModuleProjectDirectory}/Akjonav-Model/out</directory>
 
         <finalName>${project.name}_${project.version}</finalName>
 
         <plugins>
-            <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-                <version>${spring.boot.version}</version>
-            </plugin>
-
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>

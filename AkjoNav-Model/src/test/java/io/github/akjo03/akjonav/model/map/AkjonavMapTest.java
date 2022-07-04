@@ -12,17 +12,12 @@ import io.github.akjo03.akjonav.model.elements.base.way.AkjonavWayBuilder;
 import io.github.akjo03.akjonav.model.services.JsonService;
 import io.github.akjo03.akjonav.model.util.position.AkjonavPositionBuilder;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.ContextConfiguration;
 
 import java.math.BigInteger;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-@SpringBootTest
-@ContextConfiguration(classes = { JsonService.class })
 class AkjonavMapTest {
 	private static final AkjonavMapBuilder MAP_BUILDER = new AkjonavMapBuilder();
 	private static final AkjonavMap TEST_MAP = MAP_BUILDER
@@ -47,9 +42,8 @@ class AkjonavMapTest {
 
 	private final JsonService jsonService;
 
-	@Autowired
-	protected AkjonavMapTest(JsonService jsonService) {
-		this.jsonService = jsonService;
+	protected AkjonavMapTest() {
+		this.jsonService = new JsonService();
 	}
 
 	@Test
