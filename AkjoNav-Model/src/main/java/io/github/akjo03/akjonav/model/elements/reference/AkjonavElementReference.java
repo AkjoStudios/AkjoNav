@@ -13,10 +13,10 @@ import java.util.Objects;
 @Getter
 @SuppressWarnings("unused")
 public class AkjonavElementReference extends AkjonavBuildable<AkjonavElementReferenceType> {
-	private final AkjonavElementType elementType;
+	private final AkjonavElementType<?> elementType;
 	private final BigInteger elementID;
 
-	protected AkjonavElementReference(AkjonavElementType elementType, BigInteger elementID) {
+	protected AkjonavElementReference(AkjonavElementType<?> elementType, BigInteger elementID) {
 		super(AkjonavElementReferenceType.type);
 		this.elementType = elementType;
 		this.elementID = elementID;

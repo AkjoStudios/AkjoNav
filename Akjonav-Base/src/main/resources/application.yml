@@ -23,11 +23,11 @@ springdoc:
     default-model-expand-depth: -1
 
 auth0:
-  domain: akjo03.eu.auth0.com
-  audience: api.akjonav.io
-
   client-id: ${env.AUTH_CLIENT_ID}
   client-secret: ${env.AUTH_CLIENT_SECRET}
+
+  domain: akjo03.eu.auth0.com
+  audience: api.akjonav.io
 
 .env:
   directory: ./.env

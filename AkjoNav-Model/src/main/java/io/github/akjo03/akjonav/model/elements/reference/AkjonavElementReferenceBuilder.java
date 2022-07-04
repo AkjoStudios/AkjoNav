@@ -15,18 +15,18 @@ import static io.validly.NoteFirstValidator.valid;
 
 @SuppressWarnings("unused")
 public class AkjonavElementReferenceBuilder extends AkjonavBuilder<AkjonavElementReferenceType, AkjonavElementReference> {
-	private AkjonavElementType elementType;
+	private AkjonavElementType<?> elementType;
 	private BigInteger elementID;
 
 	public AkjonavElementReferenceBuilder() { super(); }
 
-	public AkjonavElementReferenceBuilder(@NotNull AkjonavElementType elementType, @NotNull BigInteger elementID) {
+	public AkjonavElementReferenceBuilder(@NotNull AkjonavElementType<?> elementType, @NotNull BigInteger elementID) {
 		super();
 		this.elementType = elementType;
 		this.elementID = elementID;
 	}
 
-	public AkjonavElementReferenceBuilder setElementType(@NotNull AkjonavElementType elementType) {
+	public AkjonavElementReferenceBuilder setElementType(@NotNull AkjonavElementType<?> elementType) {
 		this.elementType = elementType;
 		return this;
 	}
@@ -37,7 +37,7 @@ public class AkjonavElementReferenceBuilder extends AkjonavBuilder<AkjonavElemen
 	}
 
 	@Override
-	protected AkjonavBuildableType getType() {
+	protected AkjonavBuildableType<?> getType() {
 		return AkjonavElementReferenceType.type;
 	}
 

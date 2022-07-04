@@ -8,7 +8,6 @@ import io.github.akjo03.akjonav.model.elements.base.AkjonavBaseElementBuilder;
 import io.github.akjo03.akjonav.model.elements.base.AkjonavBaseElementType;
 import io.github.akjo03.akjonav.model.elements.reference.AkjonavElementReference;
 import io.github.akjo03.akjonav.model.elements.reference.AkjonavElementReferenceBuilder;
-import io.github.akjo03.akjonav.model.util.builder.AkjonavBuildableType;
 import io.validly.Notification;
 import org.jetbrains.annotations.NotNull;
 
@@ -49,7 +48,7 @@ public class AkjonavAreaBuilder extends AkjonavBaseElementBuilder<AkjonavArea> {
 	}
 
 	@Override
-	protected AkjonavBuildableType getType() {
+	protected AkjonavBaseElementType getType() {
 		return AkjonavBaseElementType.AREA;
 	}
 

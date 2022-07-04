@@ -10,7 +10,7 @@ import java.math.BigInteger;
 import java.util.Objects;
 
 @Getter
-public abstract class AkjonavElement<T extends AkjonavElementType> extends AkjonavBuildable<T> {
+public abstract class AkjonavElement<T extends AkjonavElementType<?>> extends AkjonavBuildable<T> {
 	private final BigInteger elementID;
 
 	protected AkjonavElement(BigInteger elementID, T elementType) {

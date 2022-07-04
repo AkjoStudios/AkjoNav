@@ -13,23 +13,17 @@ import io.github.akjo03.akjonav.model.elements.reference.AkjonavElementReference
 import io.github.akjo03.akjonav.model.services.JsonService;
 import io.github.akjo03.akjonav.model.util.position.AkjonavPositionBuilder;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.ContextConfiguration;
 
 import java.math.BigInteger;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-@SpringBootTest
-@ContextConfiguration(classes = { JsonService.class })
 class AkjonavMapBuilderTest {
 	private final JsonService jsonService;
 
-	@Autowired
-	protected AkjonavMapBuilderTest(JsonService jsonService) {
-		this.jsonService = jsonService;
+	protected AkjonavMapBuilderTest() {
+		this.jsonService = new JsonService();
 	}
 
 	@Test

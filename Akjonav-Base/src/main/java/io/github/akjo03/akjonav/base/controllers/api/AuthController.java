@@ -36,7 +36,6 @@ public class AuthController {
 			summary = "Login to AkjoNav"
 	)
 	public ResponseEntity<AuthLoginResponse> login(@RequestBody @NotNull AuthLoginRequest request) {
-		LOGGER.info(request);
 		AuthLoginResponse response = new RestTemplateBuilder().build()
 				.postForObject(
 					issuer + "/oauth/token",

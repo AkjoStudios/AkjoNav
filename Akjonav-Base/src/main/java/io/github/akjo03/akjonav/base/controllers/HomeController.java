@@ -16,6 +16,7 @@ public class HomeController {
 
 	@Hidden
 	@RequestMapping("/")
+	@SuppressWarnings("StringBufferReplaceableByString")
 	public String home(HttpServletRequest request) {
 		StringBuilder sb = new StringBuilder();
 		sb.append("<html lang=\"en\">\n");

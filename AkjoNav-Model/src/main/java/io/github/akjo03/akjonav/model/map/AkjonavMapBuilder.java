@@ -10,7 +10,6 @@ import io.github.akjo03.akjonav.model.elements.map.AkjonavMapElement;
 import io.github.akjo03.akjonav.model.elements.map.AkjonavMapElementBuilder;
 import io.github.akjo03.akjonav.model.elements.reference.AkjonavElementReference;
 import io.github.akjo03.akjonav.model.elements.reference.AkjonavElementReferenceBuilder;
-import io.github.akjo03.akjonav.model.util.builder.AkjonavBuildableType;
 import io.github.akjo03.akjonav.model.util.builder.AkjonavBuilder;
 import io.validly.Notification;
 import org.jetbrains.annotations.NotNull;
@@ -104,7 +103,7 @@ public class AkjonavMapBuilder extends AkjonavBuilder<AkjonavMapType, AkjonavMap
 	}
 
 	@Override
-	protected AkjonavBuildableType getType() {
+	protected AkjonavMapType getType() {
 		return AkjonavMapType.type;
 	}
 
