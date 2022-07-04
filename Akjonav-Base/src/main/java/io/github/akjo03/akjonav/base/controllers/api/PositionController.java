@@ -4,10 +4,12 @@ import io.github.akjo03.akjonav.base.constants.AkjonavBaseConstants;
 import io.github.akjo03.akjonav.base.domain.position.DistanceCalculationRequest;
 import io.github.akjo03.akjonav.base.domain.position.DistanceCalculationResponse;
 import io.github.akjo03.akjonav.base.services.ModelConverterService;
+import io.github.akjo03.akjonav.base.services.api.PositionService;
 import io.github.akjo03.akjonav.model.util.position.AkjonavPosition;
 import io.github.akjo03.akjonav.model.util.position.AkjonavPositionBuilder;
 import io.github.akjo03.util.logging.v2.Logger;
 import io.github.akjo03.util.logging.v2.LoggerManager;
+import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import io.swagger.v3.oas.annotations.tags.Tags;
@@ -31,15 +33,19 @@ public class PositionController {
 			.setLoggingFormat(AkjonavBaseConstants.LOGGING_FORMAT);
 
 	private final ModelConverterService modelConverterService;
+	private final PositionService positionService;
 
 	@PostMapping("/distance")
 	@SecurityRequirement(name = "Bearer Authentication")
+	@Operation(
+			summary = "Calculate distance between two positions"
+	)
 	public ResponseEntity<DistanceCalculationResponse> getDistance(@RequestBody @NotNull DistanceCalculationRequest request) {
 		AkjonavPosition startPosition = modelConverterService.convertData((HashMap<?, ?>) request.getStartPosition(), new AkjonavPositionBuilder());
 		AkjonavPosition endPosition = modelConverterService.convertData((HashMap<?, ?>) request.getEndPosition(), new AkjonavPositionBuilder());
 
+		Double distance = positionService.calculateDistance(startPosition, endPosition);
 
-
-		return ResponseEntity.ok(new DistanceCalculationResponse(0.0));
+		return ResponseEntity.ok(new DistanceCalculationResponse(distance));
 	}
 }
