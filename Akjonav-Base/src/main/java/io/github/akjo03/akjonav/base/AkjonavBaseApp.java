@@ -7,18 +7,16 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.properties.ConfigurationPropertiesScan;
-import org.springframework.context.ApplicationContext;
 
 @SpringBootApplication
 @RequiredArgsConstructor
 @ConfigurationPropertiesScan
 public class AkjonavBaseApp {
-    private static final Logger LOGGER = LoggerManager.getLogger(AkjonavBaseApp.class, AkjonavBaseConstants.LOGGING_LEVEL);
-
-    private final ApplicationContext applicationContext;
+    private static final Logger LOGGER = LoggerManager.getLogger(AkjonavBaseApp.class)
+            .setMinimumLoggingLevel(AkjonavBaseConstants.LOGGING_LEVEL)
+            .setLoggingFormat(AkjonavBaseConstants.LOGGING_FORMAT);
 
     public static void main(String[] args) {
-        LOGGER.setLoggingFormat(AkjonavBaseConstants.LOGGING_FORMAT);
         SpringApplication.run(AkjonavBaseApp.class, args);
     }
 }
