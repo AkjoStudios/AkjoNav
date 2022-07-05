@@ -1,0 +1,10 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="[Akjonav-TestMapCreator] Run AkjonavTestMapCreatorApp" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+    <option name="ACTIVE_PROFILES" />
+    <module name="Akjonav-TestMapCreator" />
+    <option name="SPRING_BOOT_MAIN_CLASS" value="io.github.akjo03.akjonav.testmapcreator.AkjonavTestMapCreatorApp" />
+    <method v="2">
+      <option name="Make" enabled="true" />
+    </method>
+  </configuration>
+</component>

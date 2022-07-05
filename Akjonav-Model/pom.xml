@@ -9,7 +9,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>AkjoNav-Model</artifactId>
+    <artifactId>Akjonav-Model</artifactId>
     <version>2022.1-dev1</version>
     <packaging>jar</packaging>
 

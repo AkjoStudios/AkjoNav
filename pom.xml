@@ -8,7 +8,7 @@
     <artifactId>AkjoNav</artifactId>
     <version>2022.1-dev1</version>
     <modules>
-        <module>AkjoNav-Model</module>
+        <module>Akjonav-Model</module>
         <module>Akjonav-Base</module>
         <module>Akjonav-DesktopMapper</module>
         <module>Akjonav-TestMapCreator</module>
