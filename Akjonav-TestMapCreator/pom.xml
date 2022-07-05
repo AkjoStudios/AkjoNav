@@ -9,12 +9,12 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>Akjonav-DesktopMapper</artifactId>
+    <artifactId>Akjonav-TestMapCreator</artifactId>
     <version>2022.1-dev1</version>
     <packaging>jar</packaging>
 
-    <name>AkjoNav DesktopMapper</name>
-    <description>This is a desktop application to create maps.</description>
+    <name>AkjoNav TestMapCreator</name>
+    <description>Used to create maps for testing.</description>
     <url>https://akjo03.github.io/akjonav</url>
     <inceptionYear>2022</inceptionYear>
 
@@ -53,11 +53,13 @@
             <artifactId>spring-boot-starter</artifactId>
             <version>${spring.boot.version}</version>
         </dependency>
+
         <dependency>
-            <groupId>com.formdev</groupId>
-            <artifactId>flatlaf</artifactId>
-            <version>2.3</version>
+            <groupId>io.github.akjo03.akjonav</groupId>
+            <artifactId>AkjoNav-Model</artifactId>
+            <version>2022.1-dev1</version>
         </dependency>
+
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-core</artifactId>
@@ -73,18 +75,11 @@
             <artifactId>jackson-annotations</artifactId>
             <version>${jackson.version}</version>
         </dependency>
-
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-test</artifactId>
-            <version>${spring.boot.version}</version>
-            <scope>test</scope>
-        </dependency>
     </dependencies>
 
     <build>
         <defaultGoal>install</defaultGoal>
-        <directory>${maven.multiModuleProjectDirectory}/Akjonav-DesktopMapper/out</directory>
+        <directory>${maven.multiModuleProjectDirectory}/Akjonav-TestMapCreator/out</directory>
 
         <finalName>${project.name}_${project.version}</finalName>
 
@@ -101,7 +96,7 @@
                 <version>2.22.2</version>
                 <configuration>
                     <includes>
-                        <include>io.github.akjo03.akjonav.desktopmapper.**.*Test</include>
+                        <include>io.github.akjo03.akjonav.testmapcreator.**.*Test</include>
                     </includes>
                     <failIfNoTests>false</failIfNoTests>
                 </configuration>

@@ -1,6 +1,6 @@
 <component name="ProjectRunConfigurationManager">
   <configuration default="false" name="[Akjonav-Model] Run All Unit Tests" type="JUnit" factoryName="JUnit">
-    <module name="AkjoNav-Model" />
+    <module name="Akjonav-Model" />
     <extension name="coverage">
       <pattern>
         <option name="PATTERN" value="io.github.akjo03.akjonav.model.*" />

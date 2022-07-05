@@ -2,8 +2,6 @@ package io.github.akjo03.akjonav.base;
 
 import io.github.akjo03.akjonav.base.constants.AkjonavBaseConstants;
 import io.github.akjo03.akjonav.base.services.JsonService;
-import io.github.akjo03.akjonav.model.util.position.AkjonavPosition;
-import io.github.akjo03.akjonav.model.util.position.AkjonavPositionBuilder;
 import io.github.akjo03.util.logging.v2.Logger;
 import io.github.akjo03.util.logging.v2.LoggerManager;
 import lombok.RequiredArgsConstructor;
@@ -23,10 +21,5 @@ public class AkjonavBaseApp {
 
     public static void main(String[] args) {
         SpringApplication.run(AkjonavBaseApp.class, args);
-        AkjonavPosition startPosition = new AkjonavPositionBuilder(46.8938422, 7.3298003).build();
-        AkjonavPosition endPosition = new AkjonavPositionBuilder(46.8937608, 7.3298296).build();
-
-        System.out.println(startPosition.serialize(jsonService.getObjectMapper()));
-        System.out.println(endPosition.serialize(jsonService.getObjectMapper()));
     }
 }

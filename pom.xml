@@ -11,6 +11,7 @@
         <module>AkjoNav-Model</module>
         <module>Akjonav-Base</module>
         <module>Akjonav-DesktopMapper</module>
+        <module>Akjonav-TestMapCreator</module>
     </modules>
     <packaging>pom</packaging>
 
