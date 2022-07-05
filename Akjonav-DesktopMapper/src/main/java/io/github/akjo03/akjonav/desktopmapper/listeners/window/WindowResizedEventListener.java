@@ -25,7 +25,7 @@ public class WindowResizedEventListener extends ComponentAdapter {
 
 	@Override
 	public void componentResized(@NotNull ComponentEvent e) {
-		LOGGER.info("Event 'windowResized' triggered");
+		LOGGER.debug("Event 'windowResized' triggered");
 		if (!e.getComponent().equals(window)) {
 			return;
 		}
@@ -39,6 +39,7 @@ public class WindowResizedEventListener extends ComponentAdapter {
 		AkjonavDesktopMapperApp.getAppSettings().getWindowSettings().setScreenY(String.valueOf(window.getY()));
 		try {
 			DataManager.save("settings.json", JsonService.getObjectMapper().convertValue(AkjonavDesktopMapperApp.getAppSettings(), JsonNode.class));
+			LOGGER.debug("Saved settings after resizing window to " + window.getWidth() + "x" + window.getHeight() + " and position " + window.getX() + "x" + window.getY() + "!");
 		} catch (IOException e) {
 			LOGGER.error("Failed to save settings after resizing window!", e);
 		}
