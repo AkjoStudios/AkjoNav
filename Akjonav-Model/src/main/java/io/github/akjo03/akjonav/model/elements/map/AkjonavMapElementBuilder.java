@@ -1,28 +1,43 @@
 package io.github.akjo03.akjonav.model.elements.map;
 
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import io.github.akjo03.akjonav.model.elements.AkjonavElementBuilder;
 import io.github.akjo03.akjonav.model.elements.reference.AkjonavElementReference;
-import io.github.akjo03.akjonav.model.map.AkjonavMapBuilder;
+import io.github.akjo03.akjonav.model.elements.reference.AkjonavElementReferenceBuilder;
 import io.validly.Notification;
 import org.jetbrains.annotations.NotNull;
 
 import java.math.BigInteger;
+import java.util.ArrayList;
+import java.util.List;
 
 import static io.validly.NoteFirstValidator.valid;
 
 @SuppressWarnings("unused")
 public abstract class AkjonavMapElementBuilder<T extends AkjonavMapElement> extends AkjonavElementBuilder<AkjonavMapElementType, T> {
-	private AkjonavElementReference baseElementRef;
+	private List<AkjonavElementReference> elementRefs = new ArrayList<>();
 
 	protected AkjonavMapElementBuilder() { super(); }
-	protected AkjonavMapElementBuilder(BigInteger elementID, AkjonavElementReference baseElementRef) {
+	protected AkjonavMapElementBuilder(BigInteger elementID, List<AkjonavElementReference> elementRefs) {
 		super(elementID);
-		this.baseElementRef = baseElementRef;
+		this.elementRefs = elementRefs;
 	}
 
-	public AkjonavMapElementBuilder<T> setBaseElementRef(AkjonavElementReference baseElementRef) {
-		this.baseElementRef = baseElementRef;
+	public AkjonavMapElementBuilder<T> setElementRefs(List<AkjonavElementReference> elementRefs) {
+		this.elementRefs = elementRefs;
+		return this;
+	}
+
+	public AkjonavMapElementBuilder<T> addElementRef(AkjonavElementReference elementRef) {
+		if (elementRef == null) {
+			throw new IllegalArgumentException("Cannot add element reference to map element that is null!");
+		}
+		if (elementRefs.stream().anyMatch(er -> er.getElementID().equals(elementRef.getElementID()))) {
+			throw new IllegalArgumentException("Cannot add element reference to map element that is already present!");
+		}
+		this.elementRefs.add(elementRef);
 		return this;
 	}
 
@@ -30,9 +45,8 @@ public abstract class AkjonavMapElementBuilder<T extends AkjonavMapElement> exte
 	protected @NotNull Notification validateElement() {
 		Notification notification = validateMapElement();
 
-		valid(baseElementRef, "AkjonavMapElement.baseElementRef", notification)
-				.mustNotBeNull("Base element reference of an AkjonavMapElement cannot be null!")
-				.must(baseElementRefP -> baseElementRefP.getElementType().getTypeID().split(":")[0].equals("BaseElement"), "Base element reference of an AkjonavMapElement must be a reference to a BaseElement!");
+		valid(elementRefs, "AkjonavMapElement.elementRefs", notification)
+				.mustNotBeNull("Element references of an AkjonavMapElement cannot be null!");
 
 		return notification;
 	}
@@ -51,7 +65,10 @@ public abstract class AkjonavMapElementBuilder<T extends AkjonavMapElement> exte
 
 	@Override
 	protected void deserializeRootProperties(@NotNull ObjectNode objectNode) {
-		this.baseElementRef = AkjonavMapBuilder.deserializeElementReference(objectNode);
+		ArrayNode elementRefsNode = (ArrayNode) objectNode.get("elementRefs");
+		for (JsonNode elementRefNode : elementRefsNode) {
+			elementRefs.add(new AkjonavElementReferenceBuilder().deserialize((ObjectNode) elementRefNode));
+		}
 		super.deserializeRootProperties(objectNode);
 	}
 
