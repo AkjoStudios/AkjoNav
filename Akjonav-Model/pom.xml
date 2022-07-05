@@ -9,12 +9,12 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>Akjonav-DesktopMapper</artifactId>
+    <artifactId>Akjonav-Model</artifactId>
     <version>2022.1-dev1</version>
     <packaging>jar</packaging>
 
-    <name>AkjoNav DesktopMapper</name>
-    <description>This is a desktop application to create maps.</description>
+    <name>AkjoNav Model</name>
+    <description>This is the data model for all AkjoNav modules.</description>
     <url>https://akjo03.github.io/akjonav</url>
     <inceptionYear>2022</inceptionYear>
 
@@ -43,65 +43,36 @@
     <properties>
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
-
-        <jackson.version>2.13.3</jackson.version>
     </properties>
 
     <dependencies>
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter</artifactId>
-            <version>${spring.boot.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.formdev</groupId>
-            <artifactId>flatlaf</artifactId>
-            <version>2.3</version>
-        </dependency>
-        <dependency>
-            <groupId>com.fasterxml.jackson.core</groupId>
-            <artifactId>jackson-core</artifactId>
-            <version>${jackson.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.fasterxml.jackson.core</groupId>
-            <artifactId>jackson-databind</artifactId>
-            <version>${jackson.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.fasterxml.jackson.core</groupId>
-            <artifactId>jackson-annotations</artifactId>
-            <version>${jackson.version}</version>
+            <groupId>io.validly</groupId>
+            <artifactId>Validly</artifactId>
+            <version>0.1.0</version>
         </dependency>
 
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-test</artifactId>
-            <version>${spring.boot.version}</version>
-            <scope>test</scope>
+            <groupId>io.swagger.core.v3</groupId>
+            <artifactId>swagger-annotations</artifactId>
+            <version>2.2.1</version>
         </dependency>
     </dependencies>
 
     <build>
         <defaultGoal>install</defaultGoal>
-        <directory>${maven.multiModuleProjectDirectory}/Akjonav-DesktopMapper/out</directory>
+        <directory>${maven.multiModuleProjectDirectory}/Akjonav-Model/out</directory>
 
         <finalName>${project.name}_${project.version}</finalName>
 
         <plugins>
-            <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-                <version>${spring.boot.version}</version>
-            </plugin>
-
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>2.22.2</version>
                 <configuration>
                     <includes>
-                        <include>io.github.akjo03.akjonav.desktopmapper.**.*Test</include>
+                        <include>io.github.akjo03.akjonav.model.**.*Test</include>
                     </includes>
                     <failIfNoTests>false</failIfNoTests>
                 </configuration>
