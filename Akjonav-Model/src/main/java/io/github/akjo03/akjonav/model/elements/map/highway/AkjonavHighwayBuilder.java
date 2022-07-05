@@ -60,23 +60,19 @@ public class AkjonavHighwayBuilder extends AkjonavMapElementBuilder<AkjonavHighw
 									case "BaseElement:WAY" -> {
 										AkjonavWay currentWay = (AkjonavWay) mapBuilderRef.getBaseElementByReference(currentElementRef);
 										switch (nextElementRef.getElementType().getTypeID()) {
-											case "BaseElement:WAY":
+											case "BaseElement:WAY" -> {
 												AkjonavWay nextWay = (AkjonavWay) mapBuilderRef.getBaseElementByReference(nextElementRef);
 												AkjonavElementReference currentEndPoint1 = Objects.requireNonNull(currentWay).getEndNodeRef();
 												AkjonavElementReference nextStartPoint1 = Objects.requireNonNull(nextWay).getStartNodeRef();
 												result = currentEndPoint1.equals(nextStartPoint1);
-												break;
-
-											case "MapElement:HIGHWAY":
+											}
+											case "MapElement:HIGHWAY" -> {
 												AkjonavHighway nextHighway = (AkjonavHighway) mapBuilderRef.getMapElementByReference(nextElementRef);
 												AkjonavElementReference currentEndPoint2 = Objects.requireNonNull(currentWay).getEndNodeRef();
 												AkjonavElementReference nextStartPoint2 = Objects.requireNonNull(nextHighway).getStartNodeRef();
 												result = currentEndPoint2.equals(nextStartPoint2);
-												break;
-
-											default:
-												result = false;
-												break;
+											}
+											default -> result = false;
 										}
 									}
 									case "MapElement:HIGHWAY" -> {
