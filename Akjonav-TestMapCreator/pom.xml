@@ -56,7 +56,7 @@
 
         <dependency>
             <groupId>io.github.akjo03.akjonav</groupId>
-            <artifactId>AkjoNav-Model</artifactId>
+            <artifactId>Akjonav-Model</artifactId>
             <version>2022.1-dev1</version>
         </dependency>
 
