@@ -13,6 +13,7 @@ import io.github.akjo03.akjonav.model.elements.reference.AkjonavElementReference
 import io.github.akjo03.akjonav.model.util.builder.AkjonavBuilder;
 import io.validly.Notification;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.math.BigInteger;
 import java.util.ArrayList;
@@ -43,7 +44,9 @@ public class AkjonavMapBuilder extends AkjonavBuilder<AkjonavMapType, AkjonavMap
 		return this;
 	}
 
-	public AkjonavMapBuilder addMapElement(@NotNull AkjonavMapElement mapElement) {
+	public AkjonavMapBuilder addMapElement(@NotNull AkjonavMapElementBuilder<?> mapElementBuilder) {
+		mapElementBuilder.setMapBuilderRef(this);
+		AkjonavMapElement mapElement = mapElementBuilder.build();
 		if (mapElements.stream().anyMatch(element -> element.getElementID().equals(mapElement.getElementID()))) {
 			throw new IllegalArgumentException("Map element with ID " + mapElement.getElementID() + " already exists!");
 		}
@@ -51,12 +54,12 @@ public class AkjonavMapBuilder extends AkjonavBuilder<AkjonavMapType, AkjonavMap
 		return this;
 	}
 
-	public AkjonavMapBuilder addMapElements(@NotNull List<AkjonavMapElement> mapElements) {
-		mapElements.forEach(this::addMapElement);
+	public AkjonavMapBuilder addMapElements(@NotNull List<AkjonavMapElementBuilder<?>> mapElementBuilders) {
+		mapElementBuilders.forEach(this::addMapElement);
 		return this;
 	}
 
-	public AkjonavElementReference getBaseElementReference(@NotNull BigInteger id) {
+	public @Nullable AkjonavElementReference getBaseElementReference(@NotNull BigInteger id) {
 		AkjonavElementReference reference = elementReferences.stream()
 				.filter(elementReference -> elementReference.getElementID().equals(id))
 				.findFirst()
@@ -77,7 +80,7 @@ public class AkjonavMapBuilder extends AkjonavBuilder<AkjonavMapType, AkjonavMap
 		return reference;
 	}
 
-	public AkjonavElementReference getMapElementReference(@NotNull BigInteger id) {
+	public @Nullable AkjonavElementReference getMapElementReference(@NotNull BigInteger id) {
 		AkjonavElementReference reference = elementReferences.stream()
 				.filter(elementReference -> elementReference.getElementID().equals(id))
 				.findFirst()
@@ -96,6 +99,20 @@ public class AkjonavMapBuilder extends AkjonavBuilder<AkjonavMapType, AkjonavMap
 		}
 
 		return reference;
+	}
+
+	public @Nullable AkjonavBaseElement getBaseElementByReference(@NotNull AkjonavElementReference reference) {
+		return baseElements.stream()
+				.filter(element -> element.getElementID().equals(reference.getElementID()))
+				.findFirst()
+				.orElse(null);
+	}
+
+	public @Nullable AkjonavMapElement getMapElementByReference(@NotNull AkjonavElementReference reference) {
+		return mapElements.stream()
+				.filter(element -> element.getElementID().equals(reference.getElementID()))
+				.findFirst()
+				.orElse(null);
 	}
 
 	public static AkjonavElementReference deserializeElementReference(@NotNull ObjectNode objectNode) {

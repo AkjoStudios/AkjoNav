@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import io.github.akjo03.akjonav.model.elements.AkjonavElement;
 import io.github.akjo03.akjonav.model.elements.reference.AkjonavElementReference;
+import io.github.akjo03.akjonav.model.map.AkjonavMapBuilder;
 import lombok.Getter;
 import org.jetbrains.annotations.NotNull;
 
@@ -13,11 +14,13 @@ import java.util.List;
 
 @Getter
 public abstract class AkjonavMapElement extends AkjonavElement<AkjonavMapElementType> {
-	private final List<AkjonavElementReference> elementRefs;
+	protected final List<AkjonavElementReference> elementRefs;
+	protected final AkjonavMapBuilder mapBuilderRef;
 
-	protected AkjonavMapElement(BigInteger elementID, AkjonavMapElementType elementType, List<AkjonavElementReference> elementRefs) {
+	protected AkjonavMapElement(BigInteger elementID, AkjonavMapElementType elementType, List<AkjonavElementReference> elementRefs, AkjonavMapBuilder mapBuilderRef) {
 		super(elementID, elementType);
 		this.elementRefs = elementRefs;
+		this.mapBuilderRef = mapBuilderRef;
 	}
 
 	@Override

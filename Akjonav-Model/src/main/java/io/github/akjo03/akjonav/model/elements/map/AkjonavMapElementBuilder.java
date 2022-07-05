@@ -6,6 +6,7 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 import io.github.akjo03.akjonav.model.elements.AkjonavElementBuilder;
 import io.github.akjo03.akjonav.model.elements.reference.AkjonavElementReference;
 import io.github.akjo03.akjonav.model.elements.reference.AkjonavElementReferenceBuilder;
+import io.github.akjo03.akjonav.model.map.AkjonavMapBuilder;
 import io.validly.Notification;
 import org.jetbrains.annotations.NotNull;
 
@@ -17,9 +18,16 @@ import static io.validly.NoteFirstValidator.valid;
 
 @SuppressWarnings("unused")
 public abstract class AkjonavMapElementBuilder<T extends AkjonavMapElement> extends AkjonavElementBuilder<AkjonavMapElementType, T> {
-	private List<AkjonavElementReference> elementRefs = new ArrayList<>();
+	protected List<AkjonavElementReference> elementRefs;
+	protected AkjonavMapBuilder mapBuilderRef;
 
 	protected AkjonavMapElementBuilder() { super(); }
+
+	protected AkjonavMapElementBuilder(BigInteger elementID) {
+		super(elementID);
+		this.elementRefs = new ArrayList<>();
+	}
+
 	protected AkjonavMapElementBuilder(BigInteger elementID, List<AkjonavElementReference> elementRefs) {
 		super(elementID);
 		this.elementRefs = elementRefs;
@@ -39,6 +47,25 @@ public abstract class AkjonavMapElementBuilder<T extends AkjonavMapElement> exte
 		}
 		this.elementRefs.add(elementRef);
 		return this;
+	}
+
+	public AkjonavMapElementBuilder<T> addElementRefs(List<AkjonavElementReference> elementRefs) {
+		if (elementRefs == null) {
+			throw new IllegalArgumentException("Cannot add element references to map element that is null!");
+		}
+		elementRefs.forEach(this::addElementRef);
+		return this;
+	}
+
+	public void setMapBuilderRef(AkjonavMapBuilder mapBuilderRef) {
+		Class<?> callerClass = StackWalker.getInstance(StackWalker.Option.RETAIN_CLASS_REFERENCE).getCallerClass();
+		if (callerClass == null) {
+			throw new IllegalArgumentException("Cannot set map builder reference to map element that is null!");
+		}
+		if (!callerClass.isAssignableFrom(AkjonavMapBuilder.class)) {
+			throw new IllegalArgumentException("Only AkjonavMapBuilder can set map builder reference to a map element!");
+		}
+		this.mapBuilderRef = mapBuilderRef;
 	}
 
 	@Override
@@ -65,6 +92,7 @@ public abstract class AkjonavMapElementBuilder<T extends AkjonavMapElement> exte
 
 	@Override
 	protected void deserializeRootProperties(@NotNull ObjectNode objectNode) {
+		this.elementRefs = new ArrayList<>();
 		ArrayNode elementRefsNode = (ArrayNode) objectNode.get("elementRefs");
 		for (JsonNode elementRefNode : elementRefsNode) {
 			elementRefs.add(new AkjonavElementReferenceBuilder().deserialize((ObjectNode) elementRefNode));

@@ -23,6 +23,14 @@ public class AkjonavWay extends AkjonavBaseElement {
 		this.nodeRefs = nodeRefs;
 	}
 
+	public AkjonavElementReference getStartNodeRef() {
+		return nodeRefs.get(0);
+	}
+
+	public AkjonavElementReference getEndNodeRef() {
+		return nodeRefs.get(nodeRefs.size() - 1);
+	}
+
 	@Override
 	protected @NotNull ObjectNode serializeElement(@NotNull ObjectNode objectNode, @NotNull ObjectMapper objectMapper) {
 		ArrayNode nodesArray = objectMapper.createArrayNode();

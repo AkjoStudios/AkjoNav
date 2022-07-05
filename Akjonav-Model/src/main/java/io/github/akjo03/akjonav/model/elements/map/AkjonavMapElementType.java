@@ -1,6 +1,8 @@
 package io.github.akjo03.akjonav.model.elements.map;
 
 import io.github.akjo03.akjonav.model.elements.AkjonavElementType;
+import io.github.akjo03.akjonav.model.elements.map.highway.AkjonavHighway;
+import io.github.akjo03.akjonav.model.elements.map.highway.AkjonavHighwayBuilder;
 import io.github.akjo03.akjonav.model.util.builder.AkjonavBuilder;
 import lombok.RequiredArgsConstructor;
 
@@ -8,7 +10,7 @@ import java.util.Arrays;
 
 @RequiredArgsConstructor
 public enum AkjonavMapElementType implements AkjonavElementType<AkjonavMapElement> {
-	;
+	HIGHWAY("MapElement:HIGHWAY", new AkjonavHighwayBuilder(), AkjonavHighway.class);
 
 	private final String typeID;
 	private final AkjonavMapElementBuilder<?> builder;
