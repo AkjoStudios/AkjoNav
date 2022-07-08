@@ -1,9 +1,10 @@
 package io.github.akjo03.akjonav.model.util.position;
 
+import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import io.github.akjo03.akjonav.model.util.builder.AkjonavBuilder;
-import io.github.akjo03.util.ArgumentChecks;
+import io.github.akjo03.akjonav.model.util.builder.AkjonavBuilderContext;
 import io.github.akjo03.util.math.Range;
 import io.github.akjo03.util.math.unit.units.length.Length;
 import io.github.akjo03.util.math.unit.units.length.LengthUnit;
@@ -11,52 +12,51 @@ import io.validly.Notification;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.math.BigDecimal;
-import java.util.Objects;
-
 import static io.validly.NoteFirstValidator.valid;
 
-@SuppressWarnings("unused")
-public class AkjonavPositionBuilder extends AkjonavBuilder<AkjonavPositionType, AkjonavPosition> {
-	protected Double latitude;
-	protected Double longitude;
-	@Nullable protected Length altitude = null;
+public class AkjonavPositionBuilder extends AkjonavBuilder<AkjonavPositionType, AkjonavPosition, AkjonavPositionBuilder> {
+	private double latitude;
+	private double longitude;
+	@Nullable private Length altitude;
 
-	public AkjonavPositionBuilder() { super(); }
+	public AkjonavPositionBuilder() { super(false); }
 
-	public AkjonavPositionBuilder(@NotNull Double latitude, @NotNull Double longitude) {
-		super();
+	public AkjonavPositionBuilder(double latitude, double longitude) {
+		this();
 		this.latitude = latitude;
 		this.longitude = longitude;
 	}
 
-	public AkjonavPositionBuilder(@NotNull Double latitude, @NotNull Double longitude, @NotNull Length altitude) {
-		super();
+	public AkjonavPositionBuilder(double latitude, double longitude, @Nullable Length altitude) {
+		this();
 		this.latitude = latitude;
 		this.longitude = longitude;
 		this.altitude = altitude;
 	}
 
-	public AkjonavPositionBuilder withLatitude(@NotNull Double latitude) {
-		ArgumentChecks.requireArgumentNotNull(latitude, "Latitude of a position cannot be null!");
+	public AkjonavPositionBuilder setLatitude(double latitude) {
 		this.latitude = latitude;
 		return this;
 	}
 
-	public AkjonavPositionBuilder withLongitude(@NotNull Double longitude) {
-		ArgumentChecks.requireArgumentNotNull(longitude, "Longitude of a position cannot be null!");
+	public AkjonavPositionBuilder setLongitude(double longitude) {
 		this.longitude = longitude;
 		return this;
 	}
 
-	public AkjonavPositionBuilder withAltitude(@NotNull Length altitude) {
+	public AkjonavPositionBuilder setAltitude(@Nullable Length altitude) {
 		this.altitude = altitude;
 		return this;
 	}
 
 	@Override
 	protected AkjonavPositionType getType() {
-		return AkjonavPositionType.type;
+		return AkjonavPositionType.TYPE;
+	}
+
+	@Override
+	protected AkjonavBuilderContext<AkjonavPositionType, AkjonavPosition, AkjonavPositionBuilder> getContext() {
+		return null;
 	}
 
 	@Override
@@ -68,24 +68,26 @@ public class AkjonavPositionBuilder extends AkjonavBuilder<AkjonavPositionType, 
 	protected @NotNull Notification validateIt() {
 		Notification notification = new Notification();
 
-		valid(latitude, "AkjonavPosition.latitude", notification)
-				.mustNotBeNull("Latitude of a position cannot be null!")
-				.must(latitudeP -> new Range<>(-90D, 90D).contains(latitudeP), "Latitude of a position must be between -90 and 90!");
+		valid(latitude, getValidationID("latitude"), notification)
+				.must(latitude -> new Range<>(-90.0, 90.0).contains(latitude), "Latitude of an AkjonavPosition must be between -90 and 90 degrees!");
 
-		valid(longitude, "AkjonavPosition.longitude", notification)
-				.mustNotBeNull("Longitude of a position cannot be null!")
-				.must(longitudeP -> new Range<>(-180D, 180D).contains(longitudeP), "Longitude of a position must be between -180 and 180!");
+		valid(longitude, getValidationID("longitude"), notification)
+				.must(longitude -> new Range<>(-180.0, 180.0).contains(longitude), "Longitude of an AkjonavPosition must be between -180 and 180 degrees!");
 
 		return notification;
 	}
 
 	@Override
 	protected void fromSerialized(@NotNull ObjectNode objectNode, @NotNull ObjectMapper objectMapper) {
-		this.latitude = objectNode.get("lat").asDouble();
-		this.longitude = objectNode.get("lon").asDouble();
-		if (objectNode.has("alt")) {
-			ObjectNode altitudeNode = (ObjectNode) objectNode.get("alt");
-			altitude = new Length(new BigDecimal(altitudeNode.get("value").asText()), Objects.requireNonNull(LengthUnit.getUnit(altitudeNode.get("unit").asText())));
+		this.latitude = objectNode.get("latitude").asDouble();
+		this.longitude = objectNode.get("longitude").asDouble();
+		if (objectNode.hasNonNull("altitude")) {
+			JsonNode altitudeNode = objectNode.get("altitude");
+			LengthUnit lengthUnit = LengthUnit.getUnit(altitudeNode.get("unit").asText());
+			if (lengthUnit == null) {
+				throw new IllegalArgumentException("Unknown length unit " + altitudeNode.get("unit").asText() + " for altitude of an AkjonavPosition!");
+			}
+			this.altitude = new Length(altitudeNode.get("value").asDouble(), lengthUnit);
 		}
 	}
 }

@@ -1,29 +1,24 @@
 package io.github.akjo03.akjonav.model.util.position;
 
 import io.github.akjo03.akjonav.model.util.builder.AkjonavBuildableType;
-import io.github.akjo03.akjonav.model.util.builder.AkjonavBuilder;
 
-public class AkjonavPositionType implements AkjonavBuildableType<AkjonavPosition> {
-	public static final AkjonavPositionType type = new AkjonavPositionType();
+public class AkjonavPositionType implements AkjonavBuildableType<AkjonavPositionType, AkjonavPosition, AkjonavPositionBuilder> {
+	public static final AkjonavPositionType TYPE = new AkjonavPositionType();
 
-	private static final String TYPE_ID = "AkjonavPosition";
-	private static final AkjonavPositionBuilder BUILDER = new AkjonavPositionBuilder();
-
-	private AkjonavPositionType() {}
+	private AkjonavPositionType() { super(); }
 
 	@Override
-	public String getTypeID() { return TYPE_ID; }
-
-	@Override
-	public AkjonavBuilder<?, ?> getBuilder() { return BUILDER; }
-
-	@Override
-	public Class<AkjonavPosition> getTypeClass() {
-		return AkjonavPosition.class;
+	public String getTypeID() {
+		return "AkjonavPosition";
 	}
 
 	@Override
-	public String toString() {
-		return TYPE_ID;
+	public AkjonavPositionBuilder getBuilder() {
+		return new AkjonavPositionBuilder();
+	}
+
+	@Override
+	public Class<AkjonavPosition> getBuildableClass() {
+		return AkjonavPosition.class;
 	}
 }

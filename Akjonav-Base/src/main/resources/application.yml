@@ -13,6 +13,7 @@ server:
   error:
     whitelabel:
       enabled: false
+    include-message: always
   forward-headers-strategy: framework
 
 springdoc:

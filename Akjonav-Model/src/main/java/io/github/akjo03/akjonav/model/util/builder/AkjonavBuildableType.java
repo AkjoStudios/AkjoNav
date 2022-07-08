@@ -1,7 +1,7 @@
 package io.github.akjo03.akjonav.model.util.builder;
 
-public interface AkjonavBuildableType<T extends AkjonavBuildable<?>> {
+public interface AkjonavBuildableType<T extends AkjonavBuildableType<T, E, B>, E extends AkjonavBuildable<T, E, B>, B extends AkjonavBuilder<T, E, B>> {
 	String getTypeID();
-	AkjonavBuilder<?, ?> getBuilder();
-	Class<? extends T> getTypeClass();
+	B getBuilder();
+	Class<E> getBuildableClass();
 }

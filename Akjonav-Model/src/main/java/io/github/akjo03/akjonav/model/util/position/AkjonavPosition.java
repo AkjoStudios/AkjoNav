@@ -9,17 +9,15 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Locale;
-import java.util.Objects;
 
-@SuppressWarnings("unused")
 @Getter
-public class AkjonavPosition extends AkjonavBuildable<AkjonavPositionType> {
+public class AkjonavPosition extends AkjonavBuildable<AkjonavPositionType, AkjonavPosition, AkjonavPositionBuilder> {
 	private final double latitude;
 	private final double longitude;
 	@Nullable private final Length altitude;
 
-	AkjonavPosition(double latitude, double longitude, @Nullable Length altitude) {
-		super(AkjonavPositionType.type);
+	protected AkjonavPosition(double latitude, double longitude, @Nullable Length altitude) {
+		super(AkjonavPositionType.TYPE);
 		this.latitude = latitude;
 		this.longitude = longitude;
 		this.altitude = altitude;
@@ -27,36 +25,21 @@ public class AkjonavPosition extends AkjonavBuildable<AkjonavPositionType> {
 
 	@Override
 	protected @NotNull ObjectNode serializeIt(@NotNull ObjectNode objectNode, @NotNull ObjectMapper objectMapper) {
-		objectNode.put("lat", latitude);
-		objectNode.put("lon", longitude);
+		objectNode.put("latitude", latitude);
+		objectNode.put("longitude", longitude);
 		if (altitude != null) {
 			ObjectNode altitudeNode = objectMapper.createObjectNode();
-			altitudeNode.put("value", altitude.getValue().toString());
+			altitudeNode.put("value", altitude.getValue());
 			altitudeNode.put("unit", altitude.getUnit().toString());
-			objectNode.set("alt", altitudeNode);
+			objectNode.set("altitude", altitudeNode);
+		} else {
+			objectNode.putNull("altitude");
 		}
 		return objectNode;
 	}
 
 	@Override
 	protected @NotNull String toObjectString() {
-		return "{latitude=" + latitude + ", longitude=" + longitude + ", altitude=" + (altitude != null ? altitude.toStringLocalizedWithAbbreviation(Locale.US) : "null").replace(" ", "") + "}";
-	}
-
-	@Override
-	public boolean equals(Object o) {
-		if (this == o)
-			return true;
-		if (o == null || getClass() != o.getClass())
-			return false;
-		if (!super.equals(o))
-			return false;
-		AkjonavPosition position = (AkjonavPosition) o;
-		return Double.compare(position.latitude, latitude) == 0 && Double.compare(position.longitude, longitude) == 0 && Objects.equals(altitude, position.altitude);
-	}
-
-	@Override
-	public int hashCode() {
-		return Objects.hash(super.hashCode(), latitude, longitude, altitude);
+		return "{latitude=" + latitude + ", longitude=" + longitude + ", altitude=" + (altitude != null ? altitude.toStringLocalizedWithAbbreviation(Locale.ENGLISH).replaceAll("\\s", "") : "null") + "}";
 	}
 }

@@ -10,7 +10,7 @@ AkjonavMap map = mapBuilderContext
 			.setPosition(new AkjonavPositionBuilder(46.8937608, 7.3298296).build())
 			.build(),
 		new AkjonavNodeBuilder(BigInteger.valueOf(3))
-			.setPosition(new AkjonavPositionBuider(46.8937312, 7.3298997).build())
+			.setPosition(new AkjonavPositionBuilder(46.8937312, 7.3298997).build())
 			.build(),
 		new AkjonavNodeBuilder(BigInteger.valueOf(4))
 			.setPosition(new AkjonavPositionBuilder(46.8937249, 7.3299669).build())

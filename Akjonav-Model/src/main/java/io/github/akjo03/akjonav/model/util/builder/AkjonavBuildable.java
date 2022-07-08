@@ -11,7 +11,7 @@ import java.util.Objects;
 @Getter
 @RequiredArgsConstructor
 @SuppressWarnings("unused")
-public abstract class AkjonavBuildable<T extends AkjonavBuildableType<?>> {
+public abstract class AkjonavBuildable<T extends AkjonavBuildableType<T, E, B>, E extends AkjonavBuildable<T, E, B>, B extends AkjonavBuilder<T, E, B>> {
 	@NotNull protected final T type;
 
 	public ObjectNode serialize(@NotNull ObjectMapper objectMapper) {
@@ -43,7 +43,7 @@ public abstract class AkjonavBuildable<T extends AkjonavBuildableType<?>> {
 			return true;
 		if (o == null || getClass() != o.getClass())
 			return false;
-		AkjonavBuildable<?> that = (AkjonavBuildable<?>) o;
+		AkjonavBuildable<?, ?, ?> that = (AkjonavBuildable<?, ?, ?>) o;
 		return Objects.equals(type, that.type);
 	}
 

@@ -6,9 +6,10 @@ import io.github.akjo03.akjonav.base.domain.position.DistanceCalculationResponse
 import io.github.akjo03.akjonav.base.services.ModelConverterService;
 import io.github.akjo03.akjonav.base.services.api.PositionService;
 import io.github.akjo03.akjonav.model.util.position.AkjonavPosition;
-import io.github.akjo03.akjonav.model.util.position.AkjonavPositionBuilder;
+import io.github.akjo03.akjonav.model.util.position.AkjonavPositionType;
 import io.github.akjo03.util.logging.v2.Logger;
 import io.github.akjo03.util.logging.v2.LoggerManager;
+import io.github.akjo03.util.math.unit.units.length.Length;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -22,6 +23,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.HashMap;
+import java.util.Map;
 
 @Tags(@Tag(name = "Position API"))
 @RequiredArgsConstructor
@@ -41,11 +43,16 @@ public class PositionController {
 			summary = "Calculate distance between two positions"
 	)
 	public ResponseEntity<DistanceCalculationResponse> getDistance(@RequestBody @NotNull DistanceCalculationRequest request) {
-		AkjonavPosition startPosition = modelConverterService.convertData((HashMap<?, ?>) request.getStartPosition(), new AkjonavPositionBuilder());
-		AkjonavPosition endPosition = modelConverterService.convertData((HashMap<?, ?>) request.getEndPosition(), new AkjonavPositionBuilder());
+		LOGGER.info("[PositionController, getDistance] Started calculating distance between two positions...");
+		AkjonavPosition startPosition = modelConverterService.convertData((HashMap<?, ?>) request.getStartPosition(), AkjonavPositionType.TYPE);
+		AkjonavPosition endPosition = modelConverterService.convertData((HashMap<?, ?>) request.getEndPosition(), AkjonavPositionType.TYPE);
 
-		Double distance = positionService.calculateDistance(startPosition, endPosition);
+		Length distance = positionService.calculateDistance(startPosition, endPosition);
 
-		return ResponseEntity.ok(new DistanceCalculationResponse(distance));
+		LOGGER.success("[PositionController, getDistance] Successfully calculated distance between two positions");
+		return ResponseEntity.ok(new DistanceCalculationResponse(Map.ofEntries(
+				Map.entry("distance", distance.getValue()),
+				Map.entry("unit", distance.getUnit().toString())
+		)));
 	}
 }

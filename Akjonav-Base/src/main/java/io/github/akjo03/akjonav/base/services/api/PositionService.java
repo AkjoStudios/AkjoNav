@@ -1,15 +1,18 @@
 package io.github.akjo03.akjonav.base.services.api;
 
 import io.github.akjo03.akjonav.model.util.position.AkjonavPosition;
+import io.github.akjo03.util.math.unit.units.length.Length;
 import io.github.akjo03.util.math.unit.units.length.LengthUnit;
 import lombok.RequiredArgsConstructor;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
+
 @Service
 @RequiredArgsConstructor
 public class PositionService {
-	public Double calculateDistance(@NotNull AkjonavPosition startPosition, @NotNull AkjonavPosition endPosition) {
+	public Length calculateDistance(@NotNull AkjonavPosition startPosition, @NotNull AkjonavPosition endPosition) {
 		double r = 6371 * 1000; // Radius of the earth
 		double phi1 = Math.toRadians(startPosition.getLatitude());
 		double phi2 = Math.toRadians(endPosition.getLatitude());
@@ -29,6 +32,6 @@ public class PositionService {
 			d = Math.sqrt(Math.pow(d, 2) + Math.pow(alt2m - alt1m, 2));
 		}
 
-		return d;
+		return new Length(BigDecimal.valueOf(d), LengthUnit.METRE);
 	}
 }

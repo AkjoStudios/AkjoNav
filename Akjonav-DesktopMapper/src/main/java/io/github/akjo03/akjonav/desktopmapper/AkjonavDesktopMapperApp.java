@@ -78,8 +78,6 @@ public class AkjonavDesktopMapperApp {
 		}
 
 		LOGGER.info("Initializing window...");
-		SwingUtilities.invokeLater(() -> {
-			new DesktopMapperAppWindow().setVisible(true);
-		});
+		SwingUtilities.invokeLater(() -> new DesktopMapperAppWindow().setVisible(true));
 	}
 }
