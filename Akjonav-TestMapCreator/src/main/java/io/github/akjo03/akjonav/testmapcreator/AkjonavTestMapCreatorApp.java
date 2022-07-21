@@ -1,7 +1,5 @@
 package io.github.akjo03.akjonav.testmapcreator;
 
-import io.github.akjo03.akjonav.model.util.position.AkjonavPosition;
-import io.github.akjo03.akjonav.model.util.position.AkjonavPositionBuilder;
 import io.github.akjo03.akjonav.testmapcreator.constants.AkjonavTestMapCreatorConstants;
 import io.github.akjo03.akjonav.testmapcreator.services.JsonService;
 import io.github.akjo03.util.logging.v2.Logger;
@@ -25,14 +23,9 @@ public class AkjonavTestMapCreatorApp implements CommandLineRunner {
 	}
 
 	@Override
+	@SuppressWarnings("RedundantThrows")
 	public void run(String... args) throws Exception {
 		LOGGER.info("Running TestMapCreator...");
-
-		AkjonavPosition startPosition = new AkjonavPositionBuilder(0.0, 0.0).build();
-		AkjonavPosition endPosition = new AkjonavPositionBuilder(1.0, 1.0).build();
-
-		System.out.println("startPosition: " + startPosition.serialize(jsonService.getObjectMapper()));
-		System.out.println("endPosition: " + endPosition.serialize(jsonService.getObjectMapper()));
 
 		LOGGER.info("Finished TestMapCreator!");
 	}
